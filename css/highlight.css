@@ -1,0 +1,176 @@
+.article-content pre,
+.article-content .highlight,
+.article-content .highlight pre {
+  background: #eee;
+  margin: 0.5em 0;
+  padding: 0.5em 2%;
+  color: #4d4d4c;
+  line-height: 1.2;
+  font-size: 0.8em;
+  -webkit-border-radius: 0.35em;
+  border-radius: 0.35em;
+  word-wrap: break-word;
+}
+@media phone {
+  .article-content pre,
+  .article-content .highlight,
+  .article-content .highlight pre {
+    font-size: 0.9em;
+  }
+}
+.article-content .highlight .gutter pre,
+.article-content .gist .gist-file .gist-data .line-numbers {
+  color: #999;
+  font-size: 0.8em;
+}
+@media phone {
+  .article-content .highlight .gutter pre,
+  .article-content .gist .gist-file .gist-data .line-numbers {
+    font-size: 0.9em;
+    line-height: 1.2;
+  }
+}
+.article-content pre {
+  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+}
+.article-content .highlight {
+  overflow: auto;
+  font-size: 1em;
+}
+@media phone {
+  .article-content .highlight {
+    font-size: 0.9em;
+  }
+}
+.article-content .highlight pre {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.article-content .highlight table {
+  margin: 0;
+  width: auto;
+}
+.article-content .highlight td {
+  border: none;
+  padding: 0;
+}
+.article-content .highlight figcaption {
+  font-size: 0.85em;
+  text-align: left;
+  color: #8e908c;
+  line-height: 1em;
+  padding: 0.5em 0;
+  margin-bottom: 0.5em;
+}
+.article-content .highlight figcaption a {
+  float: right;
+}
+.article-content .highlight .gutter pre {
+  text-align: right;
+  padding-right: 1.5em;
+}
+.article-content .highlight .line {
+  height: 20px;
+}
+.article-content .gist {
+  margin: 0.5em 0;
+  background: #eee;
+  padding: 1em 2%;
+  -webkit-border-radius: 0.35em;
+  border-radius: 0.35em;
+}
+.article-content .gist .gist-file {
+  border: none;
+  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  margin: 0;
+}
+.article-content .gist .gist-file .gist-data {
+  background: none;
+  border: none;
+}
+.article-content .gist .gist-file .gist-data .line-numbers {
+  background: none;
+  border: none;
+  padding: 0 1.5em 0 0;
+}
+.article-content .gist .gist-file .gist-data .line-data {
+  padding: 0 !important;
+}
+.article-content .gist .gist-file .highlight {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: #eee;
+}
+.article-content .gist .gist-file .gist-meta {
+  background: #eee;
+  color: #8e908c;
+  font: 0.85em font-serif;
+  text-shadow: 0 0;
+  padding: 0;
+  margin-top: 1em;
+}
+.article-content .gist .gist-file .gist-meta a {
+  color: color-blue;
+  font-weight: normal;
+}
+.article-content .gist .gist-file .gist-meta a:hover {
+  color: color-theme;
+}
+pre .comment,
+pre .title {
+  color: #8e908c;
+}
+pre .variable,
+pre .attribute,
+pre .tag,
+pre .regexp,
+pre .ruby .constant,
+pre .xml .tag .title,
+pre .xml .pi,
+pre .xml .doctype,
+pre .html .doctype,
+pre .css .id,
+pre .css .class,
+pre .css .pseudo {
+  color: #c82829;
+}
+pre .number,
+pre .preprocessor,
+pre .built_in,
+pre .literal,
+pre .params,
+pre .constant {
+  color: #f5871f;
+}
+pre .class,
+pre .ruby .class .title,
+pre .css .rules .attribute {
+  color: #718c00;
+}
+pre .string,
+pre .value,
+pre .inheritance,
+pre .header,
+pre .ruby .symbol,
+pre .xml .cdata {
+  color: #718c00;
+}
+pre .css .hexcolor {
+  color: #3e999f;
+}
+pre .function,
+pre .python .decorator,
+pre .python .title,
+pre .ruby .function .title,
+pre .ruby .title .keyword,
+pre .perl .sub,
+pre .javascript .title,
+pre .coffeescript .title {
+  color: #4271ae;
+}
+pre .keyword,
+pre .javascript .function {
+  color: #8959a8;
+}
