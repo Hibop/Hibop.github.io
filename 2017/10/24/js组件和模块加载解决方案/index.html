@@ -16,17 +16,17 @@
     
     
 
-    <meta name="description" content="####1、AMD（Asynchromous Module Definition - 异步模块定义）  AMD是RequireJS在推广过程中对模块定义的规范化产出，AMD是异步加载模块，推崇依赖前置。123define(&amp;apos;module1&amp;apos;, [&amp;apos;jquery&amp;apos;], ($) =&amp;gt; &amp;#123;  //do something...&amp;#125;);">
+    <meta name="description" content="1、AMD（Asynchromous Module Definition - 异步模块定义） AMD是RequireJS在推广过程中对模块定义的规范化产出，AMD是异步加载模块，推崇依赖前置。123define(&amp;apos;module1&amp;apos;, [&amp;apos;jquery&amp;apos;], ($) =&amp;gt; &amp;#123;  //do something...&amp;#125;);  2、CMD">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js组件和模块解决方案 | Hibop&#39;s Blog">
 <meta property="og:url" content="https://hibop.github.io/2017/10/24/js组件和模块加载解决方案/index.html">
 <meta property="og:site_name" content="Hibop&#39;s Blog">
-<meta property="og:description" content="####1、AMD（Asynchromous Module Definition - 异步模块定义）  AMD是RequireJS在推广过程中对模块定义的规范化产出，AMD是异步加载模块，推崇依赖前置。123define(&amp;apos;module1&amp;apos;, [&amp;apos;jquery&amp;apos;], ($) =&amp;gt; &amp;#123;  //do something...&amp;#125;);">
+<meta property="og:description" content="1、AMD（Asynchromous Module Definition - 异步模块定义） AMD是RequireJS在推广过程中对模块定义的规范化产出，AMD是异步加载模块，推崇依赖前置。123define(&amp;apos;module1&amp;apos;, [&amp;apos;jquery&amp;apos;], ($) =&amp;gt; &amp;#123;  //do something...&amp;#125;);  2、CMD">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-24T15:30:55.434Z">
+<meta property="og:updated_time" content="2017-10-25T14:23:15.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js组件和模块解决方案 | Hibop&#39;s Blog">
-<meta name="twitter:description" content="####1、AMD（Asynchromous Module Definition - 异步模块定义）  AMD是RequireJS在推广过程中对模块定义的规范化产出，AMD是异步加载模块，推崇依赖前置。123define(&amp;apos;module1&amp;apos;, [&amp;apos;jquery&amp;apos;], ($) =&amp;gt; &amp;#123;  //do something...&amp;#125;);">
+<meta name="twitter:description" content="1、AMD（Asynchromous Module Definition - 异步模块定义） AMD是RequireJS在推广过程中对模块定义的规范化产出，AMD是异步加载模块，推崇依赖前置。123define(&amp;apos;module1&amp;apos;, [&amp;apos;jquery&amp;apos;], ($) =&amp;gt; &amp;#123;  //do something...&amp;#125;);  2、CMD">
     
     
     
@@ -213,12 +213,10 @@ classes that you can use:
 
   <section id="post-content" class="article-content post">
     <blockquote>
-<p>####1、<strong>AMD</strong>（Asynchromous Module Definition - 异步模块定义）</p>
-</blockquote>
+<h4 id="1、AMD（Asynchromous-Module-Definition-异步模块定义）"><a href="#1、AMD（Asynchromous-Module-Definition-异步模块定义）" class="headerlink" title="1、AMD（Asynchromous Module Definition - 异步模块定义）"></a>1、<strong>AMD</strong>（Asynchromous Module Definition - 异步模块定义）</h4></blockquote>
 <p>AMD是RequireJS在推广过程中对模块定义的规范化产出，AMD是异步加载模块，推崇依赖前置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define(&apos;module1&apos;, [&apos;jquery&apos;], ($) =&gt; &#123;</div><div class="line">  //do something...</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <blockquote>
-<p>####2、<strong>CMD</strong>（Common Module Definition - 公共模块定义）</p>
-</blockquote>
+<h4 id="2、CMD（Common-Module-Definition-公共模块定义）"><a href="#2、CMD（Common-Module-Definition-公共模块定义）" class="headerlink" title="2、CMD（Common Module Definition - 公共模块定义）"></a>2、<strong>CMD</strong>（Common Module Definition - 公共模块定义）</h4></blockquote>
 <p>CMD是SeaJS在推广过程中对模块定义的规范化产出，对于模块的依赖，CMD是延迟执行，推崇依赖就近。</p>
 <pre><code>define((require, exports, module) =&gt; {
       module.exports = {
@@ -232,13 +230,11 @@ classes that you can use:
 <li>CommonJS：CommonJS是服务端模块的规范，由于Node.js被广泛认知。根据CommonJS规范，一个单独的文件就是一个模块。加载模块使用require方法，该方法读取一个文件并执行，最后返回文件内部的module.exports对象。CommonJS 加载模块是同步的，所以只有加载完成才能执行后面的操作。</li>
 </ul>
 <blockquote>
-<p>####3、<strong>UMD</strong>（Universal Module Definition - 通用模块定义）</p>
-</blockquote>
+<h4 id="3、UMD（Universal-Module-Definition-通用模块定义）"><a href="#3、UMD（Universal-Module-Definition-通用模块定义）" class="headerlink" title="3、UMD（Universal Module Definition - 通用模块定义）"></a>3、<strong>UMD</strong>（Universal Module Definition - 通用模块定义）</h4></blockquote>
 <p>UMD是AMD和CommonJS的一个糅合。AMD是浏览器优先，异步加载；CommonJS是服务器优先，同步加载。</p>
 <p>既然要通用，怎么办呢？那就先判断是否支持node.js的模块，存在就使用node.js；再判断是否支持AMD（define是否存在），存在则使用AMD的方式加载。这就是所谓的UMD。</p>
 <blockquote>
-<p>####4、ES6 风格：</p>
-</blockquote>
+<h4 id="4、ES6-风格："><a href="#4、ES6-风格：" class="headerlink" title="4、ES6 风格："></a>4、ES6 风格：</h4></blockquote>
 <p>通过import–export对管理依赖模块，可以选择性加载单个变量、函数等。</p>
 <h2 id="关于模块管理工具："><a href="#关于模块管理工具：" class="headerlink" title="关于模块管理工具："></a>关于模块管理工具：</h2><p>Gulp / Grunt 是一种工具，能够优化前端工作流程。比如自动刷新页面、combo、压缩css、js、编译less等等。简单来说，就是使用Gulp/Grunt，然后配置你需要的插件，就可以把以前需要手工做的事情让它帮你做了。</p>
 <p>browserify / webpack ，那还要说到 seajs / requirejs 。这四个都是JS模块化的方案。其中seajs / require 是一种类型，browserify / webpack 是另一种类型。</p>
