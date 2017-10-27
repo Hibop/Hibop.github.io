@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      关于数据绑定的实现——angular脏值检测思考 | Hibop&#39;s Blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="hbyuan">
+    
+    
+
+    <meta name="description" content="问题背景 如何监听 js 中变量的变化?我现在有这样一个需求，需要监控js的某个变量的改变，如果该变量发生变化，则触发一些事件(DOM更新等)，不能使用timeinterval之类的定时去监控的方法，不知道有比较好的解决方案么？  解决方案：问题的实质就是————如何实现MVVM库/框架的数据绑定；  脏值检测 $digest; 基于ES5 Object.defineProperty的getter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于数据绑定的实现——angular脏值检测思考 | Hibop&#39;s Blog">
+<meta property="og:url" content="https://hibop.github.io/2017/10/27/关于数据绑定的实现——angular脏值检测思考/index.html">
+<meta property="og:site_name" content="Hibop&#39;s Blog">
+<meta property="og:description" content="问题背景 如何监听 js 中变量的变化?我现在有这样一个需求，需要监控js的某个变量的改变，如果该变量发生变化，则触发一些事件(DOM更新等)，不能使用timeinterval之类的定时去监控的方法，不知道有比较好的解决方案么？  解决方案：问题的实质就是————如何实现MVVM库/框架的数据绑定；  脏值检测 $digest; 基于ES5 Object.defineProperty的getter">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-27T14:50:27.724Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于数据绑定的实现——angular脏值检测思考 | Hibop&#39;s Blog">
+<meta name="twitter:description" content="问题背景 如何监听 js 中变量的变化?我现在有这样一个需求，需要监控js的某个变量的改变，如果该变量发生变化，则触发一些事件(DOM更新等)，不能使用timeinterval之类的定时去监控的方法，不知道有比较好的解决方案么？  解决方案：问题的实质就是————如何实现MVVM库/框架的数据绑定；  脏值检测 $digest; 基于ES5 Object.defineProperty的getter">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hibop&#39;s Blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          爱生活爱编码
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social" style="display: block">
+  <ul class="navigation" style="float: none;">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/someus" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">关于数据绑定的实现——angular脏值检测思考</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-10-27" class="post-meta__date date">2017-10-27</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h3 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h3><blockquote>
+<p>如何监听 js 中变量的变化?<br>我现在有这样一个需求，需要监控js的某个变量的改变，如果该变量发生变化，则触发一些事件(DOM更新等<br>)，不能使用timeinterval之类的定时去监控的方法，不知道有比较好的解决方案么？</p>
+</blockquote>
+<h3 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h3><p>问题的实质就是————如何实现MVVM库/框架的数据绑定；</p>
+<ul>
+<li>脏值检测 <em>$digest</em>;</li>
+<li>基于ES5 <em>Object.defineProperty</em>的getter和setter；</li>
+<li>ES已被废弃的Object.observe；</li>
+<li>ES6中添加的Proxy；</li>
+</ul>
+<hr>
+<h3 id="脏值检测："><a href="#脏值检测：" class="headerlink" title="脏值检测："></a>脏值检测：</h3><p>angular使用的就是脏值检测，原理是比较新值和旧值，当值真的发生改变时再去更改DOM，所以angular中有一个$digest。那么为什么在像ng-click这样的内置指令在触发后会自动变更呢？原理也很简单，在ng-click这样的内置指令中最后追加了$digest。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>two-way binding<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">"init()"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-click</span>=<span class="string">"inc"</span>&gt;</span></div><div class="line">            Increase</div><div class="line">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-click</span>=<span class="string">"reset"</span>&gt;</span></div><div class="line">            Reset</div><div class="line">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"color:red"</span> <span class="attr">ng-bind</span>=<span class="string">"counter"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"color:blue"</span> <span class="attr">ng-bind</span>=<span class="string">"counter"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"color:green"</span> <span class="attr">ng-bind</span>=<span class="string">"counter"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined">            /* 数据模型区开始 */</span></div><div class="line"><span class="undefined">            var counter = 0;</span></div><div class="line"><span class="undefined">            function inc() &#123;</span></div><div class="line"><span class="undefined">                counter++;</span></div><div class="line"><span class="undefined">            &#125;</span></div><div class="line"><span class="undefined">            function reset() &#123;</span></div><div class="line"><span class="undefined">                counter = 0;</span></div><div class="line"><span class="undefined">            &#125;</span></div><div class="line"><span class="undefined">            /* 数据模型区结束 */</span></div><div class="line"><span class="undefined">            /* 绑定关系区开始 */</span></div><div class="line"><span class="undefined">            function init() &#123;</span></div><div class="line"><span class="undefined">                bind();</span></div><div class="line"><span class="undefined">            &#125;</span></div><div class="line"><span class="undefined">            function bind() &#123;</span></div><div class="line"><span class="undefined">                var list = document.querySelectorAll("[ng-click]");</span></div><div class="line"><span class="undefined">                for (var i=0; i&lt;list.length; i++) &#123;</span></div><div class="line"><span class="undefined">                    list[i].onclick = (function(index) &#123;</span></div><div class="line"><span class="undefined">                        return function() &#123;</span></div><div class="line"><span class="undefined">                            window[list[index].getAttribute("ng-click")]();</span></div><div class="line"><span class="undefined">                            apply();</span></div><div class="line"><span class="undefined">                        &#125;;</span></div><div class="line"><span class="undefined">                    &#125;)(i);</span></div><div class="line"><span class="undefined">                &#125;</span></div><div class="line"><span class="undefined">            &#125;</span></div><div class="line"><span class="undefined">            function apply() &#123;</span></div><div class="line"><span class="undefined">                var list = document.querySelectorAll("[ng-bind='counter']");</span></div><div class="line"><span class="undefined">                for (var i=0; i&lt;list.length; i++) &#123;</span></div><div class="line"><span class="undefined">                    if (list[i].innerHTML != counter) &#123;</span></div><div class="line"><span class="undefined">                        list[i].innerHTML = counter;</span></div><div class="line"><span class="undefined">                    &#125;</span></div><div class="line"><span class="undefined">                &#125;</span></div><div class="line"><span class="undefined">            &#125;</span></div><div class="line"><span class="undefined">            /* 绑定关系区结束 */</span></div><div class="line"><span class="undefined">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这样做的坏处是自己变更数据后，是无法自动改变DOM的，必须要想办法触发apply()，所以只能借助ng-click的包装，在ng-click中包含真实的click事件监听并追加脏值检测以判断是否要更新DOM。</p>
+<p>另外一个坏处是如果不注意，每次脏值检测会检测大量的数据，而很多数据是没有检测的必要的，容易影响性能。</p>
+<p>关于如何实现一个和angular一样的脏值检测，知道原理后还有很多工作要去做，以及如何优化等等。如果有兴趣可以看看民工叔曾经推荐的《Build Your Own Angular.js》，第一章Scope便讲了如何实现angular的作用域和脏值检测。对了，上面的例子也是从民工叔的博客稍加修改来的，建议最后去看下原文，链接在参考资料中。</p>
+<h3 id="Object-defineProperty："><a href="#Object-defineProperty：" class="headerlink" title="Object.defineProperty："></a>Object.defineProperty：</h3><blockquote>
+<p>在ES5中新增了一个Object.defineProperty，直接在一个对象上定义一个新属性，或者修改一个已经存在的属性， 并返回这个对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Object</span>.defineProperty(obj, prop, descriptor)</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>其接受的第三个参数可以取get和set并各自对应一个getter和setter方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = &#123; <span class="attr">zhihu</span>:<span class="number">0</span> &#125;;</div><div class="line"><span class="built_in">Object</span>.defineProperty(a, <span class="string">'zhihu'</span>, &#123;</div><div class="line">  get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'get：'</span> + zhihu);</div><div class="line">    <span class="keyword">return</span> zhihu;</div><div class="line">  &#125;,</div><div class="line">  set: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">    zhihu = value;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'set:'</span> + zhihu);</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">a.zhihu = <span class="number">2</span>; <span class="comment">// set:2</span></div><div class="line"><span class="built_in">console</span>.log(a.zhihu); <span class="comment">// get：2</span></div><div class="line">                      <span class="comment">// 2</span></div></pre></td></tr></table></figure></p>
+<p>基于ES5的getter和setter可以说几乎完美符合了要求。为什么要说几乎呢？</p>
+<p>首先IE8及更低版本IE是无法使用的，而且这个特性是没有polyfill的，无法在不支持的平台实现，<br>这也是基于ES5getter和setter的Vue.js不支持IE8及更低版本IE的原因。也许有人会提到avalon，avalon在低版本IE借助vbscript一些黑魔法实现了类似的功能。</p>
+<p>除此之外，还有一个问题就是修改数组的length，直接用索引设置元素如items[0] = {}，以及数组的push等变异方法是无法触发setter的。<br>如果想要解决这个问题可以参考Vue的做法，在Vue的observer/array.js中，Vue直接修改了数组的原型方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> arrayProto = <span class="built_in">Array</span>.prototype</div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> arrayMethods = <span class="built_in">Object</span>.create(arrayProto)</div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Intercept mutating methods and emit events</span></div><div class="line"><span class="comment"> */</span></div><div class="line">;[</div><div class="line">  <span class="string">'push'</span>,</div><div class="line">  <span class="string">'pop'</span>,</div><div class="line">  <span class="string">'shift'</span>,</div><div class="line">  <span class="string">'unshift'</span>,</div><div class="line">  <span class="string">'splice'</span>,</div><div class="line">  <span class="string">'sort'</span>,</div><div class="line">  <span class="string">'reverse'</span></div><div class="line">]</div><div class="line">.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">method</span>) </span>&#123;</div><div class="line">  <span class="comment">// cache original method</span></div><div class="line">  <span class="keyword">var</span> original = arrayProto[method]</div><div class="line">  def(arrayMethods, method, <span class="function"><span class="keyword">function</span> <span class="title">mutator</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// avoid leaking arguments:</span></div><div class="line">    <span class="comment">// http://jsperf.com/closure-with-arguments</span></div><div class="line">    <span class="keyword">var</span> i = <span class="built_in">arguments</span>.length</div><div class="line">    <span class="keyword">var</span> args = <span class="keyword">new</span> <span class="built_in">Array</span>(i)</div><div class="line">    <span class="keyword">while</span> (i--) &#123;</div><div class="line">      args[i] = <span class="built_in">arguments</span>[i]</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> result = original.apply(<span class="keyword">this</span>, args)</div><div class="line">    <span class="keyword">var</span> ob = <span class="keyword">this</span>.__ob__</div><div class="line">    <span class="keyword">var</span> inserted</div><div class="line">    <span class="keyword">switch</span> (method) &#123;</div><div class="line">      <span class="keyword">case</span> <span class="string">'push'</span>:</div><div class="line">        inserted = args</div><div class="line">        <span class="keyword">break</span></div><div class="line">      <span class="keyword">case</span> <span class="string">'unshift'</span>:</div><div class="line">        inserted = args</div><div class="line">        <span class="keyword">break</span></div><div class="line">      <span class="keyword">case</span> <span class="string">'splice'</span>:</div><div class="line">        inserted = args.slice(<span class="number">2</span>)</div><div class="line">        <span class="keyword">break</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (inserted) ob.observeArray(inserted)</div><div class="line">    <span class="comment">// notify change</span></div><div class="line">    ob.dep.notify()</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">  &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>这样重写了原型方法，在执行数组变异方法后依然能够触发视图的更新。</p>
+<p>但是这样还是不能解决修改数组的length和直接用索引设置元素如items[0] = {}的问题，想要解决依然可以参考Vue的做法：<br>前一个问题可以直接用新的数组代替旧的数组；后一个问题可以为数组拓展一个$set方法，在执行修改后顺便触发视图的更新。</p>
+<h3 id="Object-observe；"><a href="#Object-observe；" class="headerlink" title="Object.observe；"></a>Object.observe；</h3><p>Object.observe曾在ES7的草案中，并在提议中进展到stage2，最终依然被废弃。<br>这里只举一个MDN上的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 一个数据模型</span></div><div class="line"><span class="keyword">var</span> user = &#123;</div><div class="line">  id: <span class="number">0</span>,</div><div class="line">  name: <span class="string">'Brendan Eich'</span>,</div><div class="line">  title: <span class="string">'Mr.'</span></div><div class="line">&#125;;</div><div class="line"><span class="comment">// 创建用户的greeting</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateGreeting</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  user.greeting = <span class="string">'Hello, '</span> + user.title + <span class="string">' '</span> + user.name + <span class="string">'!'</span>;</div><div class="line">&#125;</div><div class="line">updateGreeting();</div><div class="line"><span class="built_in">Object</span>.observe(user, <span class="function"><span class="keyword">function</span>(<span class="params">changes</span>) </span>&#123;</div><div class="line">  changes.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">change</span>) </span>&#123;</div><div class="line">    <span class="comment">// 当name或title属性改变时, 更新greeting</span></div><div class="line">    <span class="keyword">if</span> (change.name === <span class="string">'name'</span> || change.name === <span class="string">'title'</span>) &#123;</div><div class="line">      updateGreeting();</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>由于是已经废弃了的特性，Chrome虽然曾经支持但也已经废弃了支持，这里不再讲更多，有兴趣可以搜一搜以前的文章，这曾经是一个被看好的特性（Object.observe()带来的数据绑定变革）。<br>当然关于它也有一些替代品Polymer/observe-js。</p>
+<h3 id="ES6中添加的Proxy；"><a href="#ES6中添加的Proxy；" class="headerlink" title="ES6中添加的Proxy；"></a>ES6中添加的Proxy；</h3><p>人如其名，类似HTTP中的代理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</div></pre></td></tr></table></figure></p>
+<p>target为目标对象，可以是任意类型的对象，比如数组，函数，甚至是另外一个代理对象。<br>handler为处理器对象，包含了一组代理方法，分别控制所生成代理对象的各种行为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">let a = new Proxy(&#123;&#125;, &#123;</div><div class="line">  set: function(obj, prop, value) &#123;</div><div class="line">    obj[prop] = value;</div><div class="line">    if (prop === &apos;zhihu&apos;) &#123;</div><div class="line">      console.log(&quot;set &quot; + prop + &quot;: &quot; + obj[prop]);</div><div class="line">    &#125;</div><div class="line">    return true;</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">a.zhihu = 100;</div></pre></td></tr></table></figure></p>
+<p>当然，Proxy的能力远不止此，还可以实现代理转发等等。</p>
+<p>但是要注意的是目前浏览器中只有Firefox18支持这个特性，而babel官方也表明不支持这个特性：<br>目前已经有babel插件可以实现，但是据说实现的比较复杂。<br>如果是Node的话升级到目前的最新版本应该就可以使用了，上面的例子测试环境为Node v6.4.0</p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
