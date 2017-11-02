@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      Redux状态管理思考 | Hibop&#39;s Blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="hbyuan">
+    
+    
+
+    <meta name="description" content="如何设计Redux的store？ 哪些状态需要被管理？ Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redux状态管理思考 | Hibop&#39;s Blog">
+<meta property="og:url" content="https://hibop.github.io/2017/11/02/Redux状态管理思考/index.html">
+<meta property="og:site_name" content="Hibop&#39;s Blog">
+<meta property="og:description" content="如何设计Redux的store？ 哪些状态需要被管理？ Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂度">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-11-02T15:36:17.470Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redux状态管理思考 | Hibop&#39;s Blog">
+<meta name="twitter:description" content="如何设计Redux的store？ 哪些状态需要被管理？ Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂度">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hibop&#39;s Blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          我的故事我的酒
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social" style="display: block">
+  <ul class="navigation" style="float: none;">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/Hibop" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Redux状态管理思考</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-11-02" class="post-meta__date date">2017-11-02</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <pre><code>如何设计Redux的store？
+哪些状态需要被管理？
+</code></pre><h3 id="Domain-data"><a href="#Domain-data" class="headerlink" title="Domain data"></a>Domain data</h3><p>Domain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。</p>
+<p>通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂度到服务端。</p>
+<p>甚至有不少页面仅在初始化时获取一次Domain data，从此就再无瓜葛，直到跳转到下一个页面。</p>
+<h3 id="UI-state"><a href="#UI-state" class="headerlink" title="UI state"></a>UI state</h3><p>决定当前UI如何展示的状态，比如一个弹窗的开闭，下拉菜单是否打开。</p>
+<p>在我看来，UI state是前端真正开始复杂的部分——如果仅仅依靠服务端拿下来的Domain data就能做好前端，backbone的Model早就一统江湖了，没后来者们什么事情。</p>
+<p>和Domain data的简单、稳定不同，UI state是多变，不稳定的——不同的页面有不同、甚至相似但又细微不同的展现和交互。</p>
+<p>同时，UI state之间也是互相影响的，比如选择列表中的元素(选中状态是ui state)，当选中数量低于N时禁用提交按钮(按钮是否禁用也是ui state)。这是前端工作中非常常见的需求，整个场景中没有Domain data出现。</p>
+<p>UI state多变、不稳定，但它仍然是需要被复用的。小到弹窗的开闭，大到表单的管理，他们的逻辑都是明显可被抽象的。</p>
+<h3 id="App-state"><a href="#App-state" class="headerlink" title="App state *"></a>App state *</h3><p>App级的状态，例如当前是否有请求正在加载。个人倾向将它们视为另一种抽象角度下的UI state。因为本质上它们仍然是服务于UI的：一个异步下拉框会发请求，加载页面主要信息也会发请求，而我们通常希望前者加载时只disable下拉框，而后者可能要用Loading mask遮罩整个页面——场景不同，对状态的需求就不同，单纯关注当前是否有请求正在加载没有意义，只有与UI场景结合才会产生价值，因此我倾向认为App state的本质是对UI state的再抽象。</p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017- . | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题 Huno </span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
