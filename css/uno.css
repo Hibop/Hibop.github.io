@@ -1001,7 +1001,7 @@ blockquote {
   /*font-family: "Roboto Slab", serif;*/
   font-family:  Microsoft YaHei ,PingFang SC, "Raleway",Verdana,sans-serif,宋体, serif, "Droid Serif", Helvetica Neue, Helvetica, Arial;
   font-weight: lighter;
-  font-style: italic;
+  font-style: normal;
   font-size: 1.0em;
   /*text-align: center;*/ }
   blockquote p:last-child {
