@@ -16,17 +16,17 @@
     
     
 
-    <meta name="description" content="#### 如何设计Redux的store？ #### 哪些状态需要被管理？ Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合">
+    <meta name="description" content="如何设计Redux的store？哪些状态需要被管理？  Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redux状态管理思考 | Hibop&#39;s Blog">
 <meta property="og:url" content="https://hibop.github.io/2017/11/02/Redux状态管理思考/index.html">
 <meta property="og:site_name" content="Hibop&#39;s Blog">
-<meta property="og:description" content="#### 如何设计Redux的store？ #### 哪些状态需要被管理？ Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合">
+<meta property="og:description" content="如何设计Redux的store？哪些状态需要被管理？  Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-07T14:50:53.748Z">
+<meta property="og:updated_time" content="2017-11-07T14:59:28.044Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redux状态管理思考 | Hibop&#39;s Blog">
-<meta name="twitter:description" content="#### 如何设计Redux的store？ #### 哪些状态需要被管理？ Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合">
+<meta name="twitter:description" content="如何设计Redux的store？哪些状态需要被管理？  Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂">
     
     
     
@@ -212,9 +212,10 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <pre><code>#### 如何设计Redux的store？
-#### 哪些状态需要被管理？
-</code></pre><h3 id="Domain-data"><a href="#Domain-data" class="headerlink" title="Domain data"></a>Domain data</h3><p>Domain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。</p>
+    <blockquote>
+<p>如何设计Redux的store？<br>哪些状态需要被管理？</p>
+</blockquote>
+<h3 id="Domain-data"><a href="#Domain-data" class="headerlink" title="Domain data"></a>Domain data</h3><p>Domain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。</p>
 <p>通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂度到服务端。</p>
 <p>甚至有不少页面仅在初始化时获取一次Domain data，从此就再无瓜葛，直到跳转到下一个页面。</p>
 <h3 id="UI-state"><a href="#UI-state" class="headerlink" title="UI state"></a>UI state</h3><p>决定当前UI如何展示的状态，比如一个弹窗的开闭，下拉菜单是否打开。</p>
