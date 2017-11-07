@@ -991,13 +991,15 @@ em {
   font-style: italic; }
 
 blockquote {
+  border-left: 6px solid #b4b4b4;
+  padding: 20px;
   margin: 1em 0;
   padding: 1em 0;
   background: #f8f8f8;
   border: 1px solid #eeeeee;
   border-radius: 3px;
   /*font-family: "Roboto Slab", serif;*/
-  font-family:  "Raleway",Verdana,sans-serif,宋体, serif, "Droid Serif", Helvetica Neue, Helvetica, Arial;
+  font-family:  Microsoft YaHei ,PingFang SC, "Raleway",Verdana,sans-serif,宋体, serif, "Droid Serif", Helvetica Neue, Helvetica, Arial;
   font-weight: lighter;
   font-style: italic;
   font-size: 1.0em;
