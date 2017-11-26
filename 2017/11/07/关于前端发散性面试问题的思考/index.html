@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      关于前端面试问题思考后的回答 | Hibop&#39;s Blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="hbyuan">
+    
+    
+
+    <meta name="description" content="作为一个不老不嫩的前端Weber，被面试过也面试过不少，大的鹅厂、菊花厂，小的创业公司。有些开放性的可深可浅的问题确实是值得好好思考回答，z这些问题可以很好考察你的前端综合能力。如果不知道，更应该由这些问题好好规划一下自己后面的学习目标，以此让自己知识面加深加厚—————  面试的一般是类似 Senior Web Front-end Developer之类的职位。以下问题可深可浅，发散性很强，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于前端面试问题思考后的回答 | Hibop&#39;s Blog">
+<meta property="og:url" content="https://hibop.github.io/2017/11/07/关于前端发散性面试问题的思考/index.html">
+<meta property="og:site_name" content="Hibop&#39;s Blog">
+<meta property="og:description" content="作为一个不老不嫩的前端Weber，被面试过也面试过不少，大的鹅厂、菊花厂，小的创业公司。有些开放性的可深可浅的问题确实是值得好好思考回答，z这些问题可以很好考察你的前端综合能力。如果不知道，更应该由这些问题好好规划一下自己后面的学习目标，以此让自己知识面加深加厚—————  面试的一般是类似 Senior Web Front-end Developer之类的职位。以下问题可深可浅，发散性很强，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-11-26T11:38:19.490Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于前端面试问题思考后的回答 | Hibop&#39;s Blog">
+<meta name="twitter:description" content="作为一个不老不嫩的前端Weber，被面试过也面试过不少，大的鹅厂、菊花厂，小的创业公司。有些开放性的可深可浅的问题确实是值得好好思考回答，z这些问题可以很好考察你的前端综合能力。如果不知道，更应该由这些问题好好规划一下自己后面的学习目标，以此让自己知识面加深加厚—————  面试的一般是类似 Senior Web Front-end Developer之类的职位。以下问题可深可浅，发散性很强，">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hibop&#39;s Blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          我的故事我的酒
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social" style="display: block">
+  <ul class="navigation" style="float: none;">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/Hibop" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">关于前端面试问题思考后的回答</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-11-07" class="post-meta__date date">2017-11-07</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <hr>
+<blockquote>
+<p>作为一个不老不嫩的前端Weber，被面试过也面试过不少，大的鹅厂、菊花厂，小的创业公司。有些开放性的可深可浅的问题确实是值得好好思考回答，z这些问题可以很好考察你的前端综合能力。如果不知道，更应该由这些问题好好规划一下自己后面的学习目标，以此让自己知识面加深加厚—————</p>
+</blockquote>
+<p>面试的一般是类似 Senior Web Front-end Developer之类的职位。以下问题可深可浅，发散性很强，能比较充分发现一个weber的知识深度和广度————</p>
+<h3 id="在-Web-前端领域，你掌握哪些语言和框架，或者说掌握程度达到可以在项目中实际使用的？"><a href="#在-Web-前端领域，你掌握哪些语言和框架，或者说掌握程度达到可以在项目中实际使用的？" class="headerlink" title="在 Web 前端领域，你掌握哪些语言和框架，或者说掌握程度达到可以在项目中实际使用的？"></a>在 Web 前端领域，你掌握哪些语言和框架，或者说掌握程度达到可以在项目中实际使用的？</h3><h5 id="常见回答："><a href="#常见回答：" class="headerlink" title="常见回答："></a>常见回答：</h5><ul>
+<li>「jQuery」（90%的人都没有忘记它）[回答这个的时候一定要有所准备，可能是你后面的坑，鹅厂大佬很可能会问有研究过JQ码源吗？这个对Senior Weber其实也不过分]</li>
+<li>「最近还看了下 AngularJS」（我们公司的项目在用 AngularJS，当时2代 Angular 已经出来了，React、Vue 等也都开始大热，80%的人只提到 AngularJS 而其他的都不知道让我很怀疑其真实性）</li>
+</ul>
+<h5 id="我的回答："><a href="#我的回答：" class="headerlink" title="我的回答："></a>我的回答：</h5><p>目前用得最熟的是 Vue、React、angular————angular以基于指令做基础，$scope做module的面相对象MVVC框架，而react是以组件为基础的 props和state为基础的函数式编程的UI框架，Vue个人感觉是两者的结合</p>
+<p>之前项目中用过 AngularJS，一代的那个，也用过 Backbone，不过日子有点久远，可能要稍微花一点时间重新捡起来。语言的话 HTML、CSS、JS 肯定会，但我已经不太直接写了。像JS 方面最近比较爱用TypeScript，CSS 这边则比较喜欢用Less或者 Sass，毕竟现在大型项目“国际化”和“皮肤”是很大一块，用Less，Sass这些预处理语言很方便开发皮肤。HTML 的话之前用过一段时间 Ruby 平台的 HAML 和 Slim，前几天试了试 Jade，就是前几天改名 Pug 的那个，但总觉得不是很舒服，HTML一般是用前后端模板引擎，jade，ejs，handlebars。。。经常用到的underscore、lodash、Ramda等工具类库也有模板引擎，当然自己也可撸一个。</p>
+<hr>
+<h3 id="你是怎么学到了这些的？"><a href="#你是怎么学到了这些的？" class="headerlink" title="你是怎么学到了这些的？"></a>你是怎么学到了这些的？</h3><h5 id="常见回答：-1"><a href="#常见回答：-1" class="headerlink" title="常见回答："></a>常见回答：</h5><ul>
+<li>「之前工作中遇到的吧」和「之前看到有点感兴趣就自己看了看」（最常见的两种回答））</li>
+<li>「之前外面读了个培训班他们教的」（有个很实在的人这么说的……帮人干活还要倒贴工资的可怜人……）</li>
+</ul>
+<h5 id="我的回答：-1"><a href="#我的回答：-1" class="headerlink" title="我的回答："></a>我的回答：</h5><p>Backbone 和 AngularJS 是工作原因，之前在外包公司时有个项目的客户是一群技术很好的美国人，他们用的这些，我就跟着偷学了。他们一开始用的 Backbone，但后来换了个 Leader，他更熟悉 AngularJS，刚好赶上重构，就换掉了。</p>
+<p>其他的基本都是因为一些原因而自学的，大多数是在接触 Backbone 和 AngularJS 之前就学了的，但 Vue 和 TS 是在那之后。AngularJS 那个项目后期的时候我自己在看当时新火起来的 React，因为在帮隔壁 Team 的忙，他们在用。期间一次在 Twitter 上看到一个朋友提到，就去看了一下，觉得意外的好用，刚好那时候离职了，就转去学 Vue 了，顺便也啃了下 Webpack。TS 在那期间其实就试着学过一次，但当时要学的东西太多忙不过来就先搁置了，学了 Vue 之后又开始重新学的，初衷其实只是想要 IDE 的提示和自动完成用起来更舒服一点。</p>
+<hr>
+<h3 id="你用过哪些前端构建工具（你们项目怎么构建的，不可能是刀耕火种时代吧）？webpack、Gulp、Grunt。。。是否熟悉？"><a href="#你用过哪些前端构建工具（你们项目怎么构建的，不可能是刀耕火种时代吧）？webpack、Gulp、Grunt。。。是否熟悉？" class="headerlink" title="你用过哪些前端构建工具（你们项目怎么构建的，不可能是刀耕火种时代吧）？webpack、Gulp、Grunt。。。是否熟悉？"></a>你用过哪些前端构建工具（你们项目怎么构建的，不可能是刀耕火种时代吧）？webpack、Gulp、Grunt。。。是否熟悉？</h3><h5 id="常见回答：-2"><a href="#常见回答：-2" class="headerlink" title="常见回答："></a>常见回答：</h5><ul>
+<li><p>？？？（多数人并不知道 Grunt 啥的是什么鬼）</p>
+</li>
+<li><p>「Grunt / Gulp」（少量人知道）</p>
+</li>
+</ul>
+<h5 id="我的回答：-2"><a href="#我的回答：-2" class="headerlink" title="我的回答："></a>我的回答：</h5><p>其实我第一个接触的类似的构建工具是 Ruby 平台的 Middleman，就是刚刚提到的用 Backbone 的那个项目。<br>就是从那个项目我开始意识到可以用 HAML、Sass、Coffee 之类的语言直接去写网站，并且就像在 Rails 里那样实时看到效果而不需要每次都编译半天，发布时又可以直接编译成静态文件。之后那个项目在换到 AngularJS 时一并把平台换成了 Grunt。之后我自学的 Gulp 和 Webpack，后来因为 Angular2 的关系还学过一下 rollup。现在我一般是 Webpack 和 Gulp 一起用的。</p>
+<p>哦对了其实因为现在是 TS、Webpack、Babel 来做模块管理了，以前 Backbone + require 时代，但我真的不喜欢。很庆幸后来换到 AngularJS 后就没必要做这个了，简单 concat 一下就好了。</p>
+<p>个人感觉webpack做模块管理，前端工程化构建，工作流等等方面非常优秀，现在架构一般都是用的webpack，现在升级2了</p>
+<h3 id="除了这些-NodeJS-的工具外，你自己会去写-NodeJS-么，mock数据，前端服务接口？"><a href="#除了这些-NodeJS-的工具外，你自己会去写-NodeJS-么，mock数据，前端服务接口？" class="headerlink" title="除了这些 NodeJS 的工具外，你自己会去写 NodeJS 么，mock数据，前端服务接口？"></a>除了这些 NodeJS 的工具外，你自己会去写 NodeJS 么，mock数据，前端服务接口？</h3><h5 id="常见回答：-3"><a href="#常见回答：-3" class="headerlink" title="常见回答："></a>常见回答：</h5><p>？？？（多数人并不知道 node.js 是什么鬼）<br>会吧（少数人的回答，没什么信心的语气）<br>之前写过些简单的工具什么的，还有 Express 之类（有个真的比较 Senior 的人似乎是这么说的）</p>
+<h5 id="我的回答：-3"><a href="#我的回答：-3" class="headerlink" title="我的回答："></a>我的回答：</h5><p>会。你知道前端跟后端有个很大的区别就是能离开后端独立玩的东西很少，要学什么或者练什么时很难没有后端，所以我也学过写 WebService，最早用 Ruby 和 Python，后来也学过 Go 之类，但最常用的当然还是 NodeJS。除了真的 WebService 外我每个项目也都会写一个用假数据的 MockAPI，用来测试。这个也是我从那个 Backbone 的项目借鉴来的。后来因为写太多了我就单独写了个 npm 包来做这事情，这也是我唯一一个在 npm 上公开发布的内容。</p>
+<p>除了这个之外，我也常用 NodeJS 去写一些小工具，比如我之前写过一些清理冗余照片的、Excel 和 Json 转换的、从数据源生成特定格式数据的之类。其中有些也试过写成 node-webkit 或者 Electron。<br>我还喜欢捣鼓些好玩儿的，比如用node写爬虫，爬知乎日报，用node利用websocket做即时通信、游戏房间，node不能不说非常强大，正经撸前端天天离不开node服和npm包，不正经做爬虫，搞并发，完后台也是不虚。</p>
+<h3 id="你是直接写-HTML、CSS、JS-的吗？还是会用一些别的语言去写然后编译过去？"><a href="#你是直接写-HTML、CSS、JS-的吗？还是会用一些别的语言去写然后编译过去？" class="headerlink" title="你是直接写 HTML、CSS、JS 的吗？还是会用一些别的语言去写然后编译过去？"></a>你是直接写 HTML、CSS、JS 的吗？还是会用一些别的语言去写然后编译过去？</h3><h5 id="常见回答：-4"><a href="#常见回答：-4" class="headerlink" title="常见回答："></a>常见回答：</h5><ul>
+<li><p>？？？（很多人并没听懂我的问题，其实我也不知道应该怎么更好地描述这个问题，又不能直接把语言名字报给他们听）<br>没有（除了上面一个外几乎全都是没有了）<br>Sass / Less（偶尔有些人学过，因为 Bootstrap……）</p>
+<h5 id="我的回答：-4"><a href="#我的回答：-4" class="headerlink" title="我的回答："></a>我的回答：</h5></li>
+<li><p>HTML 这边我学过 HAML、Slim 和 Pug（之前叫 Jade 的），CSS 这边我学过 Sass、Less、Stylus，JS 这边我学过 CoffeeScript、TypeScript，那个跟 TS 竞争的 Flow 什么的应该不算语言吧？</p>
+</li>
+<li><p>HTML、Sass、Coffee 我是学 Rails 的时候学到的，HAML 我不是很满意所以后来学了 Slim，换到 node.js 平台后又试了 Jade（后来改名 Pug 了），但我都不是很满意。现在我大概随心情有时候写 Pug 有时候直接写 HTML。</p>
+</li>
+</ul>
+<p>CSS 的那几个我远更喜欢 Sass。现在除非特殊情况比如要用 Ant Design 之类只有提供 less 没有办法的，不然我都是写 Sass。不过有时候要跟 team 共享的话我还是会写 Scss，怕 Sass 有些人接受不了。</p>
+<p>JS 的话我以前很喜欢 CoffeeScript、Typecript，后来因为作者比较固执（他家的 Backbone 也几百年没更新了），一直不肯接受新的 ES 特性，有了 babel 后我就不再写 coffee 了。再后来写了 TypeScript 后上瘾了。</p>
+<h3 id="除了这些之外，是不是还有什么-Web-前端技术你有简单了解过或有所耳闻呢？都是怎么知道的？"><a href="#除了这些之外，是不是还有什么-Web-前端技术你有简单了解过或有所耳闻呢？都是怎么知道的？" class="headerlink" title="除了这些之外，是不是还有什么 Web 前端技术你有简单了解过或有所耳闻呢？都是怎么知道的？"></a>除了这些之外，是不是还有什么 Web 前端技术你有简单了解过或有所耳闻呢？都是怎么知道的？</h3><h5 id="常见回答：-5"><a href="#常见回答：-5" class="headerlink" title="常见回答："></a>常见回答：</h5><p>呃……啊……（很多人什么都没说出来）<br>YUI……（有些年纪大的还记得它，但我记得有一个很年轻的人这么跟我说，这个可怜的孩子之前在日企，就是觉得技术太落后才想出来的……）<br>Bootstrap（上镜率挺高，确实也算没错）<br>React（有一两个人知道）<br>我的回答：</p>
+<p>呃……只是听说过都算的话有点多，就只算至少简单写过一点 Hello World 的那些吧。按时间顺序么最早最早的时候 jQuery 和 YUI，Flex 和 Silverlight 不知道算不算，我还真做过整站 Flex 的项目，这些都是在我大学毕业第一份工作时的事情了，其实那时候我是美工，主要工作是 PS 画图而不是写代码，但国企小公司你懂的，能者多劳嘛……</p>
+<p>后来我第二份工作不是特别忙，Leader 是个牛人，就让我空余时间去学的 Ruby（其实我那时候是想学 Python 的）。然后顺理成章学了 Rails，后来又觉得 Rails 太重了，改成了 Sinatra 之类。再后来因为 Windows 上 Ruby 的开发环境很麻烦，加上 NodeJS 开始流行了，我慢慢的就不玩了，之后后面做自动化测试时还用过。不过因为 Rails 的关系，当时学了 Sass/Scss、CoffeeScript，HAML。顺便那个 Team 里还狠狠锻炼了我的 Linux 技术，终身受用。</p>
+<p>后来换了个 Team，比较小，没有人带，基本都是在消化之前学的东西，并没有学太多新的技术。非要说的话就是因为之前 Team 用的 CVS 我非常不喜欢，于是花了很多精力学了 Git 和 Hg，那时候 Git 在国内还没现在那么流行，有问题都没人问。</p>
+<p>再后来就是那个 Backbone 的项目了，那个项目刚刚说了客户是一群技术控，到那时候才算正式从做网页转向写 JS，感觉打开了新世界的大门……按那个项目用了 Middleman、Backbone、Scss、HAML、Mustache（同时用 HAML 和 Mustache 的感觉真的很怪），还有 RequireJS，听说客户本来还想用 Coffee 但后来发现高估了团队的技术能力就放弃了。 那时候学 Backbone 又是周围完全没人会，又不能老去问客户，只能很艰苦地自己啃下来。</p>
+<p>项目第二阶段时改成了 Grunt、AngularJS，附带了一堆 AngularJS 的生态，比如 rest-angular、ui-router、ui-bootstrap 之类。这次 AngularJS 是一样的问题，只能自己啃，其实我因为对之前的项目结构不满意，早就私下在研究其他方案了，就有预习过 AngularJS 和 Ember，但仍然感觉很难学（笑）。另外这次加了 UT，用的 Jasmine 还有 Sinon。其实我之前自己写过 UT，一开始是 Qunit，后来用 Mocha、Chai，但我已经不记得是什么时候学的了。</p>
+<p>第三阶段时我本职工作里倒是没什么大的技术变化。但因为有些关系很好的做 Tester 的同事要去做自动化，所以学了一些自动化的东西。当时他们是用的 Java，但我不喜欢 Java，所以用的 Ruby 平台的 Cucumber、Capybara 之类，然后 Selenium 和 Watir 也是都玩过的。另外 RSpec 真的太迷人……直到现在我仍然觉得用 Ruby 写测试是最漂亮的。</p>
+<p>再后面的工作又回到了没人带路的阶段，刚才提到的自学的 React 和 Vue，然后接触到了 Webpack、Babel 和 TypeScript，又是新世界的大门的样子……</p>
+<h3 id="你觉得你平时的工作是编程占比重多一点还是绘制页面占比重更多呢？"><a href="#你觉得你平时的工作是编程占比重多一点还是绘制页面占比重更多呢？" class="headerlink" title="你觉得你平时的工作是编程占比重多一点还是绘制页面占比重更多呢？"></a>你觉得你平时的工作是编程占比重多一点还是绘制页面占比重更多呢？</h3><h5 id="常见回答：-6"><a href="#常见回答：-6" class="headerlink" title="常见回答："></a>常见回答：</h5><p>画页面吧（项目早期供应商推了很多这种人过来，花了很久才跟他们说清楚我们要前端开发不要美工）<br>写 JS 吧（后面推来的基本都是写 JS 的了）</p>
+<h5 id="我的回答：-5"><a href="#我的回答：-5" class="headerlink" title="我的回答："></a>我的回答：</h5><p>第一份工作是设计页面多，美工嘛，不过设计完了还得自己把静态页面画出来……在那个 Backbone 的项目之前是绘制页面多，之后就几乎全身心投入 JS 编程里去了。讲真我现在在 Web 前端开发最大的软肋就是不怎么了解页面效果实现之类的东西，都是 Bootstrap 啊 Material 啊现成的一套了事，反正都比我自己设计的好看（笑）。</p>
+<h3 id="那你个人的爱好或者说期望是希望哪方面更多一点？"><a href="#那你个人的爱好或者说期望是希望哪方面更多一点？" class="headerlink" title="那你个人的爱好或者说期望是希望哪方面更多一点？"></a>那你个人的爱好或者说期望是希望哪方面更多一点？</h3><h5 id="常见回答：-7"><a href="#常见回答：-7" class="headerlink" title="常见回答："></a>常见回答：</h5><p>还是偏静态一点吧<br>偏 JS 吧<br>好像都可以吧，我不是很有所谓<br>偏 JS 的比较少，另外两个差不多多……</p>
+<h5 id="我的回答：-6"><a href="#我的回答：-6" class="headerlink" title="我的回答："></a>我的回答：</h5><p>现在的比重讲真还蛮符合我的期望的，讲真我现在是离后端越来越近了。</p>
+<p>你上一个岗位里的主要工作内容是什么呢？</p>
+<h5 id="常见回答：-8"><a href="#常见回答：-8" class="headerlink" title="常见回答："></a>常见回答：</h5><p>设计页面，然后画出来，交给后台开发（国产美工，我的第一份工作……前期推来很多这种人）<br>画静态页面，交给开发（比美工还少了个设计，我的第二份工作……）<br>开发 JS（后期推来的基本都是开发了，但更多的也说不出什么）<br>另外还有少数人提到跟客户沟通、确定需求之类的，一般都是身处一个很小的 team。</p>
+<h5 id="我的回答：-7"><a href="#我的回答：-7" class="headerlink" title="我的回答："></a>我的回答：</h5><p>（假想我面的是现在公司的岗位，所以跳过现在的工作）</p>
+<p>我的本职工作还是 JS 开发吧。当时我们 Team 有8个开发，但有4个人一开始是基本不会写 JS 只能画静态的，老板是想要分工一半人做页面一半人写代码，结果客户不买账……</p>
+<p>另外因为客户要求用如 HAML、Scss 之类的技术，只有我会，所以我还给大家培训……</p>
+<p>然后 Git，还是只有我会，于是又得培训。然而 Git 其实是个需要深入理解去领会的东西，很多人跑去拿本子抄命令，这样根本没用，于是在之后的两年里我还是得不停地给大家解决各种各样的 Git 问题……</p>
+<p>然后 Linux，还是只有一两个人会，除了我另一个是 Leader 而他要出差……因为客户的开发环境是 Linux 虚拟机，于是帮大家装机和解决环境问题的人还是我。直到现在我还在吐槽我一个那么讨厌 Java 的前端开发找了个帮 Java 开发安装配置 Tomcat 的工作……当然这个是开玩笑，我们的真正的 Java 开发还是很厉害的，主要是我们 Front-end 团队的开发和测试，尤其是后来测试被要求写 automation（用 Java 写的），而他们之前是做 manual 的，很多人根本没接触过编程。</p>
+<p>另外因为我们的 Leader 连续在客户那里出差，所以我常常得顶替一下 Leader 的角色，虽然说实话我那次做得比较差，我在管理人方面的天赋并不高，但好的一面是还是学到了很多宝贵的管理知识和经验。</p>
+<h3 id="你有没有学过一些后端的或者其他的开发技术呢？"><a href="#你有没有学过一些后端的或者其他的开发技术呢？" class="headerlink" title="你有没有学过一些后端的或者其他的开发技术呢？"></a>你有没有学过一些后端的或者其他的开发技术呢？</h3><h5 id="常见回答：-9"><a href="#常见回答：-9" class="headerlink" title="常见回答："></a>常见回答：</h5><p>学校里学过 xxx（很多人会这么说，但学过什么我觉得并没有什么关系）<br>Java、.net、PHP（人气最高的语言群体，很正常）<br>基本没有人提到任何语言之外的框架、技术之类，也没有人提到任何相对比较小众的语言，连 Python 和 Ruby 都没人学过。</p>
+<h5 id="我的回答：-8"><a href="#我的回答：-8" class="headerlink" title="我的回答："></a>我的回答：</h5><p>学校里教过 C、C++、Java、.net 之类，可以无视。大学时因为跟朋友合伙搞论坛，所以学过 PHP，已经全忘了。后来学 Silverlight 后又去学了桌面端的 C# + WPF，还顺便学了 F#，当然也全忘光了。然后学的 Python 和 Ruby，这些是还能拿出来凑合用一下的。Python 当时用一个新的叫 Eve 的快速搭建 WebService 的框架用得很舒服，还贡献过代码，也用 QT 写过桌面的，就一个文本框一个按钮（笑）。 Ruby 刚刚提过就是从 Rails 转的 Sinatra、Mongoid 之类，还有些自动化的东西。</p>
+<p>第二家公司开始几乎后端都是用 Java 的，我不喜欢 Java，但因为对后端的东西好奇，加上后来出现了 Android，所以先是试着自学了 Scala 写 WebService 和 Android，但学不会（果然我还是不适合函数式，之前 F# 也学得一头雾水），后来 Kotlin 拯救了我。</p>
+<p>再后来因为兴趣的关系自学了一点 Go，勉强可以写点简单的小 WebService 出来。还简单看过一点 Rust 和 Dart。哦对之前因为去 nVidia 面试的关系还自学了一点点 Lua。</p>
+<p>前端离不开后续的部署和维护，不管是生产环境还是类生产环境，以前玩过虚拟机Vm部署，用的是tomcat或者nginx，不得不说nginx的反向代理确实很好用；后面有用部署微服务，我们使用的Kubenets和docker部署，这是云时代很牛逼两大科技，同chrome和angular一样也是google‘亲儿子’，一个是集群化管理，一个是容器化部署。</p>
+<h3 id="你写过单元测试吗（UT）？"><a href="#你写过单元测试吗（UT）？" class="headerlink" title="你写过单元测试吗（UT）？"></a>你写过单元测试吗（UT）？</h3><h5 id="常见回答：-10"><a href="#常见回答：-10" class="headerlink" title="常见回答："></a>常见回答：</h5><p>没有写过（大多数）<br>不多（少数）</p>
+<h5 id="我的回答：-9"><a href="#我的回答：-9" class="headerlink" title="我的回答："></a>我的回答：</h5><p>严格来说不多，除了项目要求的之外（当初 AngularJS 那个项目是有 UT 覆盖率要求的）。我一般是给一些特别关键的核心逻辑代码写少量的 UT。另外有时候遇到一些逻辑特别复杂容易出错的模块时我会用 TDD 来写，这样反而比较省时间。</p>
+<h3 id="你对网页自动化测试有多少了解？"><a href="#你对网页自动化测试有多少了解？" class="headerlink" title="你对网页自动化测试有多少了解？"></a>你对网页自动化测试有多少了解？</h3><h5 id="常见回答：-11"><a href="#常见回答：-11" class="headerlink" title="常见回答："></a>常见回答：</h5><p>？？？（一脸懵逼，100%）</p>
+<h5 id="我的回答：-10"><a href="#我的回答：-10" class="headerlink" title="我的回答："></a>我的回答：</h5><p>直至我上次做自动化测试时，网页自动化测试相比 API 自动化测试仍然很不成熟不稳定，我是这么认为的。变数太多以至于完全自动化很难，一般跑的时候最好还是要有人看着。而且出了问题 Debug 很困难，经常会有灵异问题，比如我之前 Team 里大家用同样的浏览器同样的网页同一个版本的 WebDriver 但他用 Java 写我用 Ruby 写一模一样的 case 结果我能通过他就说 element not found，至今没找到原因。听说 Chrome 和 Firefox 要出 Headless 版本了，希望到时候能有改观。总得来说我觉得如果 API 自动化还没做的话应该先做 API 自动化，那个的投入产出比要高得多。</p>
+<p>另外我还有一个切身体会就是网页自动化的 case 最好让页面开发自己写，这样他们才会真的体会到好好地去组织规范 ID、Class、Name 之类的属性还有 Label 标签什么的这些老生常谈的语义化有多重要了，总有一堆人喜欢在那里嚷嚷样子对了不就好了什么的，然后就是给别的 Team 挖坑。</p>
+<h3 id="你用版本控制工具么？"><a href="#你用版本控制工具么？" class="headerlink" title="你用版本控制工具么？"></a>你用版本控制工具么？</h3><h5 id="常见回答：-12"><a href="#常见回答：-12" class="headerlink" title="常见回答："></a>常见回答：</h5><p>Git（用过的人不多但总算还是有的）<br>SVN（毕竟老牌，还是有一些人用过）<br>小乌龟（这么说的人还不少，所以其实就是用了半天连名字都没关心过，不知道应该作何评价）</p>
+<h5 id="我的回答：-11"><a href="#我的回答：-11" class="headerlink" title="我的回答："></a>我的回答：</h5><p>用，现在基本固定 Git 了，有一段时间很喜欢 Hg。其实我蛮早的时候就接触 SVN 了，第一份工作时就有，没错就是我还是美工时……不过第一份工作时主要用的是微软的 SourceSafe，SVN 只用了很短一小会儿，第二份工作时用的 CVS，还是纯命令行的，后面还有个银行的客户非要买个什么很奇葩的商业工具，莫名其妙，用得我非常不爽，之后就去怒学了 Git 和 Hg。</p>
+<h3 id="你之前的团队规模怎样？是怎样的构成？我是说有多少前端多少后端多少测试多少-PM-之类。"><a href="#你之前的团队规模怎样？是怎样的构成？我是说有多少前端多少后端多少测试多少-PM-之类。" class="headerlink" title="你之前的团队规模怎样？是怎样的构成？我是说有多少前端多少后端多少测试多少 PM 之类。"></a>你之前的团队规模怎样？是怎样的构成？我是说有多少前端多少后端多少测试多少 PM 之类。</h3><h5 id="常见回答：-13"><a href="#常见回答：-13" class="headerlink" title="常见回答："></a>常见回答：</h5><p>不知道（很多人真的并不知道自己团队有多少人！）<br>大概有 x 个人吧（但并不知道他们是干什么的！）<br>有 x 个开发吧，还有设计、PM 什么的……啊？测试？好像有一个人吧（常见一个测试伺候七八个开发的）</p>
+<h5 id="我的回答：-12"><a href="#我的回答：-12" class="headerlink" title="我的回答："></a>我的回答：</h5><p>最近的工作其实团队并不成型，我属于一个游击手的角色，就不说了。之前一个 Team 里如果限定在 frontend 的话一开始是有8个 dev、5位 tester，其中4个 dev 是不会写 JS 的，当初老板设想的是4个人做页面4个人写 JS，但似乎客户并不买账（笑）。另外我们的 tester 是 manual 和 automation 都要做的。</p>
+<p>整个项目组还有一个 backend team，一个 mobile testing team 是做移动端自动化测试的，还有个 integration testing team，说得好听是 integration 其实做的活就是 backend automation testing，他们中的很多人直到最后都没见过前端界面长啥样，我们 FE team 的 tester 才是真的在做 integration testing。我们有个 PM，澄清一下是 Project，不是 Product，不同公司用的缩写不一样。他至少会管我们 FE team，但视情况不同也可能会参与其他 team。然后我们的 ODC Manager 也跟团队走的很近，最艰苦的日子基本每天都在一个 war room 里过日子。</p>
+<h3 id="听起来团队还挺轻巧的样子，你们是用什么方式管理的？是跑敏捷的么？"><a href="#听起来团队还挺轻巧的样子，你们是用什么方式管理的？是跑敏捷的么？" class="headerlink" title="听起来团队还挺轻巧的样子，你们是用什么方式管理的？是跑敏捷的么？"></a>听起来团队还挺轻巧的样子，你们是用什么方式管理的？是跑敏捷的么？</h3><h5 id="常见回答：-14"><a href="#常见回答：-14" class="headerlink" title="常见回答："></a>常见回答：</h5><p>？？？（一脸懵逼，软工课已还给老师）<br>不知道……（有些人我详细询问了他们 Team 平时干些啥后觉得应该是跑 Scrum 的，但他们并不知道不了解也不关心）</p>
+<h5 id="我的回答：-13"><a href="#我的回答：-13" class="headerlink" title="我的回答："></a>我的回答：</h5><p>账面上算是，跑的 Scrum，但其实我觉得不是，Scrum 没有 PM 不是么（笑）。我们的客户技术是很好但似乎并不擅长做项目，而且也没有跨洋外包合作的经验。我觉得用 Scrum 是他们的一厢情愿，也许因为那时候 Scrum 很流行听起来很酷，虽然我私下也经常吐槽他们只是因为懒得写文档。团队里自上而下（包括客户自己的人）都不知道自己应该干什么，技术团队跟需求源隔离，原因很多，比如时区、语言，还有甲乙方隔阂，客户关系紧张的时候老板是不会放心让底层员工直接接触客户的，这也就是为啥我们会有 PM……</p>
+<p>客户偷懒不写文档，管理层、产品、设计、搭档其他外包公司团队都是换了一批又换一批，代码多次推翻，大方向数次改变，到后面没人知道最初的需求是什么样子，而且大家做了无数无用功后对项目赶到疲倦无望，没有成就感，士气低落，Leader 和 Manager 们每天都很头疼。团队和团队间还有客户那边人和人之间毫无沟通，欺上瞒下现象严重，我们的 Tester 曾吐槽说有开给别的外包 Team 的 P1 的 Bug 人家直接改成 P3 然后大摇大摆把 Story 给 Close 了，JIRA 里堆满了一年前的 Bug。</p>
+<p>我一直觉得这项目如果老老实实跑瀑布啥事都没有。</p>
+<h3 id="你用什么项目管理工具、issue-tracking-什么的吗？"><a href="#你用什么项目管理工具、issue-tracking-什么的吗？" class="headerlink" title="你用什么项目管理工具、issue tracking 什么的吗？"></a>你用什么项目管理工具、issue tracking 什么的吗？</h3><h5 id="常见回答：-15"><a href="#常见回答：-15" class="headerlink" title="常见回答："></a>常见回答：</h5><p>没有（很常见，嗯）<br>有的（但并不知道名字……）</p>
+<h5 id="我的回答：-14"><a href="#我的回答：-14" class="headerlink" title="我的回答："></a>我的回答：</h5><p>刚才说的 JIRA，最近几个项目都在用，以及 Atlassian 的一整套：Confluence、Stash（最近跟 Bitbucket 合并了）、Bamboo 之类。不过我自己是觉得这类东西太重了，事实上这些年大家都对敏捷着迷，团队里全是技术和产品，并没有足够多的专业 PM 来组织和消化这么多数据。指望开发自己去消化这些数据我觉得不切实际，我呆过的大多数 team 连个 retrospective meeting 都开不好……</p>
+<p>我自己的话觉得 Github 自带的那个就已经挺不错了。</p>
+<h3 id="你平时工作中遇到技术问题会更喜欢怎么做？是挖文档呢？还是翻框架源代码呢？又或者是网上搜索、问答社区，或者问同事问朋友？"><a href="#你平时工作中遇到技术问题会更喜欢怎么做？是挖文档呢？还是翻框架源代码呢？又或者是网上搜索、问答社区，或者问同事问朋友？" class="headerlink" title="你平时工作中遇到技术问题会更喜欢怎么做？是挖文档呢？还是翻框架源代码呢？又或者是网上搜索、问答社区，或者问同事问朋友？"></a>你平时工作中遇到技术问题会更喜欢怎么做？是挖文档呢？还是翻框架源代码呢？又或者是网上搜索、问答社区，或者问同事问朋友？</h3><h5 id="常见回答：-16"><a href="#常见回答：-16" class="headerlink" title="常见回答："></a>常见回答：</h5><p>这个各种回答都有，就不一一列举了，但基本都是很虚的一两句话。</p>
+<h5 id="我的回答：-15"><a href="#我的回答：-15" class="headerlink" title="我的回答："></a>我的回答：</h5><p>实践中我一般首选文档，然后是上 Google，当然搜索最终有80%可能不是落到 Stackoverflow 就是去到文档里我粗心遗漏的哪个角落。如果还是不行就只能去翻源码了。</p>
+<p>有一些特殊情况例外，比如 TypeScript 类型定义这种翻源码非常直接高效的情况我会直接翻源码。</p>
+<p>倒不是我不喜欢问人，而是我周边实在没太多朋友能问的，有时候觉得挺孤独的……</p>
+<h3 id="长远来看，你是比较希望往产品的方向发展，还是往管理的方向发展呢？还是说你打算一直走技术的方向？"><a href="#长远来看，你是比较希望往产品的方向发展，还是往管理的方向发展呢？还是说你打算一直走技术的方向？" class="headerlink" title="长远来看，你是比较希望往产品的方向发展，还是往管理的方向发展呢？还是说你打算一直走技术的方向？"></a>长远来看，你是比较希望往产品的方向发展，还是往管理的方向发展呢？还是说你打算一直走技术的方向？</h3><h5 id="常见回答：-17"><a href="#常见回答：-17" class="headerlink" title="常见回答："></a>常见回答：</h5><p>没想过（很多人）<br>产品吧（在产品、管理、技术三条线中最热门）</p>
+<h5 id="我的回答：-16"><a href="#我的回答：-16" class="headerlink" title="我的回答："></a>我的回答：</h5><p>如果不出什么意外的话我会一直坚持做技术。不过我并不排斥产品和管理，我自己对项目管理很感兴趣，也经常跟我的 PM、Manager 偷学、讨论一些项目管理的东西。事实上我觉得每个做技术的人都应该学一点项目管理的知识，不说别的，首先至少可以用于在糟糕的环境下自保，每个人都难免运气不好掉进一个糟糕的 team 里的。而产品这块其实是跟行业有关系，不同行业我感兴趣的程度也会不同。但我这人好奇心比较重，即使是我最不感兴趣的行业，我仍然还是会想要学到一点东西。</p>
+<p>总得来说我还是希望当技术人员，但不是一个除了技术就一穷二白的技术人员。</p>
+<p>个人感受</p>
+<p>之前面试了这么多人，还是有很多共性缺点的。我觉得最不好的一点就是话很少，对每个问题都是一两句话甚至一两个单词来回答，知道的也不详细讲一讲、不知道的也不解释一下或者扯下其他的东西掩饰下，这样给人一种很肤浅的感觉。「我刚毕业第一份工作的时候学过 jQuery，那时候还很流行，虽然现在好像退居幕后了」一定是好过「jQuery」的。我怀疑这跟甲乙方关系以及资历都有很大关系，之前面试过一些甲方职位的人，相对就放得开很多，但这些人的资历也远更深，从穿着打扮从谈吐气质方面都明显要更高几个档次，所以应该也不只是甲乙方关系的原因。</p>
+<p>另一个就是很多人很明显就是蒙起头来做事，对自身手头的 task 之外什么都不了解、不关心。我很难想象一个人在一家公司工作一年连自己一个小 Team 里有几个人都不知道，对自己工作中使用的技术是什么、其周边生态、发展前景一概不关心的人工作起来到底是什么样子，但第一印象肯定是对待工作敷衍应付。</p>
+<p>其实就算是面试乙方人员，我也遇到过年纪很轻但很能说很会扯的，虽说有点浮夸，但至少给人一种积极的、好学的印象。如果在面试中给面试官留下「这个人只做本职工作别的都不关心」的印象真的是很不利的。</p>
+<p>还有一点就是既然我们都是要求招 Senior 以上的 Position 了，自然是要求有一定的 Lead/Manage 的能力的，这也就是我会问 Team 里有几个人、做什么、Team 是怎么管理的相关的问题的原因。我并不指望招到一个已经会做管理的人，但至少还是希望能找到一个被管理过的人，见过猪跑、照着猫还能画画虎的人。</p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017- . | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题 Huno </span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
