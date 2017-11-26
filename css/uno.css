@@ -1025,7 +1025,7 @@ ul {
   list-style-type: disc; }
 
 code {
-  white-space: normal;
+  white-space: normal !important;
   padding: 2px 4px;
   background-color: #f8f8f8;
   color: #d14;

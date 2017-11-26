@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      关于React的性能优化 | Hibop&#39;s Blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="hbyuan">
+    
+    
+
+    <meta name="description" content="react组件是如何渲染的？以及怎样优化呢？  React的render机制：react的组件的渲染分为初始化渲染和更新渲染;初始化渲染调用的过程：  getDefaultProps getInitialState componentWillMount [渲染前最后可以改变state的地方]； render [构建虚拟Dom] componentDidMount [真实DOM构建完毕，可以操作组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于React的性能优化 | Hibop&#39;s Blog">
+<meta property="og:url" content="https://hibop.github.io/2017/11/26/关于React的性能优化/index.html">
+<meta property="og:site_name" content="Hibop&#39;s Blog">
+<meta property="og:description" content="react组件是如何渲染的？以及怎样优化呢？  React的render机制：react的组件的渲染分为初始化渲染和更新渲染;初始化渲染调用的过程：  getDefaultProps getInitialState componentWillMount [渲染前最后可以改变state的地方]； render [构建虚拟Dom] componentDidMount [真实DOM构建完毕，可以操作组">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-11-26T15:53:55.123Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于React的性能优化 | Hibop&#39;s Blog">
+<meta name="twitter:description" content="react组件是如何渲染的？以及怎样优化呢？  React的render机制：react的组件的渲染分为初始化渲染和更新渲染;初始化渲染调用的过程：  getDefaultProps getInitialState componentWillMount [渲染前最后可以改变state的地方]； render [构建虚拟Dom] componentDidMount [真实DOM构建完毕，可以操作组">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hibop&#39;s Blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          我的故事我的酒
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social" style="display: block">
+  <ul class="navigation" style="float: none;">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/Hibop" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">关于React的性能优化</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-11-26" class="post-meta__date date">2017-11-26</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <blockquote>
+<p>react组件是如何渲染的？以及怎样优化呢？</p>
+</blockquote>
+<h3 id="React的render机制："><a href="#React的render机制：" class="headerlink" title="React的render机制："></a>React的render机制：</h3><p>react的组件的渲染分为初始化渲染和更新渲染;<br>初始化渲染调用的过程：</p>
+<ul>
+<li>getDefaultProps</li>
+<li>getInitialState</li>
+<li>componentWillMount [渲染前最后可以改变state的地方]；</li>
+<li>render [构建虚拟Dom]</li>
+<li>componentDidMount [真实DOM构建完毕，可以操作组件的真实DOM，如绑定事件等]</li>
+</ul>
+<p>组件在初始化的时候会调用根组件下的所有组件的render方法。<br>但是当我们要更新某个自组建的时候，我们的理想状态是只调用关键路径上组件的render函数。但是react的默认做法是调用所有组件的render，再对生成的虚拟DOM经行对比，如果不变则不进行更新，这样有些没有改变的组件的虚拟DOM的对比将是额外的开销。react会以变化的组件对比虚拟DOM（props和state变化），并且re-render该组件下的所有子组件，这就导致了组件没必要的重新渲染。</p>
+<p>我们应该清楚：</p>
+<ul>
+<li>拆分组件有利于复用和组件优化；</li>
+<li>成成的虚拟DOM并进行Diff对比是发生在render()函数之后的，而非之前；</li>
+</ul>
+<h3 id="shouldComponentUpdate-实现不必要的渲染；"><a href="#shouldComponentUpdate-实现不必要的渲染；" class="headerlink" title="shouldComponentUpdate()实现不必要的渲染；"></a>shouldComponentUpdate()实现不必要的渲染；</h3><p>在大量的数据的时候，有很多不必要的渲染，react团队给定制优化的生命周期钩子函数。</p>
+<ul>
+<li>componentWillReceiveProps(nextProps):当挂载的组件接收到新的props时被调用，父组件的状态改变（setState）怎样传递到自组件中？该函数在子组件中调用，比较this.props和nextProps然后再this.setState()执行子组件的状态变换，这样父组件的状态改变就更新到子组件了。</li>
+<li>shouldComponentUpdate(nextProps, nextState): boolean (返回布尔值，后面简单记为SCU)： 当组件决定任何状态改变时是否更新DOM，re-render以及后续操作，返回false时跳过重新渲染</li>
+<li>componentWillUpdate(nextProps, nextState)更新前调用，此时不能setSate()</li>
+<li>componentDidUpdate(prevProps, prevState): 更新后调用；</li>
+</ul>
+<h3 id="重新渲染的流程"><a href="#重新渲染的流程" class="headerlink" title="重新渲染的流程"></a>重新渲染的流程</h3><ul>
+<li>根据shouldComponentUpdate（SCU）函数的返回值决定是否要更新，默认返回true，</li>
+<li>如果要更新则调用组件的render方法生成新虚拟DOM；</li>
+<li>新的虚拟DOM与旧的虚拟DOM对比，根据Diff算法最小粒度的去改变更新真实DOM节点；</li>
+<li>如果SCU返回false则该组件以及子组件都保持不变</li>
+</ul>
+<h3 id="提高react渲染效率的几个方案："><a href="#提高react渲染效率的几个方案：" class="headerlink" title="提高react渲染效率的几个方案："></a>提高react渲染效率的几个方案：</h3><ol>
+<li>给组件添加shouldComponentUpdate逻辑判断：<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">shouldComponentUpdate(nextProps, nextState) &#123;</div><div class="line">	<span class="keyword">return</span> nextProps.value !=== <span class="keyword">this</span>.props.value</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>当然也可以使用facebook 开发react的孪生姐妹三方件immutable.js更方便地比较状态树；</p>
+<ol>
+<li>对于遍历组件，给组件添加唯一的key属性，提高Diff算法效率；</li>
+<li>不要乱用{…this.props}经行解构，只传递组件需要的props, 传得太多传得太深都会加重shouldComponentUpdate数据的比较的负担；<br>在用react-redux时，在容器组件上使用<em>connect([mapStateToProps(state, ownProps)], [mapDispatchToProps], [mergeProps],[options])</em>函数；</li>
+<li>将方法绑定置于constructor(props)函数中，如果直接在render函数中绑定，每次调用都会执行bind函数创建一个新的函数。<br>等等。。。【未完待续】</li>
+</ol>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017- . | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题 Huno </span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

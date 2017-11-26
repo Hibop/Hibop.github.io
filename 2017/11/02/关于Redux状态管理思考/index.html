@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Hibop&#39;s Blog">
 <meta property="og:description" content="如何设计Redux的store？哪些状态需要被管理？  Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-26T11:42:14.948Z">
+<meta property="og:updated_time" content="2017-11-26T14:08:42.551Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于Redux状态管理思考 | Hibop&#39;s Blog">
 <meta name="twitter:description" content="如何设计Redux的store？哪些状态需要被管理？  Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂">
@@ -223,7 +223,7 @@ classes that you can use:
 <p>和Domain data的简单、稳定不同，UI state是多变，不稳定的——不同的页面有不同、甚至相似但又细微不同的展现和交互。</p>
 <p>同时，UI state之间也是互相影响的，比如选择列表中的元素(选中状态是ui state)，当选中数量低于N时禁用提交按钮(按钮是否禁用也是ui state)。这是前端工作中非常常见的需求，整个场景中没有Domain data出现。</p>
 <p>UI state多变、不稳定，但它仍然是需要被复用的。小到弹窗的开闭，大到表单的管理，他们的逻辑都是明显可被抽象的。</p>
-<h3 id="App-state"><a href="#App-state" class="headerlink" title="App state *"></a>App state *</h3><p>App级的状态，例如当前是否有请求正在加载。个人倾向将它们视为另一种抽象角度下的UI state。因为本质上它们仍然是服务于UI的：一个异步下拉框会发请求，加载页面主要信息也会发请求，而我们通常希望前者加载时只disable下拉框，而后者可能要用Loading mask遮罩整个页面——场景不同，对状态的需求就不同，单纯关注当前是否有请求正在加载没有意义，只有与UI场景结合才会产生价值，因此我倾向认为App state的本质是对UI state的再抽象。</p>
+<h3 id="App-state"><a href="#App-state" class="headerlink" title="App state"></a>App state</h3><p>App级的状态，例如当前是否有请求正在加载。个人倾向将它们视为另一种抽象角度下的UI state。因为本质上它们仍然是服务于UI的：一个异步下拉框会发请求，加载页面主要信息也会发请求，而我们通常希望前者加载时只disable下拉框，而后者可能要用Loading mask遮罩整个页面——场景不同，对状态的需求就不同，单纯关注当前是否有请求正在加载没有意义，只有与UI场景结合才会产生价值，因此我倾向认为App state的本质是对UI state的再抽象。</p>
 
   </section>
 
