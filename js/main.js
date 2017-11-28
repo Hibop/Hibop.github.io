@@ -25,4 +25,23 @@ $(document).ready(function() {
     $('.btn-mobile-menu__icon').toggleClass('icon-list icon-x-circle animated fadeIn');
   });
 
+  var isFull = false;
+  function handlerFullPage() {
+    if(!isFull){
+      $('.content-wrapper').animate({
+        marginLeft: 0,
+        marginRight: 0,
+        width: '100%'
+      })
+    } else {
+      $('.content-wrapper').animate({
+        marginLeft: '430px',
+        marginRight: 0,
+        width: '68%'
+      })
+    }
+    $('.panel-cover').fadeToggle();
+    isFull = !isFull;
+  }
+  $('#fullPage').click(handlerFullPage);
 });

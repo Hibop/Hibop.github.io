@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      关于前端异步、进程、单线程、多线程 | Hibop&#39;s Blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="hbyuan">
+    
+    
+
+    <meta name="description" content="你真的了解前端异步编程、单线程吗？  写在前面的定义： 同步：一个进程在执行某个请求的时候，若该请求需要一段时间才能返回信息，那么这个进程将会一直等待下去，直到收到返回信息才继续执行下去。 异步：进程不需要一直等下去，而是继续执行下面的操作，不管其他进程的状态。当有消息返回时系统会通知进程进行处理，这样可以提高执行的效率。 进程：狭义上，就是正在运行的程序的实例。广义上，进程是一个具有一定独立功">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于前端异步、进程、单线程、多线程 | Hibop&#39;s Blog">
+<meta property="og:url" content="https://hibop.github.io/2017/11/28/关于前端异步、进程、单线程、多线程/index.html">
+<meta property="og:site_name" content="Hibop&#39;s Blog">
+<meta property="og:description" content="你真的了解前端异步编程、单线程吗？  写在前面的定义： 同步：一个进程在执行某个请求的时候，若该请求需要一段时间才能返回信息，那么这个进程将会一直等待下去，直到收到返回信息才继续执行下去。 异步：进程不需要一直等下去，而是继续执行下面的操作，不管其他进程的状态。当有消息返回时系统会通知进程进行处理，这样可以提高执行的效率。 进程：狭义上，就是正在运行的程序的实例。广义上，进程是一个具有一定独立功">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-11-28T16:13:03.991Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于前端异步、进程、单线程、多线程 | Hibop&#39;s Blog">
+<meta name="twitter:description" content="你真的了解前端异步编程、单线程吗？  写在前面的定义： 同步：一个进程在执行某个请求的时候，若该请求需要一段时间才能返回信息，那么这个进程将会一直等待下去，直到收到返回信息才继续执行下去。 异步：进程不需要一直等下去，而是继续执行下面的操作，不管其他进程的状态。当有消息返回时系统会通知进程进行处理，这样可以提高执行的效率。 进程：狭义上，就是正在运行的程序的实例。广义上，进程是一个具有一定独立功">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hibop&#39;s Blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          我的故事我的酒
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social" style="display: block">
+  <ul class="navigation" style="float: none;">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/Hibop" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">关于前端异步、进程、单线程、多线程</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-11-28" class="post-meta__date date">2017-11-28</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <blockquote>
+<p>你真的了解前端异步编程、单线程吗？</p>
+</blockquote>
+<h3 id="写在前面的定义："><a href="#写在前面的定义：" class="headerlink" title="写在前面的定义："></a>写在前面的定义：</h3><ul>
+<li>同步：一个进程在执行某个请求的时候，若该请求需要一段时间才能返回信息，那么这个进程将会一直等待下去，直到收到返回信息才继续执行下去。</li>
+<li>异步：进程不需要一直等下去，而是继续执行下面的操作，不管其他进程的状态。当有消息返回时系统会通知进程进行处理，这样可以提高执行的效率。</li>
+<li>进程：狭义上，就是正在运行的程序的实例。广义上，进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。它是操作系统动态执行的基本单元，在传统的操作系统中，进程既是基本的分配单元，也是基本的执行单元。</li>
+<li>线程：线程是程序中一个单一的顺序控制流程。进程内一个相对独立的、可调度的执行单元，是系统独立调度和分派CPU的基本单位。指运行中的程序的调度单位。</li>
+<li>单线程：单线程在程序执行时，所走的程序路径按照连续顺序排下来，前面的必须处理好，后面的才会执行。单线程就是进程里只有一个线程。</li>
+<li>多线程：在单个程序中同时运行多个线程完成不同的工作，称为多线程。</li>
+</ul>
+<h3 id="了解下js运行和浏览器解析："><a href="#了解下js运行和浏览器解析：" class="headerlink" title="了解下js运行和浏览器解析："></a>了解下js运行和浏览器解析：</h3><h4 id="1-js是单线程的，但是浏览器解析是多线程："><a href="#1-js是单线程的，但是浏览器解析是多线程：" class="headerlink" title="1. js是单线程的，但是浏览器解析是多线程："></a>1. js是单线程的，但是浏览器解析是多线程：</h4><ul>
+<li>JS运行在浏览器中，是单线程的，每个window[对应浏览器的tab页]一个JS线程，既然是单线程的，在某个特定的时刻只有特定的代码能够被执行，并阻塞其它的代码，这是一个主线程的运行过程以执行栈来完成，包括函数的压栈和出栈过程。——————‘先进后出’</li>
+<li>而浏览器是事件驱动的，浏览器中很多行为是异步的，会创建事件并放入执行队列中，JavaScript引擎是单线程处理它的任务队列。——————‘先进先出’</li>
+<li>主要的异步行为：</li>
+</ul>
+<ol>
+<li>事件[Event Loop（事件循环）}</li>
+<li>定时器</li>
+<li>XMLHttpRequest完成回调触发等<br>除此之外nodejs的一些IO操作</li>
+</ol>
+<ul>
+<li>浏览器是多线程协同解析的：<blockquote>
+<p>JavaScript引擎线程<br>界面渲染线程<br>浏览器事件触发线程<br>HTTP请求线程</p>
+</blockquote>
+</li>
+</ul>
+<p>当一个异步事件发生的时候，它就进入事件队列。浏览器有一个内部大消息循环，Event Loop（事件循环），会轮询事件队列并处理事件。比如，浏览器当前正在忙于处理onclick事件，这时window onSize事件发生了，这个异步事件就被放入事件队列等待处理，只有前面的处理完毕了，空闲了才会执行这个事件。</p>
+<p>为什么JavaScript是单线程的却能让AJAX异步发送和回调请求，为什么setTimeout也看起来像是多线程的？</p>
+<p>Ajax请求确实是异步的，这请求是由浏览器新开了一个线程请求，事件回调的时候是放入Event loop单线程事件队列等候处理。当浏览器空闲的时候出队列任务被处理，JavaScript引擎始终是单线程运行回调函数、单线程处理它的任务队列。<br>setTimeout(func, 0)神奇在哪儿？那就是告诉js引擎，在0ms以后把func放到主事件队列中，等待当前的代码执行完毕再执行，注意：重点是改变了代码流程，把func的执行放到了主事件队列中。这就是它的神奇之处了。它的用处有三个：</p>
+<p>让浏览器渲染当前的变化（很多浏览器UI render和js执行是放在一个线程中，线程阻塞会导致界面无法更新渲染）<br>重新计算script运行时间，即重新判断”script is running too long”这个警告<br>改变了执行顺序</p>
+<h3 id="异步编程三种"><a href="#异步编程三种" class="headerlink" title="异步编程三种"></a>异步编程三种</h3><h4 id="一：回调函数这是异步编程最基本的方法。假定有两个函数f1和f2，后者等待前者的执行结果。"><a href="#一：回调函数这是异步编程最基本的方法。假定有两个函数f1和f2，后者等待前者的执行结果。" class="headerlink" title="一：回调函数这是异步编程最基本的方法。假定有两个函数f1和f2，后者等待前者的执行结果。"></a>一：回调函数这是异步编程最基本的方法。假定有两个函数f1和f2，后者等待前者的执行结果。</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">　f1();</div><div class="line">　f2();如果f1是一个很耗时的任务，可以考虑把f2写成f1的回调函数。</div><div class="line">　<span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">callback</span>)</span>&#123;</div><div class="line">　　　　setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">　　　　　　<span class="comment">// f1的任务代码</span></div><div class="line">　　　　　　callback();</div><div class="line">　　　　&#125;, <span class="number">1000</span>);</div><div class="line">　　&#125;执行代码就变成下面这样：</div><div class="line">　</div><div class="line">　f1(f2);</div></pre></td></tr></table></figure>
+<p>采用这种方式，我们把同步操作变成了异步操作，f1不会堵塞程序运行。回调函数的优点是简单、容易理解和部署，缺点是不利于代码的阅读和维护，各个部分之间高度耦合，流程会很混乱，而且每个任务只能指定一个回调函数。</p>
+<h4 id="二、事件监听"><a href="#二、事件监听" class="headerlink" title="二、事件监听"></a>二、事件监听</h4><p>另一种思路是采用事件驱动模式。任务的执行不取决于代码的顺序，而取决于某个事件是否发生。还是以f1和f2为例。首先，为f1绑定一个事件（这里采用的jQuery的写法）。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">　　f1.on(<span class="string">'done'</span>, f2);上面这行代码的意思是，当f1发生done事件，就执行f2。然后，对f1进行改写：</div><div class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</div><div class="line">　　　　setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">　　　　　　<span class="comment">// f1的任务代码</span></div><div class="line">　　　　　　f1.trigger(<span class="string">'done'</span>);</div><div class="line">　　　　&#125;, <span class="number">1000</span>);</div><div class="line">　　&#125;</div></pre></td></tr></table></figure></p>
+<p>f1.trigger(‘done’)表示，执行完成后，立即触发done事件，从而开始执行f2。这种方法的优点是比较容易理解，可以绑定多个事件，每个事件可以指定多个回调函数，而且可以”去耦合”，有利于实现模块化。缺点是整个程序都要变成事件驱动型，运行流程会变得很不清晰。</p>
+<h4 id="三、Promises对象"><a href="#三、Promises对象" class="headerlink" title="三、Promises对象"></a>三、Promises对象</h4><p>Promise 是异步编程的一种解决方案，比传统的解决方案“回调函数”和“事件”——更合理和更强大。它由社区最早提出和实现，ES6 将其写进了语言标准，统一了用法，原生提供了Promise对象。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。基本用法如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">   <span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</div><div class="line">     <span class="comment">// ... some code</span></div><div class="line">     <span class="keyword">if</span> (<span class="comment">/* 异步操作成功 */</span>)&#123;</div><div class="line">       resolve(value);</div><div class="line">     &#125; <span class="keyword">else</span> &#123;</div><div class="line">       reject(error);</div><div class="line">     &#125;</div><div class="line">   &#125;);</div><div class="line">   promise.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">   <span class="comment">// success</span></div><div class="line">   &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</div><div class="line">    <span class="comment">// failure</span></div><div class="line">   &#125;);</div><div class="line">   <span class="comment">// 下面列出异步操作失败、抓捕异常的另一种写法</span></div><div class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</div><div class="line">  reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'test'</span>));</div><div class="line">&#125;);</div><div class="line">promise.catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(error);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>这样写的优点在于，回调函数变成了链式写法，程序的流程可以看得很清楚，可以实现许多强大的功能。比如，指定多个回调函数等等。</p>
+<h4 id="四、async-await"><a href="#四、async-await" class="headerlink" title="四、async/await"></a>四、async/await</h4><p>使用最新版本的Node已经可以原生支持async/await写法了，通过各种pollyfill也能在旧的浏览器使用。那么为什么说async/await方法是最优雅的呢？且看代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'Function 1'</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn2</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'Function 2'</span>)</div><div class="line">      resolve()</div><div class="line">    &#125;, <span class="number">500</span>)</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn3</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'Function 3'</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">asyncFunArr</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  fn1()</div><div class="line">  <span class="keyword">await</span> fn2()</div><div class="line">  fn3()</div><div class="line">&#125;</div><div class="line"></div><div class="line">asyncFunArr()</div><div class="line"></div><div class="line"><span class="comment">// output =&gt;</span></div><div class="line"><span class="comment">// Function 1</span></div><div class="line"><span class="comment">// Function 2</span></div><div class="line"><span class="comment">// Function 3</span></div></pre></td></tr></table></figure></p>
+<p>有没有发现，在定义异步函数fn2的时候，其内容和前文使用Promise的时候一模一样？再看执行函数asyncFunArr()，其执行的方式和使用generator的时候也非常类似。</p>
+<p>异步的操作都返回Promise，需要顺序执行时只需要await相应的函数即可，这种方式在语义化方面非常友好，对于代码的维护也很简单——只需要返回Promise并await它就好，无需像generator那般需要自己去维护内部yield的执行。</p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017- . | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题 Huno </span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
