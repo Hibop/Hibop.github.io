@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      关于前端数据可视化的一些理解 | Hibop&#39;s Blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="hbyuan">
+    
+    
+
+    <meta name="description" content="大数据的兴起，浏览器性能的提升，数据可视化成为一个趋势。在做过一些互联网公司web前端数据可视化相关的产品后，有必要对数据可视化做个学习总结。  前端与数据可视化： 数据可视化的web前端，其实从广义来讲，跟传统的网页开发没什么区别。都是数据+模板，其中的组件化和模块化其实类似。 前后端分离也与传统网页开发没什么两样。主要是现在node作为中间层做分离方案的比较多（天猫的wornhole，淘宝的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于前端数据可视化的一些理解 | Hibop&#39;s Blog">
+<meta property="og:url" content="https://hibop.github.io/2017/11/29/关于前端数据可视化的一些理解/index.html">
+<meta property="og:site_name" content="Hibop&#39;s Blog">
+<meta property="og:description" content="大数据的兴起，浏览器性能的提升，数据可视化成为一个趋势。在做过一些互联网公司web前端数据可视化相关的产品后，有必要对数据可视化做个学习总结。  前端与数据可视化： 数据可视化的web前端，其实从广义来讲，跟传统的网页开发没什么区别。都是数据+模板，其中的组件化和模块化其实类似。 前后端分离也与传统网页开发没什么两样。主要是现在node作为中间层做分离方案的比较多（天猫的wornhole，淘宝的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-11-29T15:36:21.921Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于前端数据可视化的一些理解 | Hibop&#39;s Blog">
+<meta name="twitter:description" content="大数据的兴起，浏览器性能的提升，数据可视化成为一个趋势。在做过一些互联网公司web前端数据可视化相关的产品后，有必要对数据可视化做个学习总结。  前端与数据可视化： 数据可视化的web前端，其实从广义来讲，跟传统的网页开发没什么区别。都是数据+模板，其中的组件化和模块化其实类似。 前后端分离也与传统网页开发没什么两样。主要是现在node作为中间层做分离方案的比较多（天猫的wornhole，淘宝的">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hibop&#39;s Blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          我的故事我的酒
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social" style="display: block">
+  <ul class="navigation" style="float: none;">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/Hibop" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">关于前端数据可视化的一些理解</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-11-29" class="post-meta__date date">2017-11-29</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <blockquote>
+<p>大数据的兴起，浏览器性能的提升，数据可视化成为一个趋势。在做过一些互联网公司web前端数据可视化相关的产品后，有必要对数据可视化做个学习总结。</p>
+</blockquote>
+<h3 id="前端与数据可视化："><a href="#前端与数据可视化：" class="headerlink" title="前端与数据可视化："></a>前端与数据可视化：</h3><ul>
+<li>数据可视化的web前端，其实从广义来讲，跟传统的网页开发没什么区别。都是数据+模板，其中的组件化和模块化其实类似。</li>
+<li>前后端分离也与传统网页开发没什么两样。主要是现在node作为中间层做分离方案的比较多（天猫的wornhole，淘宝的midway），数据处理交给java或者go，node用来做密集IO和模板展现；</li>
+<li>前端常说的视觉可视化大部分是基于浏览器canvas、svg、webGL等画图模块，借助曲线图表等展示形式把一些相关数据更直接、形象、生动、具体的展示在web页面上。</li>
+</ul>
+<h3 id="数据可视化实现配合："><a href="#数据可视化实现配合：" class="headerlink" title="数据可视化实现配合："></a>数据可视化实现配合：</h3><p>要做一个好的数据产品是需要 产品经理-&gt;设计师-&gt;前端-&gt;后端-&gt;用户整个链路紧密配合密切合作并且协调的。</p>
+<ol>
+<li>产品需要懂数据可视化的理论基础，哪些数据可以可视化，哪些数据是用户最想要的。</li>
+<li>设计师包括视觉和交互，需要理清楚数据怎么展示最合理，曲线，柱状图，饼状图，都有哪些优缺点，不能仅仅为了美观设计了一个好看的图形，而不顾实际数据情况，展示出来就很奇怪。</li>
+<li>前端其实在里面是最紧密的一环，数据怎么获取，什么格式对前后端最友好，采用什么技术方案，是svg的库，还是canvas的库，是自己撸还是用现成的库。实现成本有多高，性能、扩展性怎么样都是需要考虑的问题</li>
+<li>后端需要考虑的就是数据的拉取，需要考虑数据格式以及能获取哪些数据。</li>
+</ol>
+<p><em>数据可视化最重要的不是好看，而是让人一目了然的明白这个图表传达出来的意思。</em></p>
+<p>其实这方面是有相关的信息图表学的相关知识储备的话就不会犯这些错误了。支付宝有个G2 里面有两个相关的图表学基础知识介绍，个人认为这是G2 比echart更近一步，更规范化的点之一。</p>
+<p>可视化基础-图表使用建议 <a href="https://antv.alipay.com/vis/d" target="_blank" rel="external">https://antv.alipay.com/vis/d</a>…</p>
+<p>可视化基础-图表设计指引规范：<a href="https://antv.alipay.com/vis/d" target="_blank" rel="external">https://antv.alipay.com/vis/d</a>…</p>
+<p>以及经典文献：</p>
+<blockquote>
+<p>《数据可视化》、《The Grammarof Graphics》、《深入浅出统计学》、《计算机图形学几何工具算法详解》、《Visualization Analysis and Design》 、《ggplot2：数据分析与图形艺术》 。</p>
+</blockquote>
+<h3 id="可视化技术选型"><a href="#可视化技术选型" class="headerlink" title="可视化技术选型"></a>可视化技术选型</h3><p>首先需要明白一个观点：###技术选型没有一劳永逸的，永远是根据你的项目实际情况以及你的个人偏好和技术基础来做的选择###。</p>
+<p>常见的图标库和三方件及相关技术：</p>
+<ol>
+<li><em>echarts</em> (canvas, 百度) ：</li>
+</ol>
+<p>echarts算是国产的图表库里最好的了。EFE团队也是国内技术实力最雄厚的可视化团队.采用canvas作为渲染容器。底层一些实现比如鼠标事件啥的用的自己开发的zrender框架。<br>echart2.0对应不同的组件比如坐标轴图例是用不同的canvas来渲染的，echart3之后都合并到一个canvas里面了，猜测应该是底层的框架升级了<br>博客： <a href="http://efe.baidu.com/，" target="_blank" rel="external">http://efe.baidu.com/，</a><br><a href="http://echarts.baidu.com/blog。" target="_blank" rel="external">http://echarts.baidu.com/blog。</a></p>
+<ol>
+<li><em>highcharts</em> (svg, 商业使用需授权)</li>
+</ol>
+<p>这个框架用的人也不少，主打就是IE6也支持。。。。。。。。。然并卵微软都不支持IE6了。淘宝连ie8都不支持了。。。。收费的库，底层用的SVG。私以为他的API使用起来没有Echart友好。</p>
+<ol>
+<li><em>G2</em> -支付宝</li>
+</ol>
+<p>蚂蚁金服的产品，图表容器为canvas，玉伯的团队开发的。怎么说呢。。这个东西看着还不错，不过实际使用的时候大部分人还是会不由自主的去选择前面两个，大阿里系的开源东西就是这么个鬼情况。东西是不错，就怕搞着搞着团队没了。而且他们官网那些示例最开始貌似是那个嫩蓝色（or嫩绿色？）看起来让人觉得整个产品很轻浮，不像echarts 墨黑色，一种商务稳重风。现在貌似也慢慢像稳重风格靠拢了。继续下去感觉还是不错的。</p>
+<ol>
+<li><em>d3.js</em></li>
+</ol>
+<p>d3也算是资历比较老的一个产品了，采用svg作为图表容器。刚开始出来的时候各种动画比较惊艳图表类型也很丰富，感觉echarts一开始也参照它的图表类型新增了好几个图表示例。</p>
+<p>d3的优点是各种示例demo比较完善适合拿来就用，缺点就是demo不适合二次开发，熟悉api的话也可以直接自己画，他的api是对svg的dom的一种整理和兼容，类比于jquery对应html的dom。</p>
+<ol>
+<li><p><em>vis.js</em> </p>
+</li>
+<li><p><em>three.js</em> (webGL 3D视图)</p>
+</li>
+<li><p><em>kcharts</em> (阿里)</p>
+</li>
+</ol>
+<p>移动端图表库，echarts和G2应该都可以。pc端就看个人喜好了。报表类型的项目看设计师画的效果稿吧，echarts可定制性最高，G2没用过，highcharts文档不健全。</p>
+<p>监控类型的项目需要频繁更新数据的优选选择canvas的性能应该更好。</p>
+<h3 id="数据可视化的一般应用场景："><a href="#数据可视化的一般应用场景：" class="headerlink" title="数据可视化的一般应用场景："></a>数据可视化的一般应用场景：</h3><p>报表类，监控类，动效pr稿类，地图类，数据可视化系统等。</p>
+<p>报表类</p>
+<p>报表类使用场景最多，使用的图表也最简单一般echarts里面的示例图表就能满足了，</p>
+<p>监控类</p>
+<p>监控类稍微复杂点，一般涉及到实时性和稳健性，开发的时候需要考虑后端的接口性能，以及页面图表渲染的性能问题，数据量大了之后对前后端都很有挑战性。做起来也比较有意思，和业务场景结合起来能做一整套的数据可视化的产品系统。</p>
+<p>动效PR稿类</p>
+<p>这种类型的项目一般都有一个特点：急，炫，累。项目周期很急，动画效果要很炫，干起活来很累。偶尔做做还行，一直搞，就感觉路走的有点偏，而且一般很少能找到现成的库和框架，前期需要大量的技术调研和技术储备。相关的库一般需要canvas的效果库，webGL的库，比如:<a href="http://www.pixijs.com/" target="_blank" rel="external">http://www.pixijs.com/</a> ，threejs，要求更高的可能需要一些游戏库来帮忙了比如：<a href="https://www.egret.com/" target="_blank" rel="external">https://www.egret.com/</a> ，<a href="http://www.createjs.com/等等。" target="_blank" rel="external">http://www.createjs.com/等等。</a></p>
+<p>地图类</p>
+<p>这类的数据可视化单独拿出来是因为现在越来越多的数据可视化场景里需要用到地图。这也是数据可视化最麻烦的一直，一般我们借助echart的地图，或者百度地图，高德地图等来开发，其实百度地图也出了个地图可视化的库<a href="http://mapv.baidu.com/" target="_blank" rel="external">http://mapv.baidu.com/</a> ，展示效果没有echart好。。。。需要定制开发的同学其实可以直接拿百度地图之类的然后在地图上蒙一层覆盖类，然后在这个覆盖类里填充一个canvas做一些自己的扩展参见百度地图的demo；背后的地图。。可以用css隐藏掉。。。。。</p>
+<p>数据可视化系统</p>
+<p>这个范畴比较大，还是需要看业务场景，某些业务场景就特别适合做一堆相关联的数据可视化系统。做好了成就感还是满满的。</p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017- . | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题 Huno </span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
