@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="Hibop&#39;s Blog">
 <meta property="og:description" content="如何搭建前端自动化构建环境？怎样组建前端工作流？  为了前端团队更好的协作开发同时提高项目编码质量，我们需要将Web前端使用工程化方式构建； 目前需要一些简单的功能：1. 版本控制（升级、回滚、changeLog、issue、Wiki）     2. 编译Less/Sass   3. 检查JS（jsLint）   4. 图片合并/base64编码   5. 压缩CSS/压缩JS   6. 代码混">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-03T16:13:40.246Z">
+<meta property="og:updated_time" content="2017-12-03T16:20:38.512Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于前端工程化——自动化构建 | Hibop&#39;s Blog">
 <meta name="twitter:description" content="如何搭建前端自动化构建环境？怎样组建前端工作流？  为了前端团队更好的协作开发同时提高项目编码质量，我们需要将Web前端使用工程化方式构建； 目前需要一些简单的功能：1. 版本控制（升级、回滚、changeLog、issue、Wiki）     2. 编译Less/Sass   3. 检查JS（jsLint）   4. 图片合并/base64编码   5. 压缩CSS/压缩JS   6. 代码混">
@@ -240,12 +240,12 @@ classes that you can use:
 
  6. 代码混淆/丑化
 </code></pre><p>这些都是每个Web项目在构建、开发阶段需要做的事情。前端自动化构建环境可以把这些重复工作一次配置，多次重复执行，极大的提高开发效率。</p>
-<p>目前最知名的构建工具： Gulp、Grunt、NPM + Webpack；</p>
-<pre><code>grunt是前端工程化的先驱
+<p>目前最知名的构建工具： Gulp、Grunt、NPM + Webpack;</p>
+<pre><code>- grunt是前端工程化的先驱
 
-gulp更自然基于流的方式连接任务
+- gulp更自然基于流的方式连接任务
 
-Webpack最年轻，擅长用于依赖管理/代码分割，配置稍较复杂
+- Webpack最年轻，擅长用于依赖管理/代码分割，配置稍较复杂
 </code></pre><h3 id="Gulp-基于流的工程化构建"><a href="#Gulp-基于流的工程化构建" class="headerlink" title="Gulp 基于流的工程化构建"></a>Gulp 基于流的工程化构建</h3><p>Gulp是基于 Node.js的，需要要安装 Node.js</p>
 <p>1、为了确保依赖环境正确，我们先执行几个简单的命令检查。</p>
 <pre><code>node -v // 检测Node是否已经安装，如果正确安装的话你会看到所安装的Node的版本号
