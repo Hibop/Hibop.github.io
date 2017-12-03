@@ -29,9 +29,12 @@ $(document).ready(function() {
   function handlerFullPage() {
     if(!isFull){
       $('.content-wrapper').animate({
-        marginLeft: 0,
-        marginRight: 0,
+        marginLeft: '14%',
+        // marginRight: 0,
         width: '100%'
+      })
+      $('.content-wrapper').css({
+        margin: '0px auto',
       })
     } else {
       $('.content-wrapper').animate({

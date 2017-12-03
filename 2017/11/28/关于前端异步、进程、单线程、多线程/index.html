@@ -17,13 +17,14 @@
     
 
     <meta name="description" content="你真的了解前端异步编程、单线程吗？  写在前面的定义： 同步：一个进程在执行某个请求的时候，若该请求需要一段时间才能返回信息，那么这个进程将会一直等待下去，直到收到返回信息才继续执行下去。 异步：进程不需要一直等下去，而是继续执行下面的操作，不管其他进程的状态。当有消息返回时系统会通知进程进行处理，这样可以提高执行的效率。 进程：狭义上，就是正在运行的程序的实例。广义上，进程是一个具有一定独立功">
+<meta name="keywords" content="异步、线程、promise、async&#x2F;await">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于前端异步、进程、单线程、多线程 | Hibop&#39;s Blog">
 <meta property="og:url" content="https://hibop.github.io/2017/11/28/关于前端异步、进程、单线程、多线程/index.html">
 <meta property="og:site_name" content="Hibop&#39;s Blog">
 <meta property="og:description" content="你真的了解前端异步编程、单线程吗？  写在前面的定义： 同步：一个进程在执行某个请求的时候，若该请求需要一段时间才能返回信息，那么这个进程将会一直等待下去，直到收到返回信息才继续执行下去。 异步：进程不需要一直等下去，而是继续执行下面的操作，不管其他进程的状态。当有消息返回时系统会通知进程进行处理，这样可以提高执行的效率。 进程：狭义上，就是正在运行的程序的实例。广义上，进程是一个具有一定独立功">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-28T16:13:03.991Z">
+<meta property="og:updated_time" content="2017-12-03T07:16:37.441Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于前端异步、进程、单线程、多线程 | Hibop&#39;s Blog">
 <meta name="twitter:description" content="你真的了解前端异步编程、单线程吗？  写在前面的定义： 同步：一个进程在执行某个请求的时候，若该请求需要一段时间才能返回信息，那么这个进程将会一直等待下去，直到收到返回信息才继续执行下去。 异步：进程不需要一直等下去，而是继续执行下面的操作，不管其他进程的状态。当有消息返回时系统会通知进程进行处理，这样可以提高执行的效率。 进程：狭义上，就是正在运行的程序的实例。广义上，进程是一个具有一定独立功">
@@ -190,8 +191,9 @@ classes that you can use:
 <article class="post-container post-container--single">
 
   <header class="post-header">
-    
-    <h1 class="post-title">关于前端异步、进程、单线程、多线程</h1>
+    <img id="pen" class="pen" src="../../../../images/pen.png" style="float: left; width: 32px; margin: 10px;" title="原创"></img>
+    <h1 class="post-title" style="float: left;">关于前端异步、进程、单线程、多线程</h1>
+    <img id="fullPage" class="full-page" src="../../../../images/fullpage.png" style="width: 48px; margin-left: 10px;" title="点击全屏"></img>
 
     
 
@@ -202,6 +204,11 @@ classes that you can use:
 
           
 
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/异步、线程、promise、async-await/">异步、线程、promise、async/await</a>
+            </font>
           
 
       </span>

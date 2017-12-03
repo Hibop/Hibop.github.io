@@ -1141,7 +1141,9 @@ hr {
 
 .post-meta {
   margin: 0 0 1.4em 0;
-  color: #c7c7c7; }
+  color: #c7c7c7;
+  clear: both;
+}
 
 .post-meta__date {
   margin-right: .5em; }
@@ -1203,7 +1205,8 @@ hr {
   max-width: none;
   height: 100%;
   background: url(../images/background-cover.jpg) top left no-repeat #666666;
-  background-size: cover; }
+  background-size: cover;
+}
 
 .panel-cover--collapsed {
   width: 32%;
@@ -1706,4 +1709,12 @@ th, td {
 }
 pre {
   font-family: 
+}
+
+// =========== 12-3 ==============
+#fullPage {
+  background: url(../images/fullpage.png) top left no-repeat #666666;
+  width: 100px;
+  height: 100px;
+  /*background-size: cover;*/
 }
