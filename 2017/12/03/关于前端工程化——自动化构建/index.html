@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="Hibop&#39;s Blog">
 <meta property="og:description" content="如何搭建前端自动化构建环境？怎样组建前端工作流？  为了前端团队更好的协作开发同时提高项目编码质量，我们需要将Web前端使用工程化方式构建； 目前需要一些简单的功能：1. 版本控制（升级、回滚、changeLog、issue、Wiki）     2. 编译Less/Sass   3. 检查JS（jsLint）   4. 图片合并/base64编码   5. 压缩CSS/压缩JS   6. 代码混">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-03T16:05:05.039Z">
+<meta property="og:updated_time" content="2017-12-03T16:13:40.246Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于前端工程化——自动化构建 | Hibop&#39;s Blog">
 <meta name="twitter:description" content="如何搭建前端自动化构建环境？怎样组建前端工作流？  为了前端团队更好的协作开发同时提高项目编码质量，我们需要将Web前端使用工程化方式构建； 目前需要一些简单的功能：1. 版本控制（升级、回滚、changeLog、issue、Wiki）     2. 编译Less/Sass   3. 检查JS（jsLint）   4. 图片合并/base64编码   5. 压缩CSS/压缩JS   6. 代码混">
@@ -250,8 +250,10 @@ Webpack最年轻，擅长用于依赖管理/代码分割，配置稍较复杂
 <p>1、为了确保依赖环境正确，我们先执行几个简单的命令检查。</p>
 <pre><code>node -v // 检测Node是否已经安装，如果正确安装的话你会看到所安装的Node的版本号
 npm -v // 得到npm的版本号，装 Node 时已经自动安装了npm
-</code></pre><p>2、开始安装Gulp<br>        npm install -g gulp // 全局安装 gulp<br>        gulp -v // 得到gulp的版本号，确认安装成功</p>
-<p>基础安装结束</p>
+</code></pre><p>2、开始安装Gulp</p>
+<pre><code>npm install -g gulp // 全局安装 gulp
+gulp -v // 得到gulp的版本号，确认安装成功
+</code></pre><p>基础安装结束</p>
 <p>3、切换到你的在项目根文件夹下，运行</p>
 <pre><code>npm install gulp --save-dev // 将具体的gulp功能插件局部安装项目下
 </code></pre><p>4、安装gulp功能插件依赖包</p>
@@ -321,7 +323,7 @@ gulp-livereload:     服务器控制客户端同步刷新（需配合chrome插�
 <pre><code>git config --global user.name &quot;Your Name&quot;
 git config --global user.email &quot;email@example.com&quot;
 </code></pre><p>关联一个到团队的库</p>
-<pre><code>git remote add origin git@github.com:markyun/My-blog.git
+<pre><code>git remote add origin git@github.com:hibop/My-blog.git
 </code></pre><p>添加文件到仓库，添加全部文件用 . 表示</p>
 <pre><code>git add .
 </code></pre><p>把文件提交到仓库</p>
