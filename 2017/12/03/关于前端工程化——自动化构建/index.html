@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="Hibop&#39;s Blog">
 <meta property="og:description" content="如何搭建前端自动化构建环境？怎样组建前端工作流？  为了前端团队更好的协作开发同时提高项目编码质量，我们需要将Web前端使用工程化方式构建； 目前需要一些简单的功能：1. 版本控制（升级、回滚、changeLog、issue、Wiki）     2. 编译Less/Sass   3. 检查JS（jsLint）   4. 图片合并/base64编码   5. 压缩CSS/压缩JS   6. 代码混">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-03T15:57:37.098Z">
+<meta property="og:updated_time" content="2017-12-03T16:05:05.039Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于前端工程化——自动化构建 | Hibop&#39;s Blog">
 <meta name="twitter:description" content="如何搭建前端自动化构建环境？怎样组建前端工作流？  为了前端团队更好的协作开发同时提高项目编码质量，我们需要将Web前端使用工程化方式构建； 目前需要一些简单的功能：1. 版本控制（升级、回滚、changeLog、issue、Wiki）     2. 编译Less/Sass   3. 检查JS（jsLint）   4. 图片合并/base64编码   5. 压缩CSS/压缩JS   6. 代码混">
@@ -246,11 +246,12 @@ classes that you can use:
 gulp更自然基于流的方式连接任务
 
 Webpack最年轻，擅长用于依赖管理/代码分割，配置稍较复杂
-</code></pre><h3 id="Gulp"><a href="#Gulp" class="headerlink" title="Gulp"></a>Gulp</h3><p>Gulp是基于 Node.js的，需要要安装 Node.js</p>
+</code></pre><h3 id="Gulp-基于流的工程化构建"><a href="#Gulp-基于流的工程化构建" class="headerlink" title="Gulp 基于流的工程化构建"></a>Gulp 基于流的工程化构建</h3><p>Gulp是基于 Node.js的，需要要安装 Node.js</p>
 <p>1、为了确保依赖环境正确，我们先执行几个简单的命令检查。</p>
-<figure class="highlight plain"><figcaption><span>-v</span><a href="//">检测Node是否已经安装，如果正确安装的话你会看到所安装的Node的版本号</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm -v // 得到npm的版本号，装 Node 时已经自动安装了npm</div></pre></td></tr></table></figure>
-<p>2、开始安装Gulp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install -g gulp // 全局安装 gulp</div><div class="line">gulp -v // 得到gulp的版本号，确认安装成功</div></pre></td></tr></table></figure></p>
-<p>基础安装结束<br>-</p>
+<pre><code>node -v // 检测Node是否已经安装，如果正确安装的话你会看到所安装的Node的版本号
+npm -v // 得到npm的版本号，装 Node 时已经自动安装了npm
+</code></pre><p>2、开始安装Gulp<br>        npm install -g gulp // 全局安装 gulp<br>        gulp -v // 得到gulp的版本号，确认安装成功</p>
+<p>基础安装结束</p>
 <p>3、切换到你的在项目根文件夹下，运行</p>
 <pre><code>npm install gulp --save-dev // 将具体的gulp功能插件局部安装项目下
 </code></pre><p>4、安装gulp功能插件依赖包</p>
@@ -263,7 +264,7 @@ Webpack最年轻，擅长用于依赖管理/代码分割，配置稍较复杂
 - 压缩合并并重命名Javascript
 </code></pre><p>新建gulpfile.js 配置文件放在项目根目录下</p>
 <pre><code>演示项目目录结构
-   testProject        (项目名称)
+   project-name        (项目名称)
    |–.git             通过git进行版本控制,项目自动生成这个文件
    |–node_modules     组件包目录
    |–dist             **发布环境**（编译自动生成的）
@@ -278,58 +279,8 @@ Webpack最年轻，擅长用于依赖管理/代码分割，配置稍较复杂
        |–index.html         静态文件
    |–gulpfile.js              gulp配置文件
    |–package.json             依赖模块json文件,在项目目录下npm install会安装项目所有的依赖模块，简化项目的安装程序
-</code></pre><p>6、项目文件夹都建好，组件也安装完毕了，我们需要编写gulpfile.js文件以指定gulp需要为我们完成什么任务。</p>
-<pre><code>gulpfile.js内容如下：
-
-// 引入gulp
-var gulp = require(&apos;gulp&apos;);
-
-// 引入组件
-var jshint = require(&apos;gulp-jshint&apos;);//检查js
-var sass   = require(&apos;gulp-sass&apos;);    //编译Sass
-var concat = require(&apos;gulp-concat&apos;);//合并
-var uglify = require(&apos;gulp-uglify&apos;);//uglify 组件（用于压缩 JS）
-var rename = require(&apos;gulp-rename&apos;);//重命名
-
-// 检查js脚本的任务
-gulp.task(&apos;lint&apos;, function() {
-    gulp.src(&apos;./js/*.js&apos;) //可配置你需要检查脚本的具体名字。
-        .pipe(jshint())
-        .pipe(jshint.reporter(&apos;default&apos;));
-});
-
-// 编译Sass
-gulp.task(&apos;sass&apos;, function() {
-    gulp.src(&apos;./scss/*.scss&apos;)
-        .pipe(sass())
-        .pipe(gulp.dest(&apos;./css&apos;));//dest()写入文件
-});
-
-// 合并，压缩js文件
-// 找到 js/ 目录下的所有 js 文件，压缩，重命名，最后将处理完成的js存放在 dist/js/ 目录下
-gulp.task(&apos;scripts&apos;, function() {
-    gulp.src(&apos;./js/*.js&apos;)
-        .pipe(concat(&apos;all.js&apos;))
-        .pipe(gulp.dest(&apos;./dist&apos;))
-        .pipe(rename(&apos;all.min.js&apos;))
-        .pipe(uglify())
-        .pipe(gulp.dest(&apos;./dist&apos;));
-
-        console.log(&apos;gulp task is done&apos;);//自定义提醒信息
-});
-
-.... // 其他任务类似
-
-// 定义默认任务,执行gulp会自动执行的任务
-gulp.task(&apos;default&apos;, function(){
-    gulp.run(&apos;lint&apos;, &apos;sass&apos;, &apos;scripts&apos;);
-
-    // 监听js文件变化，当文件发生变化后会自动执行任务
-    gulp.watch(&apos;./js/*.js&apos;, function(){
-        gulp.run(&apos;lint&apos;,&apos;scripts&apos;);
-    });
-});
-</code></pre><p>7、现在，回到命令行窗口，可以直接运行gulp任务了。</p>
+</code></pre><p>6、项目文件夹都建好，组件也安装完毕了，我们需要编写gulpfile.js文件以指定gulp需要为我们完成什么任务。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">gulpfile.js内容如下：</div><div class="line"></div><div class="line"><span class="comment">// 引入gulp</span></div><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 引入组件</span></div><div class="line"><span class="keyword">var</span> jshint = <span class="built_in">require</span>(<span class="string">'gulp-jshint'</span>);<span class="comment">//检查js</span></div><div class="line"><span class="keyword">var</span> sass   = <span class="built_in">require</span>(<span class="string">'gulp-sass'</span>);	<span class="comment">//编译Sass</span></div><div class="line"><span class="keyword">var</span> concat = <span class="built_in">require</span>(<span class="string">'gulp-concat'</span>);<span class="comment">//合并</span></div><div class="line"><span class="keyword">var</span> uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>);<span class="comment">//uglify 组件（用于压缩 JS）</span></div><div class="line"><span class="keyword">var</span> rename = <span class="built_in">require</span>(<span class="string">'gulp-rename'</span>);<span class="comment">//重命名</span></div><div class="line"></div><div class="line"><span class="comment">// 检查js脚本的任务</span></div><div class="line">gulp.task(<span class="string">'lint'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    gulp.src(<span class="string">'./js/*.js'</span>) <span class="comment">//可配置你需要检查脚本的具体名字。</span></div><div class="line">        .pipe(jshint())</div><div class="line">        .pipe(jshint.reporter(<span class="string">'default'</span>));</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 编译Sass</span></div><div class="line">gulp.task(<span class="string">'sass'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    gulp.src(<span class="string">'./scss/*.scss'</span>)</div><div class="line">        .pipe(sass())</div><div class="line">        .pipe(gulp.dest(<span class="string">'./css'</span>));<span class="comment">//dest()写入文件</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 合并，压缩js文件</span></div><div class="line"><span class="comment">// 找到 js/ 目录下的所有 js 文件，压缩，重命名，最后将处理完成的js存放在 dist/js/ 目录下</span></div><div class="line">gulp.task(<span class="string">'scripts'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    gulp.src(<span class="string">'./js/*.js'</span>)</div><div class="line">        .pipe(concat(<span class="string">'all.js'</span>))</div><div class="line">        .pipe(gulp.dest(<span class="string">'./dist'</span>))</div><div class="line">        .pipe(rename(<span class="string">'all.min.js'</span>))</div><div class="line">        .pipe(uglify())</div><div class="line">        .pipe(gulp.dest(<span class="string">'./dist'</span>));</div><div class="line"></div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'gulp task is done'</span>);<span class="comment">//自定义提醒信息</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line">.... <span class="comment">// 其他任务类似</span></div><div class="line"></div><div class="line"><span class="comment">// 定义默认任务,执行gulp会自动执行的任务</span></div><div class="line">gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    gulp.run(<span class="string">'lint'</span>, <span class="string">'sass'</span>, <span class="string">'scripts'</span>);</div><div class="line"></div><div class="line">    <span class="comment">// 监听js文件变化，当文件发生变化后会自动执行任务</span></div><div class="line">    gulp.watch(<span class="string">'./js/*.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        gulp.run(<span class="string">'lint'</span>,<span class="string">'scripts'</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>7、现在，回到命令行窗口，可以直接运行gulp任务了。</p>
 <pre><code>gulp
 
 这将执行定义的default任务，就和以下的命令式同一个意思
@@ -340,17 +291,19 @@ gulp default
 
 gulp sass
 </code></pre><p>8、编译会显示Finished,如果你的JS有什么不好的地方它会提醒，避免一些不必要的错误，十分贴心</p>
-<pre><code>常见提醒：
-1.禁止在同一行声明多个变量。
-2.请使用 ===/!==来比较true/false或者数值
-3.使用对象字面量替代new Array这种形式
-4.不要使用全局函数。
-5.Switch语句必须带有default分支
-6.函数不应该有时候有返回值，有时候没有返回值。
-7.For循环必须使用大括号
-8.If语句必须使用大括号
-9.for-in循环中的变量 应该使用var关键字明确限定作用域，从而避免作用域污染。
-</code></pre><p>9、gulp的插件数量很多，后面还可以根据自己的需要进行添加任务</p>
+<p>常见提醒：</p>
+<ol>
+<li>禁止在同一行声明多个变量。</li>
+<li>请使用 ===/!==来比较true/false或者数值</li>
+<li>使用对象字面量替代new Array这种形式</li>
+<li>不要使用全局函数。</li>
+<li>Switch语句必须带有default分支</li>
+<li>函数不应该有时候有返回值，有时候没有返回值。</li>
+<li>For循环必须使用大括号</li>
+<li>If语句必须使用大括号</li>
+<li>for-in循环中的变量 应该使用var关键字明确限定作用域，从而避免作用域污染。</li>
+</ol>
+<p>9、gulp的插件数量很多，后面还可以根据自己的需要进行添加任务</p>
 <pre><code>常用的gulp插件参考
 gulp-imagemin:         压缩图片
 gulp-ruby-sass:     支持sass，安装此版本需要安装ruby
