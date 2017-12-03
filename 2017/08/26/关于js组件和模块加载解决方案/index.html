@@ -7,7 +7,7 @@
     
 
     <title>
-      关于Redux状态管理思考 | Hibop&#39;s Blog 
+      关于js组件模块加载解决方案 | Hibop&#39;s Blog 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,18 +16,18 @@
     
     
 
-    <meta name="description" content="如何设计Redux的store？哪些状态需要被管理？  Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂">
-<meta name="keywords" content="js,react-redux,状态">
+    <meta name="description" content="1、AMD（Asynchromous Module Definition - 异步模块定义） AMD是RequireJS在推广过程中对模块定义的规范化产出，AMD是异步加载模块，推崇依赖前置。123define(&amp;apos;module1&amp;apos;, [&amp;apos;jquery&amp;apos;], ($) =&amp;gt; &amp;#123;  //do something...&amp;#125;);  2、CMD">
+<meta name="keywords" content="AMD CMD CommonJS,模块加载">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于Redux状态管理思考 | Hibop&#39;s Blog">
-<meta property="og:url" content="https://hibop.github.io/2017/11/02/关于Redux状态管理思考/index.html">
+<meta property="og:title" content="关于js组件模块加载解决方案 | Hibop&#39;s Blog">
+<meta property="og:url" content="https://hibop.github.io/2017/08/26/关于js组件和模块加载解决方案/index.html">
 <meta property="og:site_name" content="Hibop&#39;s Blog">
-<meta property="og:description" content="如何设计Redux的store？哪些状态需要被管理？  Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂">
+<meta property="og:description" content="1、AMD（Asynchromous Module Definition - 异步模块定义） AMD是RequireJS在推广过程中对模块定义的规范化产出，AMD是异步加载模块，推崇依赖前置。123define(&amp;apos;module1&amp;apos;, [&amp;apos;jquery&amp;apos;], ($) =&amp;gt; &amp;#123;  //do something...&amp;#125;);  2、CMD">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-03T12:44:10.699Z">
+<meta property="og:updated_time" content="2017-12-03T12:47:03.458Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于Redux状态管理思考 | Hibop&#39;s Blog">
-<meta name="twitter:description" content="如何设计Redux的store？哪些状态需要被管理？  Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂">
+<meta name="twitter:title" content="关于js组件模块加载解决方案 | Hibop&#39;s Blog">
+<meta name="twitter:description" content="1、AMD（Asynchromous Module Definition - 异步模块定义） AMD是RequireJS在推广过程中对模块定义的规范化产出，AMD是异步加载模块，推崇依赖前置。123define(&amp;apos;module1&amp;apos;, [&amp;apos;jquery&amp;apos;], ($) =&amp;gt; &amp;#123;  //do something...&amp;#125;);  2、CMD">
     
     
     
@@ -192,13 +192,13 @@ classes that you can use:
 
   <header class="post-header">
     <img id="pen" class="pen" src="../../../../images/pen.png" style="float: left; width: 32px; margin: 10px;" title="原创"></img>
-    <h1 class="post-title" style="float: left;">关于Redux状态管理思考</h1>
+    <h1 class="post-title" style="float: left;">关于js组件模块加载解决方案</h1>
     <img id="fullPage" class="full-page" src="../../../../images/fullpage.png" style="width: 48px; margin-left: 10px;" title="点击全屏"></img>
 
     
 
     <div class="post-meta">
-      <time datetime="2017-11-02" class="post-meta__date date">2017-11-02</time> 
+      <time datetime="2017-08-26" class="post-meta__date date">2017-08-26</time> 
 
       <span class="post-meta__tags tags">
 
@@ -212,7 +212,7 @@ classes that you can use:
           
              &#8226; 标签:
             <font class="tags">
-              <a class="tags-link" href="/tags/js/">js</a>, <a class="tags-link" href="/tags/react-redux/">react-redux</a>, <a class="tags-link" href="/tags/状态/">状态</a>
+              <a class="tags-link" href="/tags/AMD-CMD-CommonJS/">AMD CMD CommonJS</a>, <a class="tags-link" href="/tags/模块加载/">模块加载</a>
             </font>
           
 
@@ -225,17 +225,32 @@ classes that you can use:
 
   <section id="post-content" class="article-content post">
     <blockquote>
-<p>如何设计Redux的store？<br>哪些状态需要被管理？</p>
-</blockquote>
-<h3 id="Domain-data"><a href="#Domain-data" class="headerlink" title="Domain data"></a>Domain data</h3><p>Domain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。</p>
-<p>通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂度到服务端。</p>
-<p>甚至有不少页面仅在初始化时获取一次Domain data，从此就再无瓜葛，直到跳转到下一个页面。</p>
-<h3 id="UI-state"><a href="#UI-state" class="headerlink" title="UI state"></a>UI state</h3><p>决定当前UI如何展示的状态，比如一个弹窗的开闭，下拉菜单是否打开。</p>
-<p>在我看来，UI state是前端真正开始复杂的部分——如果仅仅依靠服务端拿下来的Domain data就能做好前端，backbone的Model早就一统江湖了，没后来者们什么事情。</p>
-<p>和Domain data的简单、稳定不同，UI state是多变，不稳定的——不同的页面有不同、甚至相似但又细微不同的展现和交互。</p>
-<p>同时，UI state之间也是互相影响的，比如选择列表中的元素(选中状态是ui state)，当选中数量低于N时禁用提交按钮(按钮是否禁用也是ui state)。这是前端工作中非常常见的需求，整个场景中没有Domain data出现。</p>
-<p>UI state多变、不稳定，但它仍然是需要被复用的。小到弹窗的开闭，大到表单的管理，他们的逻辑都是明显可被抽象的。</p>
-<h3 id="App-state"><a href="#App-state" class="headerlink" title="App state"></a>App state</h3><p>App级的状态，例如当前是否有请求正在加载。个人倾向将它们视为另一种抽象角度下的UI state。因为本质上它们仍然是服务于UI的：一个异步下拉框会发请求，加载页面主要信息也会发请求，而我们通常希望前者加载时只disable下拉框，而后者可能要用Loading mask遮罩整个页面——场景不同，对状态的需求就不同，单纯关注当前是否有请求正在加载没有意义，只有与UI场景结合才会产生价值，因此我倾向认为App state的本质是对UI state的再抽象。</p>
+<h4 id="1、AMD（Asynchromous-Module-Definition-异步模块定义）"><a href="#1、AMD（Asynchromous-Module-Definition-异步模块定义）" class="headerlink" title="1、AMD（Asynchromous Module Definition - 异步模块定义）"></a>1、<strong>AMD</strong>（Asynchromous Module Definition - 异步模块定义）</h4></blockquote>
+<p>AMD是RequireJS在推广过程中对模块定义的规范化产出，AMD是异步加载模块，推崇依赖前置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define(&apos;module1&apos;, [&apos;jquery&apos;], ($) =&gt; &#123;</div><div class="line">  //do something...</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<h4 id="2、CMD（Common-Module-Definition-公共模块定义）"><a href="#2、CMD（Common-Module-Definition-公共模块定义）" class="headerlink" title="2、CMD（Common Module Definition - 公共模块定义）"></a>2、<strong>CMD</strong>（Common Module Definition - 公共模块定义）</h4></blockquote>
+<p>CMD是SeaJS在推广过程中对模块定义的规范化产出，对于模块的依赖，CMD是延迟执行，推崇依赖就近。</p>
+<pre><code>define((require, exports, module) =&gt; {
+      module.exports = {
+    fun1: () =&gt; {
+       var $ = require(&apos;jquery&apos;);
+       return $(&apos;#test&apos;);
+    } 
+  };
+});
+</code></pre><ul>
+<li>CommonJS：CommonJS是服务端模块的规范，由于Node.js被广泛认知。根据CommonJS规范，一个单独的文件就是一个模块。加载模块使用require方法，该方法读取一个文件并执行，最后返回文件内部的module.exports对象。CommonJS 加载模块是同步的，所以只有加载完成才能执行后面的操作。</li>
+</ul>
+<blockquote>
+<h4 id="3、UMD（Universal-Module-Definition-通用模块定义）"><a href="#3、UMD（Universal-Module-Definition-通用模块定义）" class="headerlink" title="3、UMD（Universal Module Definition - 通用模块定义）"></a>3、<strong>UMD</strong>（Universal Module Definition - 通用模块定义）</h4></blockquote>
+<p>UMD是AMD和CommonJS的一个糅合。AMD是浏览器优先，异步加载；CommonJS是服务器优先，同步加载。</p>
+<p>既然要通用，怎么办呢？那就先判断是否支持node.js的模块，存在就使用node.js；再判断是否支持AMD（define是否存在），存在则使用AMD的方式加载。这就是所谓的UMD。</p>
+<blockquote>
+<h4 id="4、ES6-风格："><a href="#4、ES6-风格：" class="headerlink" title="4、ES6 风格："></a>4、ES6 风格：</h4></blockquote>
+<p>通过import–export对管理依赖模块，可以选择性加载单个变量、函数等。</p>
+<h2 id="关于模块管理工具："><a href="#关于模块管理工具：" class="headerlink" title="关于模块管理工具："></a>关于模块管理工具：</h2><p>Gulp / Grunt 是一种工具，能够优化前端工作流程。比如自动刷新页面、combo、压缩css、js、编译less等等。简单来说，就是使用Gulp/Grunt，然后配置你需要的插件，就可以把以前需要手工做的事情让它帮你做了。</p>
+<p>browserify / webpack ，那还要说到 seajs / requirejs 。这四个都是JS模块化的方案。其中seajs / require 是一种类型，browserify / webpack 是另一种类型。</p>
+<p>seajs / require : 是一种在线”编译” 模块的方案，相当于在页面上加载一个 CMD/AMD 解释器。这样浏览器就认识了 define、exports、module 这些东西。也就实现了模块化。<br>browserify / webpack : 是一个预编译模块的方案，相比于上面 ，这个方案更加智能。没用过browserify，这里以webpack为例。首先，它是预编译的，不需要在浏览器中加载解释器。另外，你在本地直接写JS，不管是 AMD / CMD / ES6 风格的模块化，它都能认识，并且编译成浏览器认识的JS。<br>这样就知道，Gulp是一个工具，而webpack等等是模块化方案。Gulp也可以配置seajs、requirejs甚至webpack的插件。</p>
 
   </section>
 
