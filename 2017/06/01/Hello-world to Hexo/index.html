@@ -7,7 +7,7 @@
     
 
     <title>
-      关于Redux状态管理思考 | Hibop&#39;s Blog 
+      Hello-world to Hexo | Hibop&#39;s Blog 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,18 +16,18 @@
     
     
 
-    <meta name="description" content="如何设计Redux的store？哪些状态需要被管理？  Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂">
-<meta name="keywords" content="js,react-redux,状态">
+    <meta name="description" content="This is the abc-guide for Hexo, which will tell you how to first post, new a page, start server, generate files, deploy the blog.">
+<meta name="keywords" content="blog,web,Hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于Redux状态管理思考 | Hibop&#39;s Blog">
-<meta property="og:url" content="https://hibop.github.io/2017/11/02/关于Redux状态管理思考/index.html">
+<meta property="og:title" content="Hello-world to Hexo | Hibop&#39;s Blog">
+<meta property="og:url" content="https://hibop.github.io/2017/06/01/Hello-world to Hexo/index.html">
 <meta property="og:site_name" content="Hibop&#39;s Blog">
-<meta property="og:description" content="如何设计Redux的store？哪些状态需要被管理？  Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂">
+<meta property="og:description" content="This is the abc-guide for Hexo, which will tell you how to first post, new a page, start server, generate files, deploy the blog.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-03T12:44:10.699Z">
+<meta property="og:updated_time" content="2017-12-03T14:14:23.553Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于Redux状态管理思考 | Hibop&#39;s Blog">
-<meta name="twitter:description" content="如何设计Redux的store？哪些状态需要被管理？  Domain dataDomain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。 通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂">
+<meta name="twitter:title" content="Hello-world to Hexo | Hibop&#39;s Blog">
+<meta name="twitter:description" content="This is the abc-guide for Hexo, which will tell you how to first post, new a page, start server, generate files, deploy the blog.">
     
     
     
@@ -192,27 +192,27 @@ classes that you can use:
 
   <header class="post-header">
     <img id="pen" class="pen" src="../../../../images/pen.png" style="float: left; width: 32px; margin: 10px;" title="原创"></img>
-    <h1 class="post-title" style="float: left;">关于Redux状态管理思考</h1>
+    <h1 class="post-title" style="float: left;">Hello-world to Hexo</h1>
     <img id="fullPage" class="full-page" src="../../../../images/fullpage.png" style="width: 48px; margin-left: 10px;" title="点击全屏"></img>
 
     
 
     <div class="post-meta">
-      <time datetime="2017-11-02" class="post-meta__date date">2017-11-02</time> 
+      <time datetime="2017-06-01" class="post-meta__date date">2017-06-01</time> 
 
       <span class="post-meta__tags tags">
 
           
             <font class="categories">
             &#8226; 分类:
-            <a class="categories-link" href="/categories/js/">js</a>
+            <a class="categories-link" href="/categories/abc-guide/">abc-guide</a>
             </font>
           
 
           
              &#8226; 标签:
             <font class="tags">
-              <a class="tags-link" href="/tags/js/">js</a>, <a class="tags-link" href="/tags/react-redux/">react-redux</a>, <a class="tags-link" href="/tags/状态/">状态</a>
+              <a class="tags-link" href="/tags/Hexo/">Hexo</a>, <a class="tags-link" href="/tags/blog/">blog</a>, <a class="tags-link" href="/tags/web/">web</a>
             </font>
           
 
@@ -224,19 +224,17 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <blockquote>
-<p>如何设计Redux的store？<br>哪些状态需要被管理？</p>
-</blockquote>
-<h3 id="Domain-data"><a href="#Domain-data" class="headerlink" title="Domain data"></a>Domain data</h3><p>Domain data非常好理解，他们直接来源于服务端对领域模型的抽象，比如user、product。它们可能被应用的多个地方用到，比如当前user包含的权限信息所有涉及鉴权的地方都需要。</p>
-<p>通常，前端对Domain data最大的管理需求是和服务端保持同步，不会有频繁和复杂的变更——如果有的话请考虑合并批处理和转移复杂度到服务端。</p>
-<p>甚至有不少页面仅在初始化时获取一次Domain data，从此就再无瓜葛，直到跳转到下一个页面。</p>
-<h3 id="UI-state"><a href="#UI-state" class="headerlink" title="UI state"></a>UI state</h3><p>决定当前UI如何展示的状态，比如一个弹窗的开闭，下拉菜单是否打开。</p>
-<p>在我看来，UI state是前端真正开始复杂的部分——如果仅仅依靠服务端拿下来的Domain data就能做好前端，backbone的Model早就一统江湖了，没后来者们什么事情。</p>
-<p>和Domain data的简单、稳定不同，UI state是多变，不稳定的——不同的页面有不同、甚至相似但又细微不同的展现和交互。</p>
-<p>同时，UI state之间也是互相影响的，比如选择列表中的元素(选中状态是ui state)，当选中数量低于N时禁用提交按钮(按钮是否禁用也是ui state)。这是前端工作中非常常见的需求，整个场景中没有Domain data出现。</p>
-<p>UI state多变、不稳定，但它仍然是需要被复用的。小到弹窗的开闭，大到表单的管理，他们的逻辑都是明显可被抽象的。</p>
-<h3 id="App-state"><a href="#App-state" class="headerlink" title="App state"></a>App state</h3><p>App级的状态，例如当前是否有请求正在加载。个人倾向将它们视为另一种抽象角度下的UI state。因为本质上它们仍然是服务于UI的：一个异步下拉框会发请求，加载页面主要信息也会发请求，而我们通常希望前者加载时只disable下拉框，而后者可能要用Loading mask遮罩整个页面——场景不同，对状态的需求就不同，单纯关注当前是否有请求正在加载没有意义，只有与UI场景结合才会产生价值，因此我倾向认为App state的本质是对UI state的再抽象。</p>
-
+    <hr>
+<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<h3 id="Hexo-theme-framework"><a href="#Hexo-theme-framework" class="headerlink" title="Hexo theme framework"></a>Hexo theme framework</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── languages            #多语言</div><div class="line">|   ├── default.yml      #默认语言</div><div class="line">|   └── zh-CN.yml        #中文语言</div><div class="line">├── layout               #布局，根目录下的*.ejs文件是对主页，分页，存档等的控制</div><div class="line">|   ├── _partial         #局部的布局，此目录下的*.ejs是对头尾等局部的控制</div><div class="line">|   └── _widget          #小挂件的布局，页面下方小挂件的控制</div><div class="line">├── source               #源码</div><div class="line">|   ├── css              #css源码 </div><div class="line">|   |   ├── _base        #*.styl基础css</div><div class="line">|   |   ├── _partial     #*.styl局部css</div><div class="line">|   |   ├── fonts        #字体</div><div class="line">|   |   ├── images       #图片</div><div class="line">|   |   └── style.styl   #*.styl引入需要的css源码</div><div class="line">|   ├── fancybox         #fancybox效果源码</div><div class="line">|   └── js               #javascript源代码</div><div class="line">├── _config.yml          #主题配置文件</div><div class="line">└── README.md            #用GitHub的都知道</div></pre></td></tr></table></figure>
   </section>
 
   <section class="post-comments">
