@@ -1025,15 +1025,17 @@ ul {
   list-style-type: disc; }
 
 code {
-  white-space: normal !important;
+  /*white-space: normal !important;*/
   padding: 2px 4px;
   background-color: #f8f8f8;
   color: #d14;
   border: none;
   word-wrap: break-word;
   border-radius: 3px;
-  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
-  font-size: .85em; }
+  font-family: "楷体","楷体_GB2312", Microsoft YaHei ,PingFang SC, Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  font-size: 16px;
+  font-weight: bold;
+}
 
 
 .date,

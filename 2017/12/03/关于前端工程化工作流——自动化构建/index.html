@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      关于前端工程化工作流——自动化构建 | Hibop&#39;s Blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="hbyuan">
+    
+    
+
+    <meta name="description" content="如何搭建前端自动化构建环境？怎样组建前端工作流？  为了前端团队更好的协作开发同时提高项目编码质量，我们需要将Web前端使用工程化方式构建； 目前需要一些简单的功能：1. 版本控制（升级、回滚、changeLog、issue、Wiki）     2. 编译Less/Sass   3. 检查JS（jsLint）   4. 图片合并/base64编码   5. 压缩CSS/压缩JS   6. 代码混">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于前端工程化工作流——自动化构建 | Hibop&#39;s Blog">
+<meta property="og:url" content="https://hibop.github.io/2017/12/03/关于前端工程化工作流——自动化构建/index.html">
+<meta property="og:site_name" content="Hibop&#39;s Blog">
+<meta property="og:description" content="如何搭建前端自动化构建环境？怎样组建前端工作流？  为了前端团队更好的协作开发同时提高项目编码质量，我们需要将Web前端使用工程化方式构建； 目前需要一些简单的功能：1. 版本控制（升级、回滚、changeLog、issue、Wiki）     2. 编译Less/Sass   3. 检查JS（jsLint）   4. 图片合并/base64编码   5. 压缩CSS/压缩JS   6. 代码混">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-12-03T15:45:39.787Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于前端工程化工作流——自动化构建 | Hibop&#39;s Blog">
+<meta name="twitter:description" content="如何搭建前端自动化构建环境？怎样组建前端工作流？  为了前端团队更好的协作开发同时提高项目编码质量，我们需要将Web前端使用工程化方式构建； 目前需要一些简单的功能：1. 版本控制（升级、回滚、changeLog、issue、Wiki）     2. 编译Less/Sass   3. 检查JS（jsLint）   4. 图片合并/base64编码   5. 压缩CSS/压缩JS   6. 代码混">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hibop&#39;s Blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          我的故事我的酒
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social" style="display: block">
+  <ul class="navigation" style="float: none;">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/Hibop" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    <img id="pen" class="pen" src="../../../../images/pen.png" style="float: left; width: 32px; margin: 10px;" title="原创"></img>
+    <h1 class="post-title" style="float: left;">关于前端工程化工作流——自动化构建</h1>
+    <img id="fullPage" class="full-page" src="../../../../images/fullpage.png" style="width: 48px; margin-left: 10px;" title="点击全屏"></img>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-12-03" class="post-meta__date date">2017-12-03</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <blockquote>
+<p>如何搭建前端自动化构建环境？怎样组建前端工作流？</p>
+</blockquote>
+<p>为了前端团队更好的协作开发同时提高项目编码质量，我们需要将Web前端使用工程化方式构建；</p>
+<h3 id="目前需要一些简单的功能："><a href="#目前需要一些简单的功能：" class="headerlink" title="目前需要一些简单的功能："></a>目前需要一些简单的功能：</h3><pre><code>1. 版本控制（升级、回滚、changeLog、issue、Wiki）  
+
+ 2. 编译Less/Sass
+
+ 3. 检查JS（jsLint）
+
+ 4. 图片合并/base64编码
+
+ 5. 压缩CSS/压缩JS
+
+ 6. 代码混淆/丑化
+</code></pre><p>这些都是每个Web项目在构建、开发阶段需要做的事情。前端自动化构建环境可以把这些重复工作一次配置，多次重复执行，极大的提高开发效率。</p>
+<p>目前最知名的构建工具： Gulp、Grunt、NPM + Webpack；</p>
+<pre><code>grunt是前端工程化的先驱
+
+gulp更自然基于流的方式连接任务
+
+Webpack最年轻，擅长用于依赖管理/代码分割，配置稍较复杂
+</code></pre><h3 id="Gulp"><a href="#Gulp" class="headerlink" title="Gulp"></a>Gulp</h3><p>Gulp是基于 Node.js的，需要要安装 Node.js</p>
+<p>1、为了确保依赖环境正确，我们先执行几个简单的命令检查。</p>
+<figure class="highlight plain"><figcaption><span>-v</span><a href="//">检测Node是否已经安装，如果正确安装的话你会看到所安装的Node的版本号</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm -v // 得到npm的版本号，装 Node 时已经自动安装了npm</div></pre></td></tr></table></figure>
+<p>2、开始安装Gulp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install -g gulp // 全局安装 gulp</div><div class="line">gulp -v // 得到gulp的版本号，确认安装成功</div></pre></td></tr></table></figure></p>
+<p>基础安装结束<br>-</p>
+<p>3、切换到你的在项目根文件夹下，运行</p>
+<pre><code>npm install gulp --save-dev // 将具体的gulp功能插件局部安装项目下
+</code></pre><p>4、安装gulp功能插件依赖包</p>
+<pre><code>npm install gulp-jshint gulp-sass gulp-concat gulp-uglify gulp-rename--save-dev
+</code></pre><p>gulp功能模块的文件会放在项目所在的目录的./node_modules 下</p>
+<p>5、我们目前先使用一些简单的功能：</p>
+<pre><code>- 检查Javascript
+- 编译Sass文件
+- 合并Javascript
+- 压缩合并并重命名Javascript
+</code></pre><p>新建gulpfile.js 配置文件放在项目根目录下</p>
+<pre><code>演示项目目录结构
+   testProject        (项目名称)
+   |–.git             通过git进行版本控制,项目自动生成这个文件
+   |–node_modules     组件包目录
+   |–dist             **发布环境**（编译自动生成的）
+       |–css         样式文件(style.css style.min.css)
+       |–images     图片文件(压缩图片\合并后的图片)
+       |–js         js文件(main.js main.min.js)
+       |–index.html  静态页面文件(压缩html)
+   |–src             **开发环境**
+       |–sass                sass文件
+       |–images               图片文件
+       |–js                  js文件
+       |–index.html         静态文件
+   |–gulpfile.js              gulp配置文件
+   |–package.json             依赖模块json文件,在项目目录下npm install会安装项目所有的依赖模块，简化项目的安装程序
+</code></pre><p>6、项目文件夹都建好，组件也安装完毕了，我们需要编写gulpfile.js文件以指定gulp需要为我们完成什么任务。</p>
+<pre><code>gulpfile.js内容如下：
+
+// 引入gulp
+var gulp = require(&apos;gulp&apos;);
+
+// 引入组件
+var jshint = require(&apos;gulp-jshint&apos;);//检查js
+var sass   = require(&apos;gulp-sass&apos;);    //编译Sass
+var concat = require(&apos;gulp-concat&apos;);//合并
+var uglify = require(&apos;gulp-uglify&apos;);//uglify 组件（用于压缩 JS）
+var rename = require(&apos;gulp-rename&apos;);//重命名
+
+// 检查js脚本的任务
+gulp.task(&apos;lint&apos;, function() {
+    gulp.src(&apos;./js/*.js&apos;) //可配置你需要检查脚本的具体名字。
+        .pipe(jshint())
+        .pipe(jshint.reporter(&apos;default&apos;));
+});
+
+// 编译Sass
+gulp.task(&apos;sass&apos;, function() {
+    gulp.src(&apos;./scss/*.scss&apos;)
+        .pipe(sass())
+        .pipe(gulp.dest(&apos;./css&apos;));//dest()写入文件
+});
+
+// 合并，压缩js文件
+// 找到 js/ 目录下的所有 js 文件，压缩，重命名，最后将处理完成的js存放在 dist/js/ 目录下
+gulp.task(&apos;scripts&apos;, function() {
+    gulp.src(&apos;./js/*.js&apos;)
+        .pipe(concat(&apos;all.js&apos;))
+        .pipe(gulp.dest(&apos;./dist&apos;))
+        .pipe(rename(&apos;all.min.js&apos;))
+        .pipe(uglify())
+        .pipe(gulp.dest(&apos;./dist&apos;));
+
+        console.log(&apos;gulp task is done&apos;);//自定义提醒信息
+});
+
+.... // 其他任务类似
+
+// 定义默认任务,执行gulp会自动执行的任务
+gulp.task(&apos;default&apos;, function(){
+    gulp.run(&apos;lint&apos;, &apos;sass&apos;, &apos;scripts&apos;);
+
+    // 监听js文件变化，当文件发生变化后会自动执行任务
+    gulp.watch(&apos;./js/*.js&apos;, function(){
+        gulp.run(&apos;lint&apos;,&apos;scripts&apos;);
+    });
+});
+</code></pre><p>7、现在，回到命令行窗口，可以直接运行gulp任务了。</p>
+<pre><code>gulp
+
+这将执行定义的default任务，就和以下的命令式同一个意思
+
+gulp default
+
+当然，我们可以运行在gulpfile.js中定义的任意任务，比如，现在单独运行sass任务：
+
+gulp sass
+</code></pre><p>8、编译会显示Finished,如果你的JS有什么不好的地方它会提醒，避免一些不必要的错误，十分贴心</p>
+<pre><code>常见提醒：
+1.禁止在同一行声明多个变量。
+2.请使用 ===/!==来比较true/false或者数值
+3.使用对象字面量替代new Array这种形式
+4.不要使用全局函数。
+5.Switch语句必须带有default分支
+6.函数不应该有时候有返回值，有时候没有返回值。
+7.For循环必须使用大括号
+8.If语句必须使用大括号
+9.for-in循环中的变量 应该使用var关键字明确限定作用域，从而避免作用域污染。
+</code></pre><p>9、gulp的插件数量很多，后面还可以根据自己的需要进行添加任务</p>
+<pre><code>常用的gulp插件参考
+gulp-imagemin:         压缩图片
+gulp-ruby-sass:     支持sass，安装此版本需要安装ruby
+gulp-minify-css:     压缩css
+gulp-jshint:          检查js
+gulp-uglify:          压缩js
+gulp-concat:        合并文件
+gulp-rename:          重命名文件
+gulp-htmlmin:         压缩html
+gulp-clean:          清空文件夹
+gulp-livereload:     服务器控制客户端同步刷新（需配合chrome插件LiveReload及tiny-lr）
+</code></pre><h3 id="使用Git做版本控制"><a href="#使用Git做版本控制" class="headerlink" title="使用Git做版本控制"></a>使用Git做版本控制</h3><p>安装git， 下载安装包会安装好 Git Shell 和可视化环境</p>
+<pre><code>http://git-scm.com/download/win
+</code></pre><p>配置用户名：</p>
+<pre><code>git config --global user.name &quot;Your Name&quot;
+git config --global user.email &quot;email@example.com&quot;
+</code></pre><p>关联一个到团队的库</p>
+<pre><code>git remote add origin git@github.com:markyun/My-blog.git
+</code></pre><p>添加文件到仓库，添加全部文件用 . 表示</p>
+<pre><code>git add .
+</code></pre><p>把文件提交到仓库</p>
+<pre><code>git commit -m &quot; first add project file&quot;
+</code></pre><p>提交文件到团队仓库</p>
+<pre><code>git push -u origin master //将本地的项目提交到远程仓库中。
+</code></pre><p>以上就完成了前端团队最基本的开发环境搭建和代码提交工作流程。</p>
+<h3 id="补充：前端开发软件环境-Windows-Linux-Mac-OS-X"><a href="#补充：前端开发软件环境-Windows-Linux-Mac-OS-X" class="headerlink" title="补充：前端开发软件环境 (Windows, Linux, Mac OS X)"></a>补充：前端开发软件环境 (Windows, Linux, Mac OS X)</h3><pre><code>安装Node.Js、NPM、Ruby、Java、python等基础环境
+Sublime Text3 + 插件(Bable, code format)           用于编写前端代码
+Google chrome（Chromium/Chrome Canary） 、Mozilla Firefox + Firebug
+Internet Explorer             进行兼容测试和预览页面UI、动画效果和交互功能
+Node.js+Gulp                 进行前端自动化构建、JS语法验证、CSS压缩，图片压缩等；
+Koala                         实时编译Less、Sass、Compass、CoffeeScript;
+Github                         存储自己的代码库 、git或SVN用于版本控制和团队Code Review
+Tomcat、DedeAMPZ、MAMP          进行简单运行环境演示
+Photoshop CC 切图 + Sprites 合并小图标
+XMind                         画出清晰的工作或业务逻辑思维导图
+Xshell + Xftp                远程主机登陆，以及文件上传
+fiddler                        Http代理抓包
+postMan                        HTTP接口请求调试
+</code></pre><p>（待补充…）</p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017- . | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题 Huno </span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
