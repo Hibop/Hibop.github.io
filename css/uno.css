@@ -1710,7 +1710,7 @@ th, td {
   border: none;
 }
 pre {
-  font-family: 
+  white-space: pre-line;
 }
 
 // =========== 12-3 ==============
