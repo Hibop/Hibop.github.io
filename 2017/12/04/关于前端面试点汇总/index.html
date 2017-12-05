@@ -24,7 +24,7 @@
 <meta property="og:description" content="本文收集总结了一些前端面试题，阅后要用心钻研其中的原理，重要知识需要系统学习、透彻学习，形成自己的知识链。 前端还是一个年轻的行业，新的行业标准， 框架， 库都不断在更新和新增，正如赫门在2015深JS大会上的《前端服务化之路》主题演讲中说的一句话：“每18至24个月，前端都会难一倍”，这些变化使前端的能力更加丰富、创造的应用也会更加完美。所以关注各种前端技术，跟上快速变化的节奏，也是身为一个前端">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://www.w3school.com.cn/i/ct_js_value.gif">
-<meta property="og:updated_time" content="2017-12-05T14:57:08.852Z">
+<meta property="og:updated_time" content="2017-12-05T15:05:42.834Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于前端面试点汇总 | Hibop&#39;s Blog">
 <meta name="twitter:description" content="本文收集总结了一些前端面试题，阅后要用心钻研其中的原理，重要知识需要系统学习、透彻学习，形成自己的知识链。 前端还是一个年轻的行业，新的行业标准， 框架， 库都不断在更新和新增，正如赫门在2015深JS大会上的《前端服务化之路》主题演讲中说的一句话：“每18至24个月，前端都会难一倍”，这些变化使前端的能力更加丰富、创造的应用也会更加完美。所以关注各种前端技术，跟上快速变化的节奏，也是身为一个前端">
@@ -1102,12 +1102,10 @@ JavaScript对象是通过引用来传递的，我们创建的每个新对象实�
 直至全局函数，这种组织形式就是作用域链。
 </code></pre></li>
 <li><p>谈谈This对象的理解。</p>
-<ul>
-<li>this总是指向函数的直接调用者（而非间接调用者）；</li>
-<li>如果有new关键字，this指向new出来的那个对象；</li>
-<li>在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；</li>
-</ul>
-</li>
+<pre><code>- this总是指向函数的直接调用者（而非间接调用者）；
+- 如果有new关键字，this指向new出来的那个对象；
+- 在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；
+</code></pre></li>
 <li><p>eval是做什么的？</p>
 <pre><code>它的功能是把对应的字符串解析成JS代码并运行；
 应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。
@@ -1463,9 +1461,7 @@ jquery.extend扩展，需要通过jquery类来调用，而jquery.fn.extend扩展
 <li><p>JQuery的源码看过吗？能不能简单说一下它的实现原理？</p>
 </li>
 <li><p>jquery 中如何将数组转化为json字符串，然后再转化回来？</p>
-</li>
-</ul>
-<p>jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩展：</p>
+<p> jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩展：</p>
 <pre><code>$.fn.stringifyArray = function(array) {
     return JSON.stringify(array)
 }
@@ -1476,7 +1472,7 @@ $.fn.parseArray = function(array) {
 
 然后调用：
 $(&quot;&quot;).stringifyArray(array)
-</code></pre><ul>
+</code></pre></li>
 <li><p>jQuery和Zepto的区别？各自的使用场景？</p>
 </li>
 <li><p>针对 jQuery 的优化方法？</p>
@@ -1489,8 +1485,6 @@ $(&quot;&quot;).stringifyArray(array)
  for 循环每一次循环都查找了数组 (arr) 的.length 属性，在开始循环的时候设置一个变量来存储这个数字，可以让循环跑得更快：
  for (var i = size, length = arr.length; i &lt; length; i++) {}
 </code></pre></li>
-</ul>
-<ul>
 <li><p>Zepto的点透问题如何解决？</p>
 </li>
 <li><p>jQueryUI如何自定义组件?</p>
@@ -1553,8 +1547,6 @@ setTimeout 的第一个参数使用字符串而非函数的话，会引发内存
 <li><p>简述一下 Handlerbars 的对模板的基本处理流程， 如何编译的？如何缓存的？</p>
 </li>
 <li><p>用js实现千位分隔符?(来源：<a href="http://div.io/topic/744" target="_blank" rel="external">前端农民工</a>，提示：正则+replace)</p>
-</li>
-</ul>
 <pre><code>参考：http://www.tuicool.com/articles/ArQZfui
 function commafy(num) {
     return num &amp;&amp; num
@@ -1564,7 +1556,7 @@ function commafy(num) {
         });
 }
 console.log(commafy(1234567.90)); //1,234,567.90
-</code></pre><ul>
+</code></pre></li>
 <li><p>检测浏览器版本版本有哪些方式？</p>
 <pre><code>功能检测、userAgent特征检测
 
@@ -1628,7 +1620,6 @@ Object.is 在三等号判等的基础上特别处理了 NaN 、-0 和 +0 ，保�
 也就是说是在不改变UI的情况下，对网站进行优化，在扩展的同时保持一致的UI。
 
 对于传统的网站来说重构通常是：
-
 表格(table)布局改为DIV+CSS
 使网站前端兼容于现代浏览器(针对于不合规范的CSS、如对IE6有效的)
 对于移动平台的优化
@@ -1853,9 +1844,8 @@ git 用于版本控制和Code Review
 1、实现界面交互
 2、提升用户体验
 3、有了Node.js，前端可以实现服务端的一些事情
-</code></pre></li>
-</ul>
-<pre><code>前端是最贴近用户的程序员，前端的能力就是能让产品从 90分进化到 100 分，甚至更好，
+
+前端是最贴近用户的程序员，前端的能力就是能让产品从 90分进化到 100 分，甚至更好，
 
 参与项目，快速高质量完成实现效果图，精确到1px；
 
@@ -1866,7 +1856,7 @@ git 用于版本控制和Code Review
 处理hack，兼容、写出优美的代码格式；
 
 针对服务器的优化、拥抱最新前端技术。
-</code></pre><ul>
+</code></pre></li>
 <li><p>你怎么看待Web App 、hybrid App、Native App？</p>
 </li>
 <li><p>你移动端前端开发的理解？（和 Web 前端开发的主要区别是什么？）</p>
