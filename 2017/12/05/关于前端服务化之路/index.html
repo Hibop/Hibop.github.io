@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      关于前端服务化的总结 | Hibop&#39;s Blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="hbyuan">
+    
+    
+
+    <meta name="description" content="“每18至24个月，前端都会难一倍”（注：2015深JS大会上，赫门在《前端服务化之路》主题演讲中说的一句话）。难，是前端发展史偶然中的必然。但难，也造就着前端当下的繁荣。 Ryan Dah之所以选择用Javascript作为Node.js的基础语言，主要是因为它是单线程的，没有服务器I/O，没有历史包袱，有较低的门槛和比较良好的社区（更多内容可见：Node.js Interview: 4 Que">
+<meta name="keywords" content="前端服务化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于前端服务化的总结 | Hibop&#39;s Blog">
+<meta property="og:url" content="https://hibop.github.io/2017/12/05/关于前端服务化之路/index.html">
+<meta property="og:site_name" content="Hibop&#39;s Blog">
+<meta property="og:description" content="“每18至24个月，前端都会难一倍”（注：2015深JS大会上，赫门在《前端服务化之路》主题演讲中说的一句话）。难，是前端发展史偶然中的必然。但难，也造就着前端当下的繁荣。 Ryan Dah之所以选择用Javascript作为Node.js的基础语言，主要是因为它是单线程的，没有服务器I/O，没有历史包袱，有较低的门槛和比较良好的社区（更多内容可见：Node.js Interview: 4 Que">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-12-05T16:20:27.462Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于前端服务化的总结 | Hibop&#39;s Blog">
+<meta name="twitter:description" content="“每18至24个月，前端都会难一倍”（注：2015深JS大会上，赫门在《前端服务化之路》主题演讲中说的一句话）。难，是前端发展史偶然中的必然。但难，也造就着前端当下的繁荣。 Ryan Dah之所以选择用Javascript作为Node.js的基础语言，主要是因为它是单线程的，没有服务器I/O，没有历史包袱，有较低的门槛和比较良好的社区（更多内容可见：Node.js Interview: 4 Que">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hibop&#39;s Blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          我的故事我的酒
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social" style="display: block">
+  <ul class="navigation" style="float: none;">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/Hibop" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    <img id="pen" class="pen" src="../../../../images/pen.png" style="float: left; width: 32px; margin: 10px;" title="原创"></img>
+    <h1 class="post-title" style="float: left;">关于前端服务化的总结</h1>
+    <img id="fullPage" class="full-page" src="../../../../images/fullpage.png" style="width: 48px; margin-left: 10px;" title="点击全屏"></img>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-12-05" class="post-meta__date date">2017-12-05</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/前端服务化/">前端服务化</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>“每18至24个月，前端都会难一倍”（注：2015深JS大会上，赫门在《前端服务化之路》主题演讲中说的一句话）。难，是前端发展史偶然中的必然。但难，也造就着前端当下的繁荣。</p>
+<p>Ryan Dah之所以选择用Javascript作为Node.js的基础语言，主要是因为它是单线程的，没有服务器I/O，没有历史包袱，有较低的门槛和比较良好的社区（更多内容可见：Node.js Interview: 4 Questions with Creator Ryan Dahl）。这看似是偶然，但实际上正是Javascript的这些优秀特性必然被历史选择，承担推动Web技术发展的使命。</p>
+<p>在Node.js的推动下，前端技术大放异彩，逐渐告别“石器时代”，走向“工业时代”。而通过推动前端迈进”工业时代”的“三化“建设的力量，分别是前端的自动化、实时化与服务化。</p>
+<h3 id="前端服务化"><a href="#前端服务化" class="headerlink" title="前端服务化"></a>前端服务化</h3><p>所谓服务化，即使用者只需调用，而毋须知道内部的实现，说白了就是标准化（引自2015深JS大会上，赫门主题演讲《前端服务化之路》的内容）。Node.js的出现使前端服务化成为可能。Node.js开发的系统可以作为接入层，调用Java、C++等提供的基础功能，处理数据库，然后将数据吐给浏览器进行渲染。简易言之，就是用Node.js代替业务逻辑这一层。最后造就的成果是，不仅Java，C++可以放弃业务逻辑，更专注于数据处理的基础服务，而且Node.js能更专注于业务逻辑，提供API服务给浏览器端的代码进行调用。</p>
+<p>用Node.js作为接入层，让前端涉足“后台”的业务成为可能，而且能提高开发效率，还能更方便地使用最新Web技术，如Big Pipe，WebSocket等对页面进行优化。早前淘宝进行的前后端分离，腾讯AlloyTeam正在进行的玄武框架，都是在推动前端服务化做出努力。</p>
+<p>除了Node.js作为接入层提供服务以外，淘宝的赫门还提出了将前端Web Component作为一种服务，提供给后台使用。Javascript的AMD与CommonJS规范的订立使Javascript的模块化开发成为可能，也就自然而然地推动了前端的组件化。但赫门认为组件化的Web Component是散乱的，并没有办法一统江湖（如Angular、React这类框架），而他的理念就是希望帮助Web Component重新定位，也就是将其标准化。他在演讲中举出一个应用场景：使用React开发了一个组件，给前端直接使用React，而给后端用的时候则先用Flipper输出成Web Component再用。赫门的这个Flipper在技术上并没有太大的新意，其创新之处在于，他基于Flipper提出的服务化理念。</p>
+<p>AlloyTeam内部其实有类似的更完善的方案—— MVVM框架Q.js及Ques组件方案。赫门的Flipper只管将代码转成标准化Web Component，而Ques组件方案不仅在开发过程中可以用标准化Web Component，而且在基于构建，开发的过程中就已经可以将HTML，CSS及JS模块化，更好地组织代码。而Q.js则是一个类Vue.js的的MVVM框架，它可以使用Ques组件方案，结合MVVM框架的特性，能够轻松驾驭一个项目的开发 Ques。</p>
+<h3 id="大型前端工程架构可能面临的问题："><a href="#大型前端工程架构可能面临的问题：" class="headerlink" title="大型前端工程架构可能面临的问题："></a>大型前端工程架构可能面临的问题：</h3><ul>
+<li>css样式覆盖</li>
+<li>js调用冲突</li>
+<li>技术更新快，新旧技术栈冲突</li>
+</ul>
+<p>css和js原生没有命名空间的支持， 是在同一个浏览器页面沙箱内的静态资源。css覆盖和js冲突，会造成不同业务之间的技术选型冲突。</p>
+<h3 id="如何实现前端服务化"><a href="#如何实现前端服务化" class="headerlink" title="如何实现前端服务化"></a>如何实现前端服务化</h3><ul>
+<li><p>参考后台如何做到服务化：</p>
+<pre><code>- 通过技术中立的网络消息、文件接口经行通信；
+- 服务间的接口采用粗粒度的业务模型，而不是技术实现模型；
+- 服务间约定接口及上面承载的业务含义；
+- 各独立进程、独立部署机器、独立升级演进；
+- 服务间接口可以被监控和追踪，用于故障定位；
+</code></pre></li>
+<li><p>前端类似机制服务化：</p>
+<pre><code>1. 将一个页面划分若干可集成的业务单元=======&gt;对应后端应用/服务；
+2. 业务单元各自独立，不暴露细节，也不影响其他单元的技术选型；
+3. 业务单元只通过有限的消息进行通信实现协作；
+4. 各个业务单元可以部署在不同服务器，甚至域名上，独立升级；
+5. 各个业务单元之间消息传递以中间件middleware或者钩子Hook监控跟踪；
+6. 将业务单元可以挂载PIU（Page Integratable Unit）全局命名空间之上；
+</code></pre></li>
+<li><p>面向集成的前端元框架Prelude</p>
+<pre><code>1. 提供PIU之间协作和通信的基础能力；
+2. 管理全局冲突
+   - 浏览器特性检测和Pollyfill
+   - 全局JS注册、注入
+   - 拉起全局样式，hash片段
+   - 全局页面元素
+   - 消息通信（发布/订阅模式）
+   - 集成接口：国际化、皮肤、会话管理（登陆、注销、身份）等
+3. 不越界管理提供
+   - 组件、控件、路由管理、公共或具体业务
+   - 业务接口等除集成所需的任何接口
+</code></pre></li>
+</ul>
+<p>前端服务化之路借鉴后台的服务化，类似于后台开发的独立进程，彼此互相解耦，只通过消息接口通信，业务单元彼此解耦、互相相对独立、技术选择互不影响、新旧技术栈可以迭代更新，可以很好适合前端大型工程架构的实现。</p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017- . | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题 Huno </span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
