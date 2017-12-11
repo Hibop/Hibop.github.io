@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      关于前端跨域解决方案 | Hibop&#39;s Blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="hbyuan">
+    
+    
+
+    <meta name="description" content="什么是跨域？什么是跨站资源共享？什么是CROS？  跨域与同源策略1. 什么是域？什么是同源 一个url（统一资源定位符）的基本组成部分:  协议 :// 域名（或者是ip） : 端口（默认80） / 路径；判断同源的三要素是：协议、端口、域名。  2. 与域有关的浏览器动作：- 1.) 资源跳转： A链接、重定向、表单提交 2.) 资源嵌入： &amp;lt;link&amp;gt;、&amp;lt;script&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于前端跨域解决方案 | Hibop&#39;s Blog">
+<meta property="og:url" content="https://hibop.github.io/2017/12/07/关于前端跨域解决方案/index.html">
+<meta property="og:site_name" content="Hibop&#39;s Blog">
+<meta property="og:description" content="什么是跨域？什么是跨站资源共享？什么是CROS？  跨域与同源策略1. 什么是域？什么是同源 一个url（统一资源定位符）的基本组成部分:  协议 :// 域名（或者是ip） : 端口（默认80） / 路径；判断同源的三要素是：协议、端口、域名。  2. 与域有关的浏览器动作：- 1.) 资源跳转： A链接、重定向、表单提交 2.) 资源嵌入： &amp;lt;link&amp;gt;、&amp;lt;script&amp;g">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-12-11T14:31:24.130Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于前端跨域解决方案 | Hibop&#39;s Blog">
+<meta name="twitter:description" content="什么是跨域？什么是跨站资源共享？什么是CROS？  跨域与同源策略1. 什么是域？什么是同源 一个url（统一资源定位符）的基本组成部分:  协议 :// 域名（或者是ip） : 端口（默认80） / 路径；判断同源的三要素是：协议、端口、域名。  2. 与域有关的浏览器动作：- 1.) 资源跳转： A链接、重定向、表单提交 2.) 资源嵌入： &amp;lt;link&amp;gt;、&amp;lt;script&amp;g">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hibop&#39;s Blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          我的故事我的酒
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social" style="display: block">
+  <ul class="navigation" style="float: none;">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/Hibop" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    <img id="pen" class="pen" src="../../../../images/pen.png" style="float: left; width: 32px; margin: 10px;" title="原创"></img>
+    <h1 class="post-title" style="float: left;">关于前端跨域解决方案</h1>
+    <img id="fullPage" class="full-page" src="../../../../images/fullpage.png" style="width: 48px; margin-left: 10px;" title="点击全屏"></img>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-12-07" class="post-meta__date date">2017-12-07</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <blockquote>
+<p>什么是跨域？什么是跨站资源共享？什么是CROS？</p>
+</blockquote>
+<h3 id="跨域与同源策略"><a href="#跨域与同源策略" class="headerlink" title="跨域与同源策略"></a>跨域与同源策略</h3><h4 id="1-什么是域？什么是同源"><a href="#1-什么是域？什么是同源" class="headerlink" title="1. 什么是域？什么是同源"></a>1. 什么是域？什么是同源</h4><blockquote>
+<p>一个url（统一资源定位符）的基本组成部分: <em> 协议 :// 域名（或者是ip） : 端口（默认80） / 路径</em>；<br>判断同源的三要素是：<em>协议、端口、域名</em>。</p>
+</blockquote>
+<h4 id="2-与域有关的浏览器动作："><a href="#2-与域有关的浏览器动作：" class="headerlink" title="2. 与域有关的浏览器动作："></a>2. 与域有关的浏览器动作：</h4><pre><code>- 1.) 资源跳转： A链接、重定向、表单提交
+2.) 资源嵌入： &lt;link&gt;、&lt;script&gt;、&lt;img&gt;、&lt;frame&gt;等dom标签，还有样式中background:url()、@font-face()等文件外链
+3.) 脚本请求： js发起的ajax请求、dom和js对象的跨域操作等
+</code></pre><h4 id="3-什么是同源策略？"><a href="#3-什么是同源策略？" class="headerlink" title="3. 什么是同源策略？"></a>3. 什么是同源策略？</h4><p>同源策略/SOP（Same origin policy）是一种约定，由Netscape公司1995年引入浏览器，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。所谓同源是指”协议+域名+端口”三者相同，即便两个不同的域名指向同一个ip地址，也非同源。</p>
+<p>同源策略限制以下几种行为：</p>
+<pre><code>1.) Cookie、LocalStorage 和 IndexDB 无法读取
+2.) DOM 和 Js对象无法获得
+3.) AJAX 请求不能发送
+</code></pre><p>不受同源限制的情况:<br>        1.) script标签允许跨域嵌入脚本，稍后介绍的JSONP就是利用这个“漏洞”来实现。<br>        2.) img标签、link标签、@font-face不受跨域影响。<br>        3.) video和audio嵌入的资源。<br>        4.) iframe载入的任何资源。（不是iframe之间的通信）<br>        5.) <object>、<embed>和<applet>的插件。<br>        6.) WebSocket不受同源策略的限制。</applet></object></p>
+<h4 id="4-如何获取（get）和设置（set）域（domain）"><a href="#4-如何获取（get）和设置（set）域（domain）" class="headerlink" title="4. 如何获取（get）和设置（set）域（domain）"></a>4. 如何获取（get）和设置（set）域（domain）</h4><blockquote>
+<p>get: document.domain;<br>set:<br>//初始值 “home.example.com”<br>document.domain = “example.com”; //OK<br>document.domain = “home.example.com”; //NO,不能由松散变紧绷<br>document.domain = “example”; //NO，必须有一个点号<br>document.domain = “another.com”; //NO， 必须是有效域前缀或其本身</p>
+</blockquote>
+<h3 id="同源策略之cookie、iframe、cros"><a href="#同源策略之cookie、iframe、cros" class="headerlink" title="同源策略之cookie、iframe、cros"></a>同源策略之cookie、iframe、cros</h3><h4 id="1-关于Cookie和Session："><a href="#1-关于Cookie和Session：" class="headerlink" title="1. 关于Cookie和Session："></a>1. 关于Cookie和Session：</h4><p>说到同源策略，必不可少的就是Cookie这个东西了。</p>
+<p>而讲到Cookie，跟它关联在一起的又有Session。</p>
+<p>对于这两者，具体去(传送门查阅)[!<a href="http://www.cnblogs.com/linguoguo/p/5106618.html]。" target="_blank" rel="external">http://www.cnblogs.com/linguoguo/p/5106618.html]。</a></p>
+<p>做个小结：</p>
+<ul>
+<li>Cookie受到浏览器同源策略的限制，A页面的Cookie无法被B页面的Cookie访问和操作。</li>
+<li>Cookie最大存储容量一般为4KB，由服务器生成，在HTTP报文首部设置Set-Cookie可以指定生成Cookie的内容和生命周期，如果由浏览器生成则在关掉浏览器后失效。</li>
+<li>Cookie存储在浏览器端，由于每次发送HTTP请求默认会把Cookie附到HTTP首部上去，所以Cookie主要用来身份认证，而不用来存储其他信息，防止HTTP报文过大。</li>
+<li>Session存储在服务器，主要与Cookie配合使用完成身份认证和状态保持的功能。只有Cookie或只有Session都无法完成身份认证和状态保持的功能。</li>
+</ul>
+<p>参考文献：</p>
+<ol>
+<li><a href="https://segmentfault.com/a/1190000011145364" target="_blank" rel="external">https://segmentfault.com/a/1190000011145364</a></li>
+<li><a href="https://segmentfault.com/a/1190000006908944" target="_blank" rel="external">https://segmentfault.com/a/1190000006908944</a></li>
+<li><a href="https://segmentfault.com/a/1190000012256432" target="_blank" rel="external">https://segmentfault.com/a/1190000012256432</a></li>
+</ol>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017- . | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题 Huno </span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      20行js实现前端模板引擎[翻译] | Hibop&#39;s Blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="hbyuan">
+    
+    
+
+    <meta name="description" content="AbsurdJS 作者写的一篇教程，一步步教你怎样用 Javascript 实现一个纯客户端的模板引擎。整个引擎实现只有不到 20 行代码。如果你能从头看到尾的话，还能有不少收获的。你甚至可以跟随大牛的脚步也自己动手写一个引擎。  不知道你有木有听说过一个基于Javascript的Web页面预处理器，叫做AbsurdJS。我是它的作者，目前我还在不断地完善它。最初我只是打算写一个CSS的预处理器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20行js实现前端模板引擎[翻译] | Hibop&#39;s Blog">
+<meta property="og:url" content="https://hibop.github.io/2017/12/11/20行js实现前端模板引擎/index.html">
+<meta property="og:site_name" content="Hibop&#39;s Blog">
+<meta property="og:description" content="AbsurdJS 作者写的一篇教程，一步步教你怎样用 Javascript 实现一个纯客户端的模板引擎。整个引擎实现只有不到 20 行代码。如果你能从头看到尾的话，还能有不少收获的。你甚至可以跟随大牛的脚步也自己动手写一个引擎。  不知道你有木有听说过一个基于Javascript的Web页面预处理器，叫做AbsurdJS。我是它的作者，目前我还在不断地完善它。最初我只是打算写一个CSS的预处理器">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-12-11T14:56:45.174Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20行js实现前端模板引擎[翻译] | Hibop&#39;s Blog">
+<meta name="twitter:description" content="AbsurdJS 作者写的一篇教程，一步步教你怎样用 Javascript 实现一个纯客户端的模板引擎。整个引擎实现只有不到 20 行代码。如果你能从头看到尾的话，还能有不少收获的。你甚至可以跟随大牛的脚步也自己动手写一个引擎。  不知道你有木有听说过一个基于Javascript的Web页面预处理器，叫做AbsurdJS。我是它的作者，目前我还在不断地完善它。最初我只是打算写一个CSS的预处理器">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hibop&#39;s Blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          我的故事我的酒
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social" style="display: block">
+  <ul class="navigation" style="float: none;">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/Hibop" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    <img id="pen" class="pen" src="../../../../images/pen.png" style="float: left; width: 32px; margin: 10px;" title="原创"></img>
+    <h1 class="post-title" style="float: left;">20行js实现前端模板引擎[翻译]</h1>
+    <img id="fullPage" class="full-page" src="../../../../images/fullpage.png" style="width: 48px; margin-left: 10px;" title="点击全屏"></img>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-12-11" class="post-meta__date date">2017-12-11</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <blockquote>
+<p>AbsurdJS 作者写的一篇教程，一步步教你怎样用 Javascript 实现一个纯客户端的模板引擎。整个引擎实现只有不到 20 行代码。如果你能从头看到尾的话，还能有不少收获的。你甚至可以跟随大牛的脚步也自己动手写一个引擎。</p>
+</blockquote>
+<p>不知道你有木有听说过一个基于Javascript的Web页面预处理器，叫做AbsurdJS。我是它的作者，目前我还在不断地完善它。最初我只是打算写一个CSS的预处理器，不过后来扩展到了CSS和HTML，可以用来把Javascript代码转成CSS和HTML代码。当然，由于可以生成HTML代码，你也可以把它当成一个模板引擎，用于在标记语言中填充数据。</p>
+<p>于是我又想着能不能写一些简单的代码来完善这个模板引擎，又能与其它现有的逻辑协同工作。AbsurdJS本身主要是以NodeJS的模块的形式发布的，不过它也会发布客户端版本。考虑到这些，我就不能直接使用现有的引擎了，因为它们大部分都是在NodeJS上运行的，而不能跑在浏览器上。我需要的是一个小巧的，纯粹以Javascript编写的东西，能够直接运行在浏览器上。当我某天偶然发现John Resig的这篇博客[<a href="http://ejohn.org/blog/javascript-micro-templating/]，我惊喜地发现，这不正是我苦苦寻找的东西嘛！我稍稍做了一些修改，代码行数差不多20行左右。其中的逻辑非常有意思。在这篇文章中我会一步一步重现编写这个引擎的过程，如果你能一路看下去的话，你就会明白John的这个想法是多么犀利！" target="_blank" rel="external">http://ejohn.org/blog/javascript-micro-templating/]，我惊喜地发现，这不正是我苦苦寻找的东西嘛！我稍稍做了一些修改，代码行数差不多20行左右。其中的逻辑非常有意思。在这篇文章中我会一步一步重现编写这个引擎的过程，如果你能一路看下去的话，你就会明白John的这个想法是多么犀利！</a></p>
+<p>最初我的想法是这样子的：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> TemplateEngine = <span class="function"><span class="keyword">function</span>(<span class="params">tpl, data</span>) </span>&#123;</div><div class="line">    <span class="comment">// magic here ...</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> template = <span class="string">'&lt;p&gt;Hello, my name is &lt;%name%&gt;. I\'m &lt;%age%&gt; years old.&lt;/p&gt;'</span>;</div><div class="line"><span class="built_in">console</span>.log(TemplateEngine(template, &#123;</div><div class="line">    name: <span class="string">"Krasimir"</span>,</div><div class="line">    age: <span class="number">29</span></div><div class="line">&#125;));</div></pre></td></tr></table></figure></p>
+<p>一个简单的函数，输入是我们的模板以及数据对象，输出么估计你也很容易想到，像下面这样子：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Hello, my name is Krasimir. I'm 29 years old.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>其中第一步要做的是寻找里面的模板参数，然后替换成传给引擎的具体数据。我决定使用正则表达式来完成这一步。不过我不是最擅长这个，所以写的不好的话欢迎随时来喷。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> re = <span class="regexp">/&lt;%([^%&gt;]+)?%&gt;/g</span>;</div></pre></td></tr></table></figure></p>
+<p>这句正则表达式会捕获所有以&lt;%开头，以%&gt;结尾的片段。末尾的参数g（global）表示不只匹配一个，而是匹配所有符合的片段。Javascript里面有很多种使用正则表达式的方法，我们需要的是根据正则表达式输出一个数组，包含所有的字符串，这正是exec所做的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> re = <span class="regexp">/&lt;%([^%&gt;]+)?%&gt;/g</span>;</div><div class="line"><span class="keyword">var</span> match = re.exec(tpl);</div></pre></td></tr></table></figure>
+<p>如果我们用console.log把变量match打印出来，我们会看见：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">    <span class="string">"&lt;%name%&gt;"</span>,</div><div class="line">    <span class="string">" name "</span>, </div><div class="line">    index: <span class="number">21</span>,</div><div class="line">    input: </div><div class="line">    <span class="string">"&lt;p&gt;Hello, my name is &lt;%name%&gt;. I\'m &lt;%age%&gt; years old.&lt;/p&gt;"</span></div><div class="line">]</div></pre></td></tr></table></figure></p>
+<p>不过我们可以看见，返回的数组仅仅包含第一个匹配项。我们需要用while循环把上述逻辑包起来，这样才能得到所有的匹配项。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> re = <span class="regexp">/&lt;%([^%&gt;]+)?%&gt;/g</span>;</div><div class="line"><span class="keyword">while</span>(match = re.exec(tpl)) &#123;</div><div class="line">    <span class="built_in">console</span>.log(match);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果把上面的代码跑一遍，你就会看见&lt;%name%&gt; 和 &lt;%age%&gt;都被打印出来了。</p>
+<p>下面，有意思的部分来了。识别出模板中的匹配项后，我们要把他们替换成传递给函数的实际数据。最简单的办法就是使用replace函数。我们可以像这样来写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> TemplateEngine = <span class="function"><span class="keyword">function</span>(<span class="params">tpl, data</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> re = <span class="regexp">/&lt;%([^%&gt;]+)?%&gt;/g</span>;</div><div class="line">    <span class="keyword">while</span>(match = re.exec(tpl)) &#123;</div><div class="line">        tpl = tpl.replace(match[<span class="number">0</span>], data[match[<span class="number">1</span>]])</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> tpl;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>好了，这样就能跑了，但是还不够好。这里我们以data[“property”]的方式使用了一个简单对象来传递数据，但是实际情况下我们很可能需要更复杂的嵌套对象。所以我们稍微修改了一下data对象：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    name: <span class="string">"Krasimir Tsonev"</span>,</div><div class="line">    profile: &#123; <span class="attr">age</span>: <span class="number">29</span> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>不过直接这样子写的话还不能跑，因为在模板中使用&lt;%profile.age%&gt;的话，代码会被替换成data[‘profile.age’]，结果是undefined。这样我们就不能简单地用replace函数，而是要用别的方法。如果能够在&lt;%和%&gt;之间直接使用Javascript代码就最好了，这样就能对传入的数据直接求值，像下面这样：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> template = <span class="string">'&lt;p&gt;Hello, my name is &lt;%this.name%&gt;. I\'m &lt;%this.profile.age%&gt; years old.&lt;/p&gt;'</span>;</div></pre></td></tr></table></figure></p>
+<p>你可能会好奇，这是怎么实现的？这里John使用了new Function的语法，根据字符串创建一个函数。我们不妨来看个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fn = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"arg"</span>, <span class="string">"console.log(arg + 1);"</span>);</div><div class="line">fn(<span class="number">2</span>); <span class="comment">// outputs 3</span></div></pre></td></tr></table></figure>
+<p>fn可是一个货真价实的函数。它接受一个参数，函数体是console.log(arg + 1);。上述代码等价于下面的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fn = <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(arg + <span class="number">1</span>);</div><div class="line">&#125;</div><div class="line">fn(<span class="number">2</span>); <span class="comment">// outputs 3</span></div></pre></td></tr></table></figure></p>
+<p>通过这种方法，我们可以根据字符串构造函数，包括它的参数和函数体。这不正是我们想要的嘛！不过先别急，在构造函数之前，我们先来看看函数体是什么样子的。按照之前的想法，这个模板引擎最终返回的应该是一个编译好的模板。还是用之前的模板字符串作为例子，那么返回的内容应该类似于：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> </div><div class="line"><span class="string">"&lt;p&gt;Hello, my name is "</span> + </div><div class="line"><span class="keyword">this</span>.name + </div><div class="line"><span class="string">". I\'m "</span> + </div><div class="line"><span class="keyword">this</span>.profile.age + </div><div class="line"><span class="string">" years old.&lt;/p&gt;"</span>;</div></pre></td></tr></table></figure></p>
+<p>当然啦，实际的模板引擎中，我们会把模板切分为小段的文本和有意义的Javascript代码。前面你可能看见我使用简单的字符串拼接来达到想要的效果，不过这并不是100%符合我们要求的做法。由于使用者很可能会传递更加复杂的Javascript代码，所以我们这儿需要再来一个循环，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> template = </div><div class="line"><span class="string">'My skills:'</span> + </div><div class="line"><span class="string">'&lt;%for(var index in this.skills) &#123;%&gt;'</span> + </div><div class="line"><span class="string">'&lt;a href=""&gt;&lt;%this.skills[index]%&gt;&lt;/a&gt;'</span> +</div><div class="line"><span class="string">'&lt;%&#125;%&gt;'</span>;</div></pre></td></tr></table></figure></p>
+<p>如果使用字符串拼接的话，代码就应该是下面的样子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span></div><div class="line"><span class="string">'My skills:'</span> + </div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> index <span class="keyword">in</span> <span class="keyword">this</span>.skills) &#123; +</div><div class="line"><span class="string">'&lt;a href=""&gt;'</span> + </div><div class="line"><span class="keyword">this</span>.skills[index] +</div><div class="line"><span class="string">'&lt;/a&gt;'</span> +</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当然，这个代码不能直接跑，跑了会出错。于是我用了John的文章里写的逻辑，把所有的字符串放在一个数组里，在程序的最后把它们拼接起来。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> r = [];</div><div class="line">r.push(<span class="string">'My skills:'</span>); </div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> index <span class="keyword">in</span> <span class="keyword">this</span>.skills) &#123;</div><div class="line">r.push(<span class="string">'&lt;a href=""&gt;'</span>);</div><div class="line">r.push(<span class="keyword">this</span>.skills[index]);</div><div class="line">r.push(<span class="string">'&lt;/a&gt;'</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> r.join(<span class="string">''</span>);</div></pre></td></tr></table></figure></p>
+<p>下一步就是收集模板里面不同的代码行，用于生成函数。通过前面介绍的方法，我们可以知道模板中有哪些占位符（译者注：或者说正则表达式的匹配项）以及它们的位置。所以，依靠一个辅助变量（cursor，游标），我们就能得到想要的结果。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> TemplateEngine = <span class="function"><span class="keyword">function</span>(<span class="params">tpl, data</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> re = <span class="regexp">/&lt;%([^%&gt;]+)?%&gt;/g</span>,</div><div class="line">        code = <span class="string">'var r=[];\n'</span>,</div><div class="line">        cursor = <span class="number">0</span>;</div><div class="line">    <span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span>(<span class="params">line</span>) </span>&#123;</div><div class="line">        code += <span class="string">'r.push("'</span> + line.replace(<span class="regexp">/"/g</span>, <span class="string">'\\"'</span>) + <span class="string">'");\n'</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span>(match = re.exec(tpl)) &#123;</div><div class="line">        add(tpl.slice(cursor, match.index));</div><div class="line">        add(match[<span class="number">1</span>]);</div><div class="line">        cursor = match.index + match[<span class="number">0</span>].length;</div><div class="line">    &#125;</div><div class="line">    add(tpl.substr(cursor, tpl.length - cursor));</div><div class="line">    code += <span class="string">'return r.join("");'</span>; <span class="comment">// &lt;-- return the result</span></div><div class="line">    <span class="built_in">console</span>.log(code);</div><div class="line">    <span class="keyword">return</span> tpl;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> template = <span class="string">'&lt;p&gt;Hello, my name is &lt;%this.name%&gt;. I\'m &lt;%this.profile.age%&gt; years old.&lt;/p&gt;'</span>;</div><div class="line"><span class="built_in">console</span>.log(TemplateEngine(template, &#123;</div><div class="line">    name: <span class="string">"Krasimir Tsonev"</span>,</div><div class="line">    profile: &#123; <span class="attr">age</span>: <span class="number">29</span> &#125;</div><div class="line">&#125;));</div></pre></td></tr></table></figure></p>
+<p>上述代码中的变量code保存了函数体。开头的部分定义了一个数组。游标cursor告诉我们当前解析到了模板中的哪个位置。我们需要依靠它来遍历整个模板字符串。此外还有个函数add，它负责把解析出来的代码行添加到变量code中去。有一个地方需要特别注意，那就是需要把code包含的双引号字符进行转义（escape）。否则生成的函数代码会出错。如果我们运行上面的代码，我们会在控制台里面看见如下的内容：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> r=[];</div><div class="line">r.push(<span class="string">"&lt;p&gt;Hello, my name is "</span>);</div><div class="line">r.push(<span class="string">"this.name"</span>);</div><div class="line">r.push(<span class="string">". I'm "</span>);</div><div class="line">r.push(<span class="string">"this.profile.age"</span>);</div><div class="line"><span class="keyword">return</span> r.join(<span class="string">""</span>);</div></pre></td></tr></table></figure>
+<p>等等，貌似不太对啊，this.name和this.profile.age不应该有引号啊，再来改改。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span>(<span class="params">line, js</span>) </span>&#123;</div><div class="line">    js? code += <span class="string">'r.push('</span> + line + <span class="string">');\n'</span> :</div><div class="line">        code += <span class="string">'r.push("'</span> + line.replace(<span class="regexp">/"/g</span>, <span class="string">'\\"'</span>) + <span class="string">'");\n'</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>(match = re.exec(tpl)) &#123;</div><div class="line">    add(tpl.slice(cursor, match.index));</div><div class="line">    add(match[<span class="number">1</span>], <span class="literal">true</span>); <span class="comment">// &lt;-- say that this is actually valid js</span></div><div class="line">    cursor = match.index + match[<span class="number">0</span>].length;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>占位符的内容和一个布尔值一起作为参数传给add函数，用作区分。这样就能生成我们想要的函数体了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> r=[];</div><div class="line">r.push(<span class="string">"&lt;p&gt;Hello, my name is "</span>);</div><div class="line">r.push(<span class="keyword">this</span>.name);</div><div class="line">r.push(<span class="string">". I'm "</span>);</div><div class="line">r.push(<span class="keyword">this</span>.profile.age);</div><div class="line"><span class="keyword">return</span> r.join(<span class="string">""</span>);</div></pre></td></tr></table></figure>
+<p>剩下来要做的就是创建函数并且执行它。因此，在模板引擎的最后，把原本返回模板字符串的语句替换成如下的内容：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Function</span>(code.replace(<span class="regexp">/[\r\t\n]/g</span>, <span class="string">''</span>)).apply(data);</div></pre></td></tr></table></figure></p>
+<p>我们甚至不需要显式地传参数给这个函数。我们使用apply方法来调用它。它会自动设定函数执行的上下文。这就是为什么我们能在函数里面使用this.name。这里this指向data对象。</p>
+<p>模板引擎接近完成了，不过还有一点，我们需要支持更多复杂的语句，比如条件判断和循环。我们接着上面的例子继续写。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> template = </div><div class="line"><span class="string">'My skills:'</span> + </div><div class="line"><span class="string">'&lt;%for(var index in this.skills) &#123;%&gt;'</span> + </div><div class="line"><span class="string">'&lt;a href="#"&gt;&lt;%this.skills[index]%&gt;&lt;/a&gt;'</span> +</div><div class="line"><span class="string">'&lt;%&#125;%&gt;'</span>;</div><div class="line"><span class="built_in">console</span>.log(TemplateEngine(template, &#123;</div><div class="line">    skills: [<span class="string">"js"</span>, <span class="string">"html"</span>, <span class="string">"css"</span>]</div><div class="line">&#125;));</div></pre></td></tr></table></figure></p>
+<p>这里会产生一个异常，Uncaught SyntaxError: Unexpected token for。如果我们调试一下，把code变量打印出来，我们就能发现问题所在。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> r=[];</div><div class="line">r.push(<span class="string">"My skills:"</span>);</div><div class="line">r.push(<span class="keyword">for</span>(<span class="keyword">var</span> index <span class="keyword">in</span> <span class="keyword">this</span>.skills) &#123;);</div><div class="line">r.push(<span class="string">"&lt;a href=\"\"&gt;"</span>);</div><div class="line">r.push(<span class="keyword">this</span>.skills[index]);</div><div class="line">r.push(<span class="string">"&lt;/a&gt;"</span>);</div><div class="line">r.push(&#125;);</div><div class="line">r.push(<span class="string">""</span>);</div><div class="line"><span class="keyword">return</span> r.join(<span class="string">""</span>);</div></pre></td></tr></table></figure></p>
+<p>带有for循环的那一行不应该被直接放到数组里面，而是应该作为脚本的一部分直接运行。所以我们在把内容添加到code变量之前还要多做一个判断。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> re = <span class="regexp">/&lt;%([^%&gt;]+)?%&gt;/g</span>,</div><div class="line">    reExp = <span class="regexp">/(^( )?(if|for|else|switch|case|break|&#123;|&#125;))(.*)?/g</span>,</div><div class="line">    code = <span class="string">'var r=[];\n'</span>,</div><div class="line">    cursor = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span>(<span class="params">line, js</span>) </span>&#123;</div><div class="line">    js? code += line.match(reExp) ? line + <span class="string">'\n'</span> : <span class="string">'r.push('</span> + line + <span class="string">');\n'</span> :</div><div class="line">        code += <span class="string">'r.push("'</span> + line.replace(<span class="regexp">/"/g</span>, <span class="string">'\\"'</span>) + <span class="string">'");\n'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里我们新增加了一个正则表达式。它会判断代码中是否包含if、for、else等等关键字。如果有的话就直接添加到脚本代码中去，否则就添加到数组中去。运行结果如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> r=[];</div><div class="line">r.push(<span class="string">"My skills:"</span>);</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> index <span class="keyword">in</span> <span class="keyword">this</span>.skills) &#123;</div><div class="line">r.push(<span class="string">"&lt;a href=\"#\"&gt;"</span>);</div><div class="line">r.push(<span class="keyword">this</span>.skills[index]);</div><div class="line">r.push(<span class="string">"&lt;/a&gt;"</span>);</div><div class="line">&#125;</div><div class="line">r.push(<span class="string">""</span>);</div><div class="line"><span class="keyword">return</span> r.join(<span class="string">""</span>);</div></pre></td></tr></table></figure></p>
+<p>当然，编译出来的结果也是对的。</p>
+<p>最后一个改进可以使我们的模板引擎更为强大。我们可以直接在模板中使用复杂逻辑，例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> template = </div><div class="line"><span class="string">'My skills:'</span> + </div><div class="line"><span class="string">'&lt;%if(this.showSkills) &#123;%&gt;'</span> +</div><div class="line">    <span class="string">'&lt;%for(var index in this.skills) &#123;%&gt;'</span> + </div><div class="line">    <span class="string">'&lt;a href="#"&gt;&lt;%this.skills[index]%&gt;&lt;/a&gt;'</span> +</div><div class="line">    <span class="string">'&lt;%&#125;%&gt;'</span> +</div><div class="line"><span class="string">'&lt;%&#125; else &#123;%&gt;'</span> +</div><div class="line">    <span class="string">'&lt;p&gt;none&lt;/p&gt;'</span> +</div><div class="line"><span class="string">'&lt;%&#125;%&gt;'</span>;</div><div class="line"><span class="built_in">console</span>.log(TemplateEngine(template, &#123;</div><div class="line">    skills: [<span class="string">"js"</span>, <span class="string">"html"</span>, <span class="string">"css"</span>],</div><div class="line">    showSkills: <span class="literal">true</span></div><div class="line">&#125;));</div></pre></td></tr></table></figure></p>
+<p>除了上面说的改进，我还对代码本身做了些优化，(最终版本)[!<a href="https://github.com/krasimir/absurd/blob/master/lib/processors/html/helpers/TemplateEngine.js]如下：" target="_blank" rel="external">https://github.com/krasimir/absurd/blob/master/lib/processors/html/helpers/TemplateEngine.js]如下：</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> TemplateEngine = <span class="function"><span class="keyword">function</span>(<span class="params">html, options</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> re = <span class="regexp">/&lt;%([^%&gt;]+)?%&gt;/g</span>, reExp = <span class="regexp">/(^( )?(if|for|else|switch|case|break|&#123;|&#125;))(.*)?/g</span>, code = <span class="string">'var r=[];\n'</span>, cursor = <span class="number">0</span>;</div><div class="line">    <span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span>(<span class="params">line, js</span>) </span>&#123;</div><div class="line">        js? (code += line.match(reExp) ? line + <span class="string">'\n'</span> : <span class="string">'r.push('</span> + line + <span class="string">');\n'</span>) :</div><div class="line">            (code += line != <span class="string">''</span> ? <span class="string">'r.push("'</span> + line.replace(<span class="regexp">/"/g</span>, <span class="string">'\\"'</span>) + <span class="string">'");\n'</span> : <span class="string">''</span>);</div><div class="line">        <span class="keyword">return</span> add;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span>(match = re.exec(html)) &#123;</div><div class="line">        add(html.slice(cursor, match.index))(match[<span class="number">1</span>], <span class="literal">true</span>);</div><div class="line">        cursor = match.index + match[<span class="number">0</span>].length;</div><div class="line">    &#125;</div><div class="line">    add(html.substr(cursor, html.length - cursor));</div><div class="line">    code += <span class="string">'return r.join("");'</span>;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Function</span>(code.replace(<span class="regexp">/[\r\t\n]/g</span>, <span class="string">''</span>)).apply(options);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码比我预想的还要少，只有区区15行！</p>
+<p>参考链接:</p>
+<ol>
+<li><a href="http://krasimirtsonev.com/blog/article/Javascript-template-engine-in-just-20-line" target="_blank" rel="external">http://krasimirtsonev.com/blog/article/Javascript-template-engine-in-just-20-line</a>;</li>
+<li><a href="http://web.jobbole.com/56689/" target="_blank" rel="external">http://web.jobbole.com/56689/</a></li>
+<li><a href="https://www.liaoxuefeng.com/article/001426512790239f83bfb47b1134b63b09a57548d06e5c5000" target="_blank" rel="external">https://www.liaoxuefeng.com/article/001426512790239f83bfb47b1134b63b09a57548d06e5c5000</a></li>
+<li><a href="https://www.zhihu.com/question/32524504" target="_blank" rel="external">https://www.zhihu.com/question/32524504</a></li>
+</ol>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017- . | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题 Huno </span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
