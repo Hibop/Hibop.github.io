@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Hibop&#39;s Blog">
 <meta property="og:description" content="什么是跨域？什么是跨站资源共享？什么是CROS？  跨域与同源策略1. 什么是域？什么是同源 一个url（统一资源定位符）的基本组成部分:  协议 :// 域名（或者是ip） : 端口（默认80） / 路径；判断同源的三要素是：协议、端口、域名。  2. 与域有关的浏览器动作：- 1.) 资源跳转： A链接、重定向、表单提交 2.) 资源嵌入： &amp;lt;link&amp;gt;、&amp;lt;script&amp;g">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-17T08:51:43.729Z">
+<meta property="og:updated_time" content="2017-12-17T09:04:51.503Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于前端跨域解决方案 | Hibop&#39;s Blog">
 <meta name="twitter:description" content="什么是跨域？什么是跨站资源共享？什么是CROS？  跨域与同源策略1. 什么是域？什么是同源 一个url（统一资源定位符）的基本组成部分:  协议 :// 域名（或者是ip） : 端口（默认80） / 路径；判断同源的三要素是：协议、端口、域名。  2. 与域有关的浏览器动作：- 1.) 资源跳转： A链接、重定向、表单提交 2.) 资源嵌入： &amp;lt;link&amp;gt;、&amp;lt;script&amp;g">
@@ -257,7 +257,7 @@ classes that you can use:
 <li>请求头 Content-Type只限于三个值（表单提交）：application/x-www-form-urlencoded、multipart/formdata、text/plain。</li>
 </ul>
 <ol>
-<li>非简单请求：是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json</li>
+<li>非简单请求：是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json，非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为”预检”请求（preflight）。<br>一旦浏览器通过了“预检”，以后每次浏览器正常的CORS请求，都跟简单请求一样，会有一个Origin头信息字段。服务器的回应，也都有一个Access-Control-Allow-Origin头信息字段。如果开启了Cookie设置，那还有一个Access-Control-Allow-Credentials:true。</li>
 </ol>
 <p>需要浏览器和服务器同时支持。<br>原理：使用”Origin:”请求头和”Access-Control-Allow-Origin”响应头来扩展HTTP。其实就是利用新的HTTP头部来进行浏览器与服务器之间的沟通。</p>
 <ul>
@@ -273,6 +273,17 @@ classes that you can use:
 </blockquote>
 <p>方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定。<br>ORS请求默认不发送Cookie和HTTP认证信息。如果要把Cookie发到服务器，一方面要服务器同意，指定Access-Control-Allow-Credentials字段。另一方面，开发者必须在AJAX请求中打开withCredentials属性。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// server</span></div><div class="line">Access-Control-Allow-Credentials: <span class="literal">true</span></div><div class="line"></div><div class="line"><span class="comment">// client</span></div><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">xhr.withCredentials = <span class="literal">true</span>;</div></pre></td></tr></table></figure></p>
 <p>需要注意的是，如果要发送Cookie，Access-Control-Allow-Origin就不能设为星号，必须指定明确的、与请求网页一致的域名。同时，Cookie依然遵循同源政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，且（跨源）原网页代码中的document.cookie也无法读取服务器域名下的Cookie。</p>
+<p>更详细的CROS，请移步<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="external">阮一峰的《跨域资源共享》一文</a></p>
+<h3 id="常用跨域解决方案"><a href="#常用跨域解决方案" class="headerlink" title="常用跨域解决方案"></a>常用跨域解决方案</h3><pre><code>1、 通过jsonp跨域
+2、 document.domain + iframe跨域
+3、 location.hash + iframe
+4、 window.name + iframe跨域
+5、 postMessage跨域
+6、 跨域资源共享（CORS）
+7、 nginx代理跨域
+8、 nodejs中间件代理跨域
+9、 WebSocket协议跨域
+</code></pre><h4 id="通过jsonp跨域"><a href="#通过jsonp跨域" class="headerlink" title="通过jsonp跨域"></a>通过jsonp跨域</h4><p>通常为了减轻web服务器的负载，我们把js、css，img等静态资源分离到另一台独立域名的服务器上，在html页面中再通过相应的标签从不同域名下加载静态资源，而被浏览器允许，基于此原理，我们可以通过动态创建script，再请求一个带参网址实现跨域通信。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// client 动态创建script，再请求一个带参网址实现跨域通信</span></div><div class="line"> &lt;script&gt;</div><div class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">    script.type = <span class="string">'text/javascript'</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 传参并指定回调执行函数为onBack</span></div><div class="line">    script.src = <span class="string">'http://www.domain2.com:8080/login?user=admin&amp;callback=onBack'</span>;</div><div class="line">    <span class="built_in">document</span>.head.appendChild(script);</div><div class="line"></div><div class="line">    <span class="comment">// 回调执行函数</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onBack</span>(<span class="params">res</span>) </span>&#123;</div><div class="line">        alert(<span class="built_in">JSON</span>.stringify(res));</div><div class="line">    &#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">/</span><span class="regexp">/ server 服务端返回如下（返回时即执行全局函数）</span></div><div class="line"><span class="regexp">onBack(&#123;"status": true, "user": "admin"&#125;)</span></div></pre></td></tr></table></figure></p>
 <p>参考文献：</p>
 <ol>
 <li><a href="https://segmentfault.com/a/1190000011145364" target="_blank" rel="external">https://segmentfault.com/a/1190000011145364</a></li>
