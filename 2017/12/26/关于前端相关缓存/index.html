@@ -16,18 +16,18 @@
     
     
 
-    <meta name="description" content="浏览器缓存机制 ajax请求之后，会把请求的url和返回的响应结果保存在缓存中，当下一次调用ajax发送相同的请求时，浏览器会从缓存中把数据取出来，这是为了提高页面的响应速度和用户体验，什么时候会出现这个现象呢，就是要这两次的请求url和请求参数完全一样的时候，浏览器就不会与服务器交互。  不同刷新的请求执行过程1.浏览器地址栏中写入URL，回车浏览器发现缓存中有这个文件了，不用继续请求了，直接去">
+    <meta name="description" content="浏览器缓存机制 ajax请求之后，会把请求的url和返回的响应结果保存在缓存中，当下一次调用ajax发送相同的请求时，浏览器会从缓存中把数据取出来，这是为了提高页面的响应速度和用户体验，什么时候会出现这个现象呢，就是要这两次的请求url和请求参数完全一样的时候，浏览器就不会与服务器交互。  不同刷新的请求执行过程 浏览器地址栏中写入URL，回车浏览器发现缓存中有这个文件了，不用继续请求了，直接去缓">
 <meta name="keywords" content="浏览器缓存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于前端相关缓存 | Hibop&#39;s Blog">
 <meta property="og:url" content="https://hibop.github.io/2017/12/26/关于前端相关缓存/index.html">
 <meta property="og:site_name" content="Hibop&#39;s Blog">
-<meta property="og:description" content="浏览器缓存机制 ajax请求之后，会把请求的url和返回的响应结果保存在缓存中，当下一次调用ajax发送相同的请求时，浏览器会从缓存中把数据取出来，这是为了提高页面的响应速度和用户体验，什么时候会出现这个现象呢，就是要这两次的请求url和请求参数完全一样的时候，浏览器就不会与服务器交互。  不同刷新的请求执行过程1.浏览器地址栏中写入URL，回车浏览器发现缓存中有这个文件了，不用继续请求了，直接去">
+<meta property="og:description" content="浏览器缓存机制 ajax请求之后，会把请求的url和返回的响应结果保存在缓存中，当下一次调用ajax发送相同的请求时，浏览器会从缓存中把数据取出来，这是为了提高页面的响应速度和用户体验，什么时候会出现这个现象呢，就是要这两次的请求url和请求参数完全一样的时候，浏览器就不会与服务器交互。  不同刷新的请求执行过程 浏览器地址栏中写入URL，回车浏览器发现缓存中有这个文件了，不用继续请求了，直接去缓">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-26T16:18:37.018Z">
+<meta property="og:updated_time" content="2017-12-26T16:25:22.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于前端相关缓存 | Hibop&#39;s Blog">
-<meta name="twitter:description" content="浏览器缓存机制 ajax请求之后，会把请求的url和返回的响应结果保存在缓存中，当下一次调用ajax发送相同的请求时，浏览器会从缓存中把数据取出来，这是为了提高页面的响应速度和用户体验，什么时候会出现这个现象呢，就是要这两次的请求url和请求参数完全一样的时候，浏览器就不会与服务器交互。  不同刷新的请求执行过程1.浏览器地址栏中写入URL，回车浏览器发现缓存中有这个文件了，不用继续请求了，直接去">
+<meta name="twitter:description" content="浏览器缓存机制 ajax请求之后，会把请求的url和返回的响应结果保存在缓存中，当下一次调用ajax发送相同的请求时，浏览器会从缓存中把数据取出来，这是为了提高页面的响应速度和用户体验，什么时候会出现这个现象呢，就是要这两次的请求url和请求参数完全一样的时候，浏览器就不会与服务器交互。  不同刷新的请求执行过程 浏览器地址栏中写入URL，回车浏览器发现缓存中有这个文件了，不用继续请求了，直接去缓">
     
     
     
@@ -222,8 +222,8 @@ classes that you can use:
     <h3 id="浏览器缓存机制"><a href="#浏览器缓存机制" class="headerlink" title="浏览器缓存机制"></a>浏览器缓存机制</h3><blockquote>
 <p>ajax请求之后，会把请求的url和返回的响应结果保存在缓存中，当下一次调用ajax发送相同的请求时，浏览器会从缓存中把数据取出来，这是为了提高页面的响应速度和用户体验，什么时候会出现这个现象呢，就是要这两次的请求url和请求参数完全一样的时候，浏览器就不会与服务器交互。</p>
 </blockquote>
-<h5 id="不同刷新的请求执行过程"><a href="#不同刷新的请求执行过程" class="headerlink" title="不同刷新的请求执行过程"></a>不同刷新的请求执行过程</h5><p>1.浏览器地址栏中写入URL，回车浏览器发现缓存中有这个文件了，不用继续请求了，直接去缓存拿。（最快）</p>
-<ol>
+<h5 id="不同刷新的请求执行过程"><a href="#不同刷新的请求执行过程" class="headerlink" title="不同刷新的请求执行过程"></a>不同刷新的请求执行过程</h5><ol>
+<li>浏览器地址栏中写入URL，回车浏览器发现缓存中有这个文件了，不用继续请求了，直接去缓存拿。（最快）</li>
 <li>F5：就是告诉浏览器，别偷懒，好歹去服务器看看这个文件是否有过期了。于是浏览器就胆胆襟襟的发送一个请求带上If-Modify-since。</li>
 <li>Ctrl+F5：告诉浏览器，你先把你缓存中的这个文件给我删了，然后再去服务器请求个完整的资源文件下来。于是客户端就完成了强行更新的操作.</li>
 </ol>
@@ -242,8 +242,17 @@ classes that you can use:
 <h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><ul>
 <li>Expires：服务器返回有个Date，表示在此时间段内，资源缓存有效。浏览器请求资源时判断当前客户端时间是否晚于Expires，不晚则表示缓存有效，命中强缓存，读取缓存资源。<br><strong><br>Expirse是HTTP1.0提出的缓存处理方案，因为是通过客户端时间和服务时间进行比较，这样当服务器和客户端存在很大的时区时，就会导致缓存失效，同时也可以同过篡改客户端时间导致缓存失效或者错乱，不是很可靠。
 </strong></li>
-<li>Cache-Control: 配置如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 表明资源可以被浏览器、CDN、代理服务器缓存等任何对象缓存</div><div class="line">Cache-Control: public </div><div class="line">// 表明资源只能被浏览器缓存</div><div class="line">Cache-Control: private </div><div class="line">// 表明禁止强缓存，只能走协商缓存</div><div class="line">Cache-Control: no-cache </div><div class="line">// 相对时间，表示从第一次收到请求后多久秒内走缓存</div><div class="line">Cache-Control: max-age=&lt;seconds&gt; </div><div class="line">// 跟max-age相同，但是在共享资源中（CDN或者代理服务器）起作用。私有资源时忽略此参数</div><div class="line">Cache-Control: s-maxage=&lt;seconds&gt;</div></pre></td></tr></table></figure>
-</li>
+<li>Cache-Control: 配置如下<pre><code>// 表明资源可以被浏览器、CDN、代理服务器缓存等任何对象缓存
+Cache-Control: public 
+// 表明资源只能被浏览器缓存
+Cache-Control: private 
+// 表明禁止强缓存，只能走协商缓存
+Cache-Control: no-cache 
+// 相对时间，表示从第一次收到请求后多久秒内走缓存
+Cache-Control: max-age=&lt;seconds&gt; 
+// 跟max-age相同，但是在共享资源中（CDN或者代理服务器）起作用。私有资源时忽略此参数
+Cache-Control: s-maxage=&lt;seconds&gt; 
+</code></pre></li>
 </ul>
 <p>Cache-Control中max-age设置的是缓存有效的相对时间</p>
 <ol>
@@ -253,13 +262,26 @@ classes that you can use:
 </strong></p>
 </li>
 </ol>
-<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#response header</div><div class="line">// 服务器返回资源最后修改时间，Date</div><div class="line">Last-Modified</div><div class="line">#resquest header</div><div class="line">// 浏览器再次请求资源时携带If-Modified-Since字段。字段的值就是上次response的Last-Modified的值</div><div class="line">If-Modified-Since</div><div class="line">#或者</div><div class="line">#response header</div><div class="line">// 服务器返回MD5根据当前资源内容生成的一个摘要，资源内容不变，这个摘要的值就不会变</div><div class="line">ETag</div><div class="line">#resquest header</div><div class="line">// 浏览器再次请求资源时携带If-None-Match字段。字段的值就是上次response的ETag的值</div><div class="line">If-None-Match</div></pre></td></tr></table></figure>
-<h5 id="流程如下："><a href="#流程如下：" class="headerlink" title="流程如下："></a>流程如下：</h5><ol>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><pre><code>#response header
+// 服务器返回资源最后修改时间，Date
+Last-Modified
+#resquest header
+// 浏览器再次请求资源时携带If-Modified-Since字段。字段的值就是上次response的Last-Modified的值
+If-Modified-Since
+#或者
+#response header
+// 服务器返回MD5根据当前资源内容生成的一个摘要，资源内容不变，这个摘要的值就不会变
+ETag
+#resquest header
+// 浏览器再次请求资源时携带If-None-Match字段。字段的值就是上次response的ETag的值
+If-None-Match
+</code></pre><h5 id="流程如下："><a href="#流程如下：" class="headerlink" title="流程如下："></a>流程如下：</h5><ol>
 <li>浏览器第一次请求资源a.js，服务端返回资源a.js和Last-Modified。</li>
 <li>浏览器再次请求资源a.js，同时request的header中携带If-Modified-Since，值就是上次返回的Last-Modified</li>
 <li>服务器收到a.js的资源请求，通过request中的If-Modified-Since的时间和本地资源的最后修改时间进行对比，没有变化将返回304 not modified，浏览器读取本地缓存。修改时间变化了，服务器返回请求的资源，并在response的header中携带最新的Last-Modified。</li>
 </ol>
-<p><strong>ETag跟上面流程一样，只是比较的不是资源最后修改的时间，而是资源的内容。</strong><br>服务器响应请求时，通过此字段告诉浏览器当前资源在服务器生成的唯一标识（生成规则由服务器决定）<br>If-None-Match：再次请求服务器时，浏览器的请求报文头部会包含此字段，后面的值为在缓存中获取的标识。服务器接收到次报文后发现If-None-Match则与被请求资源的唯一标识进行对比。</p>
+<p><strong>ETag跟上面流程一样，只是比较的不是资源最后修改的时间，而是资源的内容。</strong></p>
+<p>服务器响应请求时，通过此字段告诉浏览器当前资源在服务器生成的唯一标识（生成规则由服务器决定）<br>If-None-Match：再次请求服务器时，浏览器的请求报文头部会包含此字段，后面的值为在缓存中获取的标识。服务器接收到次报文后发现If-None-Match则与被请求资源的唯一标识进行对比。</p>
 <p>不同，说明资源被改动过，则响应整个资源内容，返回状态码200。<br>相同，说明资源无心修改，则响应header，浏览器直接从缓存中获取数据信息。返回状态码304.</p>
 <p>但是实际应用中由于Etag的计算是使用算法来得出的，而算法会占用服务端计算的资源，所有服务端的资源都是宝贵的，所以就很少使用Etag了。</p>
 <h5 id="Last-Modified-If-Modified-Since的缺点："><a href="#Last-Modified-If-Modified-Since的缺点：" class="headerlink" title="Last-Modified + If-Modified-Since的缺点："></a>Last-Modified + If-Modified-Since的缺点：</h5><p>单一的时间比较，如果修改了资源但是资源的内容没有发生变化，就会导致缓存失效，这个是很不应该的。</p>
@@ -267,7 +289,7 @@ classes that you can use:
 <h3 id="CDN缓存"><a href="#CDN缓存" class="headerlink" title="CDN缓存"></a>CDN缓存</h3><p>对于各个地方的用户，就存在有些距离远的用户访问的时候慢一点，所以CDN就是别人的分布在各地的专门存放缓存资源的地方，这样就可以让各地的用户访问服务的时候都是走的最近的CDN服务器。如果发现缓存失效，则请求真正的服务器，获取到资源后缓存在本地，并将资源返回给客户端。<br>CDN的全称是Content Delivery Network，即内容分发网络。是架设在客户端和服务器之间的Cache层，客户端请求资源时，具体CDN原理不是很懂，大致的意思就是CDN对域名解析进行了调整，然后返回一个CNAME，浏览器对CNAME进行解析后得到了CDN服务器的ip，CDN服务器上存在请求的资源就返回本地缓存，不存在则CDN服务器向真正的服务器发出请求，获得资源后缓存在本地，并返回给客户端，实现整个流程。<br>优点：CDN缓存主要起到客户端跟服务器之前地域的问题，减少延时，分流作用，降低服务器的流量，减轻服务器压力</p>
 <h3 id="为何我抵制使用缓存？"><a href="#为何我抵制使用缓存？" class="headerlink" title="为何我抵制使用缓存？"></a>为何我抵制使用缓存？</h3><ul>
 <li>错误地缓存数据其实是一件很糟糕的事情。尽你所能不要缓存数据，如果不得已而为之，一定要保证你正确地缓存数据。</li>
-<li>计算机科学中有两件难事：缓存失效和命名。缓存是一个棘手的问题。近年来，我经常见到因为缓存产生的错误导致了不必要的混乱和延迟。<h5 id="常见错误缓存"><a href="#常见错误缓存" class="headerlink" title="常见错误缓存"></a>常见错误缓存</h5></li>
+<li>计算机科学中有两件难事：缓存失效和命名。缓存是一个棘手的问题。近年来，我经常见到因为缓存产生的错误导致了不必要的混乱和延迟。<h4 id="常见错误缓存"><a href="#常见错误缓存" class="headerlink" title="常见错误缓存"></a>常见错误缓存</h4></li>
 <li>启动时缓存</li>
 <li>过早地缓存：开发周期中的“早“</li>
 <li>缓存所有内容</li>
