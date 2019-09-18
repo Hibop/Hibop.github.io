@@ -16,18 +16,18 @@
     
     
 
-    <meta name="description" content="大数据的兴起，浏览器性能的提升，数据可视化成为一个趋势。在做过一些互联网公司web前端数据可视化相关的产品后，有必要对数据可视化做个学习总结。  前端与数据可视化： 数据可视化的web前端，其实从广义来讲，跟传统的网页开发没什么区别。都是数据+模板，其中的组件化和模块化其实类似。 前后端分离也与传统网页开发没什么两样。主要是现在node作为中间层做分离方案的比较多（天猫的wornhole，淘宝的">
+    <meta name="description" content="大数据的兴起，浏览器性能的提升，数据可视化成为一个趋势。在做过一些互联网公司web前端数据可视化相关的产品后，有必要对数据可视化做个学习总结。  前端与数据可视化： 数据可视化的web前端，其实从广义来讲，跟传统的网页开发没什么区别。都是数据+模板，其中的组件化和模块化其实类似, 只是渲染从html到canvas或者svg。 前后端分离也与传统网页开发没什么两样。主要是现在node作为中间层做分">
 <meta name="keywords" content="数据可视化,echarts&#x2F;d3&#x2F;vis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于前端数据可视化的一些理解 | Hibop&#39;s Blog">
 <meta property="og:url" content="https://hibop.github.io/2017/11/29/关于前端数据可视化的一些理解/index.html">
 <meta property="og:site_name" content="Hibop&#39;s Blog">
-<meta property="og:description" content="大数据的兴起，浏览器性能的提升，数据可视化成为一个趋势。在做过一些互联网公司web前端数据可视化相关的产品后，有必要对数据可视化做个学习总结。  前端与数据可视化： 数据可视化的web前端，其实从广义来讲，跟传统的网页开发没什么区别。都是数据+模板，其中的组件化和模块化其实类似。 前后端分离也与传统网页开发没什么两样。主要是现在node作为中间层做分离方案的比较多（天猫的wornhole，淘宝的">
+<meta property="og:description" content="大数据的兴起，浏览器性能的提升，数据可视化成为一个趋势。在做过一些互联网公司web前端数据可视化相关的产品后，有必要对数据可视化做个学习总结。  前端与数据可视化： 数据可视化的web前端，其实从广义来讲，跟传统的网页开发没什么区别。都是数据+模板，其中的组件化和模块化其实类似, 只是渲染从html到canvas或者svg。 前后端分离也与传统网页开发没什么两样。主要是现在node作为中间层做分">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-03T12:52:25.392Z">
+<meta property="og:updated_time" content="2019-09-18T16:20:18.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于前端数据可视化的一些理解 | Hibop&#39;s Blog">
-<meta name="twitter:description" content="大数据的兴起，浏览器性能的提升，数据可视化成为一个趋势。在做过一些互联网公司web前端数据可视化相关的产品后，有必要对数据可视化做个学习总结。  前端与数据可视化： 数据可视化的web前端，其实从广义来讲，跟传统的网页开发没什么区别。都是数据+模板，其中的组件化和模块化其实类似。 前后端分离也与传统网页开发没什么两样。主要是现在node作为中间层做分离方案的比较多（天猫的wornhole，淘宝的">
+<meta name="twitter:description" content="大数据的兴起，浏览器性能的提升，数据可视化成为一个趋势。在做过一些互联网公司web前端数据可视化相关的产品后，有必要对数据可视化做个学习总结。  前端与数据可视化： 数据可视化的web前端，其实从广义来讲，跟传统的网页开发没什么区别。都是数据+模板，其中的组件化和模块化其实类似, 只是渲染从html到canvas或者svg。 前后端分离也与传统网页开发没什么两样。主要是现在node作为中间层做分">
     
     
     
@@ -191,9 +191,9 @@ classes that you can use:
 <article class="post-container post-container--single">
 
   <header class="post-header">
-    <img id="pen" class="pen" src="../../../../images/pen.png" style="float: left; width: 32px; margin: 10px;" title="原创"></img>
+    <img id="pen" class="pen" src="../../../../images/pen.png" style="float: left; width: 28px; margin: 8px 25px 10px -2px;" title="原创"></img>
     <h1 class="post-title" style="float: left;">关于前端数据可视化的一些理解</h1>
-    <img id="fullPage" class="full-page" src="../../../../images/fullpage.png" style="width: 48px; margin-left: 10px;" title="点击全屏"></img>
+    <img id="fullPage" class="full-page" src="../../../../images/fullpage.png" style="width: 32px; margin: 6px 12px; cursor: pointer;" title="点击全屏"></img>
 
     
 
@@ -228,46 +228,47 @@ classes that you can use:
 <p>大数据的兴起，浏览器性能的提升，数据可视化成为一个趋势。在做过一些互联网公司web前端数据可视化相关的产品后，有必要对数据可视化做个学习总结。</p>
 </blockquote>
 <h3 id="前端与数据可视化："><a href="#前端与数据可视化：" class="headerlink" title="前端与数据可视化："></a>前端与数据可视化：</h3><ul>
-<li>数据可视化的web前端，其实从广义来讲，跟传统的网页开发没什么区别。都是数据+模板，其中的组件化和模块化其实类似。</li>
+<li>数据可视化的web前端，其实从广义来讲，跟传统的网页开发没什么区别。都是数据+模板，其中的组件化和模块化其实类似, 只是渲染从html到canvas或者svg。</li>
 <li>前后端分离也与传统网页开发没什么两样。主要是现在node作为中间层做分离方案的比较多（天猫的wornhole，淘宝的midway），数据处理交给java或者go，node用来做密集IO和模板展现；</li>
 <li>前端常说的视觉可视化大部分是基于浏览器canvas、svg、webGL等画图模块，借助曲线图表等展示形式把一些相关数据更直接、形象、生动、具体的展示在web页面上。</li>
 </ul>
-<h3 id="数据可视化实现配合："><a href="#数据可视化实现配合：" class="headerlink" title="数据可视化实现配合："></a>数据可视化实现配合：</h3><p>要做一个好的数据产品是需要 产品经理-&gt;设计师-&gt;前端-&gt;后端-&gt;用户整个链路紧密配合密切合作并且协调的。</p>
+<h3 id="数据可视化实现配合："><a href="#数据可视化实现配合：" class="headerlink" title="数据可视化实现配合："></a>数据可视化实现配合：</h3><p>要做一个好的数据产品是需要 产品经理–&gt;设计师–&gt;前端–&gt;后端–&gt;用户整个链路紧密配合密切合作并且协调的。</p>
 <ol>
-<li>产品需要懂数据可视化的理论基础，哪些数据可以可视化，哪些数据是用户最想要的。</li>
-<li>设计师包括视觉和交互，需要理清楚数据怎么展示最合理，曲线，柱状图，饼状图，都有哪些优缺点，不能仅仅为了美观设计了一个好看的图形，而不顾实际数据情况，展示出来就很奇怪。</li>
-<li>前端其实在里面是最紧密的一环，数据怎么获取，什么格式对前后端最友好，采用什么技术方案，是svg的库，还是canvas的库，是自己撸还是用现成的库。实现成本有多高，性能、扩展性怎么样都是需要考虑的问题</li>
+<li>产品需要懂数据可视化的理论基础，哪些数据可以可视化，哪些数据是用户最想要的，一个好的可视化产品绝对不是为了可视化而可视化。</li>
+<li>设计师包括视觉、交互、配色等，需要理清楚数据怎么展示最合理，曲线，柱状图，饼状图，都有哪些优缺点，不能仅仅为了美观设计了一个好看的图形，而不顾实际数据情况，展示出来就很奇怪。</li>
+<li>前端其实在里面是最紧密的一环，数据怎么获取，什么格式对前后端最友好，采用什么技术方案，是svg的库，还是canvas的库，是自己撸还是用现成的库。实现成本有多高，性能、扩展性怎么样都是需要考虑的问题。</li>
 <li>后端需要考虑的就是数据的拉取，需要考虑数据格式以及能获取哪些数据。</li>
 </ol>
-<p><em>数据可视化最重要的不是好看，而是让人一目了然的明白这个图表传达出来的意思。</em></p>
-<p>其实这方面是有相关的信息图表学的相关知识储备的话就不会犯这些错误了。支付宝有个G2 里面有两个相关的图表学基础知识介绍，个人认为这是G2 比echart更近一步，更规范化的点之一。</p>
-<p>可视化基础-图表使用建议 <a href="https://antv.alipay.com/vis/d" target="_blank" rel="external">https://antv.alipay.com/vis/d</a>…</p>
-<p>可视化基础-图表设计指引规范：<a href="https://antv.alipay.com/vis/d" target="_blank" rel="external">https://antv.alipay.com/vis/d</a>…</p>
-<p>以及经典文献：</p>
+<p><code>数据可视化最重要的不是好看，而是让人一目了然的明白这个图表传达出来的意思。</code></p>
+<p>其实这方面是有相关的信息图形学的相关知识储备的话就不会犯这些错误了。支付宝有个G2 里面有两个相关的图表学基础知识介绍，个人认为这是G2 比echart更进一步，更规范化的点之一。</p>
+<p>可视化基础-图表使用建议 <a href="https://antv.alipay.com/vis/" target="_blank" rel="external">https://antv.alipay.com/vis/</a></p>
+<p>可视化基础-图表设计指引规范：<a href="https://antv.alipay.com/vis/" target="_blank" rel="external">https://antv.alipay.com/vis/</a></p>
+<p><strong>经典文献：</strong></p>
 <blockquote>
-<p>《数据可视化》、《The Grammarof Graphics》、《深入浅出统计学》、《计算机图形学几何工具算法详解》、《Visualization Analysis and Design》 、《ggplot2：数据分析与图形艺术》 。</p>
+<p>《数据可视化》<br>《The Grammarof Graphics》<br>《深入浅出统计学》<br>《计算机图形学几何工具算法详解》<br>《Visualization Analysis and Design》<br>《ggplot2：数据分析与图形艺术》 </p>
 </blockquote>
-<h3 id="可视化技术选型"><a href="#可视化技术选型" class="headerlink" title="可视化技术选型"></a>可视化技术选型</h3><p>首先需要明白一个观点：###技术选型没有一劳永逸的，永远是根据你的项目实际情况以及你的个人偏好和技术基础来做的选择###。</p>
-<p>常见的图标库和三方件及相关技术：</p>
+<h3 id="可视化技术选型"><a href="#可视化技术选型" class="headerlink" title="可视化技术选型"></a>可视化技术选型</h3><p>首先需要明白一个观点：<code>技术选型没有一劳永逸，永远是根据项目实际情况以及个人团队偏好和技术基础来做的选择</code>。</p>
+<p><strong>常见的图标库和三方件及相关技术</strong>：</p>
 <ol>
-<li><em>echarts</em> (canvas, 百度) ：</li>
+<li><em>echarts</em> (主canvas, 配置型，百度) ：</li>
 </ol>
-<p>echarts算是国产的图表库里最好的了。EFE团队也是国内技术实力最雄厚的可视化团队.采用canvas作为渲染容器。底层一些实现比如鼠标事件啥的用的自己开发的zrender框架。<br>echart2.0对应不同的组件比如坐标轴图例是用不同的canvas来渲染的，echart3之后都合并到一个canvas里面了，猜测应该是底层的框架升级了<br>博客： <a href="http://efe.baidu.com/，" target="_blank" rel="external">http://efe.baidu.com/，</a><br><a href="http://echarts.baidu.com/blog。" target="_blank" rel="external">http://echarts.baidu.com/blog。</a></p>
+<p>echarts算是国产的图表库里最好的了。EFE团队也是国内技术实力最雄厚的可视化团队.采用canvas作为渲染容器。底层一些实现比如鼠标事件等用的自己开发的zrender框架。<br>echart2.0对应不同的组件比如坐标轴图例是用不同的canvas来渲染的，echart3之后都合并到一个canvas里面了，猜测应该是底层的框架升级了。<br>被人诟病的主要有：1） 配置参数很凌乱，有时花时间调试配置还不如自己撸一个；2）配置型比较死板，门槛低灵活性低。必须按照配置来，而且Echart有很多bug没有及时修改，对开发者还是不太友好，相对而言G2和d3图形语法型就有比较好的扩展。</p>
+<p>博客： <a href="http://efe.baidu.com/，" target="_blank" rel="external">http://efe.baidu.com/，</a><br><a href="http://echarts.baidu.com/blog。" target="_blank" rel="external">http://echarts.baidu.com/blog。</a></p>
 <ol>
 <li><em>highcharts</em> (svg, 商业使用需授权)</li>
 </ol>
-<p>这个框架用的人也不少，主打就是IE6也支持。。。。。。。。。然并卵微软都不支持IE6了。淘宝连ie8都不支持了。。。。收费的库，底层用的SVG。私以为他的API使用起来没有Echart友好。</p>
+<p>这个框架用的人也不少，主打就是IE6支持程度高。。。然并卵微软都不支持IE6了。淘宝连ie8都不支持了。。。。收费的库，底层用的SVG。私以为他的API使用起来没有Echart友好。</p>
 <ol>
-<li><em>G2</em> -支付宝</li>
+<li><em>G2</em> (语法型，支付宝)</li>
 </ol>
 <p>蚂蚁金服的产品，图表容器为canvas，玉伯的团队开发的。怎么说呢。。这个东西看着还不错，不过实际使用的时候大部分人还是会不由自主的去选择前面两个，大阿里系的开源东西就是这么个鬼情况。东西是不错，就怕搞着搞着团队没了。而且他们官网那些示例最开始貌似是那个嫩蓝色（or嫩绿色？）看起来让人觉得整个产品很轻浮，不像echarts 墨黑色，一种商务稳重风。现在貌似也慢慢像稳重风格靠拢了。继续下去感觉还是不错的。</p>
 <ol>
 <li><em>d3.js</em></li>
 </ol>
 <p>d3也算是资历比较老的一个产品了，采用svg作为图表容器。刚开始出来的时候各种动画比较惊艳图表类型也很丰富，感觉echarts一开始也参照它的图表类型新增了好几个图表示例。</p>
-<p>d3的优点是各种示例demo比较完善适合拿来就用，缺点就是demo不适合二次开发，熟悉api的话也可以直接自己画，他的api是对svg的dom的一种整理和兼容，类比于jquery对应html的dom。</p>
+<p>d3的优点是各种示例demo比较完善适合拿来就用，缺点就是demo不适合二次开发，熟悉api的话也可以直接自己画，他的api是对svg的dom的一种整理和兼容，类比于jquery对应html的dom。<br>还有一个就是jq式DOM修改，与主流的react，vue，ng框架数据驱动思想有一定的冲突。</p>
 <ol>
-<li><p><em>vis.js</em> </p>
+<li><p><em>vis.js</em><br>比较轻量，这是笔者使用的第一款可视化类库（比较早，当时选型没有考虑国内，d3又太重）故使用vis，里面的拓扑关系图做得比较好用，交互也还行。</p>
 </li>
 <li><p><em>three.js</em> (webGL 3D视图)</p>
 </li>
